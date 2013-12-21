@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Shoppest: Category Grid</title>
+	<meta name="description" content="">
+	<meta name="author" content="Ahmed Saeed">
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+	<!-- jquery ui css -->
+	<link rel="stylesheet" href="css/jquery-ui-1.10.1.min.css">
+	<link rel="stylesheet" href="css/customize.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/style.css">
+	<!-- fancybox -->
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+		<link rel="stylesheet" href="css/font-awesome-ie7.css">
+	<![endif]-->
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.html">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.html">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.html">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.html">
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<!--begain header-->
+			<header>
+				<div class="topHeader">
+					<div class="container">
+						<div class="pull-right">
+							<div class="btn-group">
+								<button class="btn dropdown-toggle" data-toggle="dropdown">
+									<i class="icon-shopping-cart"></i> 
+									(2) 
+									<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu cart-content pull-right">
+									<table class="table-cart">
+										<tbody>
+											<tr>
+												<td class="cart-product-info">
+													<a href="#"><img src="img/72x72.jpg" alt="product image"></a>
+													<div class="cart-product-desc">
+														<p><a class="invarseColor" href="#">Title1</a></p>
+														<ul class="unstyled">
+															<li>Available: Yes</li>
+															<li>Color: Black</li>
+														</ul>
+													</div>
+												</td>
+												<td class="cart-product-setting">
+													<p><strong>1x-$500.00</strong></p>
+													<a href="#" class="btn btn-mini remove-pro" data-tip="tooltip" data-title="Delete" data-original-title=""><i class="icon-trash"></i></a>
+												</td>
+											</tr>
+											<tr>
+												<td class="cart-product-info">
+													<a href="#"><img src="img/72x72.jpg" alt="product image"></a>
+													<div class="cart-product-desc">
+														<p><a class="invarseColor" href="#">Title</a></p>
+														<ul class="unstyled">
+															<li>Available: Yes</li>
+															<li>Color: Black</li>
+														</ul>
+													</div>
+												</td>
+												<td class="cart-product-setting">
+													<p><strong>2x-$450.00</strong></p>
+													<a href="#" class="btn btn-mini remove-pro" data-tip="tooltip" data-title="Delete" data-original-title=""><i class="icon-trash"></i></a>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td class="cart-product-info">
+													<a href="cart.html" class="btn btn-small">View cart</a>
+													<a href="checkout.html" class="btn btn-small btn-primary">Checkout</a>
+												</td>
+												<td>
+													<h3>$1,598.30</h3>
+												</td>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div><!--end pull-right-->
+						<div class="pull-right">
+							<form method="get" action="http://egythemes.com/shoppest/page" class="siteSearch">
+								<div class="input-append">
+									<input type="text" class="span2" id="appendedInputButton" placeholder="Start Typing...">
+									<button class="btn" type="submit" name=""><i class="icon-search"></i></button>
+								</div>
+							</form><!--end form-->
+						</div><!--end pull-right-->
+						<ul class="pull-right inline">
+							<li><a class="invarseColor" href="login.html">Login</a></li>
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="register.html">Register</a></li>
+							
+							
+							
+							
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="account.html">My Account</a></li>
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="wishlist.html">Wishlist(4)</a></li>
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="cart.html">Cart</a></li>
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="checkout.html">Checkout</a></li>
+						</ul>
+					</div><!--end container-->
+				</div><!--end topHeader-->
+				<div class="subHeader">
+					<div class="container">
+						<div class="navbar">
+							<div class="siteLogo pull-left">
+								<h1><a href="index.html"><img src="img/logo.png" alt="Shoppest"></a></h1>
+							</div>
+
+							<ul class="nav">
+								<li class="active"><a href="#"><i class="icon-home"></i></a></li>
+
+								<li>
+									<a href="#">TV &amp; Home Theater<i class="icon-caret-down"></i></a>
+									<ul style="">
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> TVs</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Projectors &amp; Screens</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Blu-ray &amp; DVD Players</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Home Theater Systems</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Smart TVs &amp; Devices</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Digital TV Converters</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Connections</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> TV Stands, Mounts &amp; Storage</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> TV &amp; Home Theater Services</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> TV &amp; Home Theater Accessories</a></li>
+									</ul>
+								</li>
+
+							</ul><!--end nav-->
+						</div>
+					</div><!--end container-->
+				</div><!--end subHeader-->
+			</header>
+		<!-- end header -->
+
+
+		<div class="container">
+
+			<div class="row">
+
+				<aside class="span3">
+
+					<div class="categories">
+						<div class="titleHeader clearfix">
+							<h3>Categories</h3>
+						</div><!--end titleHeader-->
+						<ul class="unstyled">
+							<li>
+								<a class="invarseColor active" href="#">Women (16)</a>
+								<ul>
+									<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Beauty (3)</a></li>
+									<li><a class="invarseColor active" href="#"><i class="icon-caret-right"></i> Dresses (4)</a></li>
+									<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Shorts (6)</a></li>
+									<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Shoes (2)</a></li>
+									<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Tops (1)</a></li>
+									<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Jakets &amp; Coats (7)</a></li>
+								</ul>
+							</li>
+							<li><a class="invarseColor" href="#">Men (6)</a></li>
+							<li><a class="invarseColor" href="#">Children (8)</a></li>
+							<li><a class="invarseColor" href="#">FootWear (3)</a></li>
+							<li><a class="invarseColor" href="#">Accesspries (56)</a></li>
+							<li><a class="invarseColor" href="#">Outlet (12)</a></li>
+							<li><a class="invarseColor" href="#">Community (0)</a></li>
+						</ul>
+					</div><!--end categories-->
+
+
+					<div class="product-quality">
+						<div class="titleHeader clearfix">
+							<h3>Shop By Quality</h3>
+						</div><!--end titleHeader-->
+						<ul class="unstyled pro-filter-list">
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> New Products (7450)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> Used Products (110)
+								</a>
+							</li>
+						</ul>
+					</div><!--end product-quality-->
+
+
+					<div class="pro-range-slider">
+						<div class="titleHeader clearfix">
+							<h3>Shop By Price</h3>
+						</div><!--end titleHeader-->
+
+						<ul class="unstyled pro-filter-list">
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> Less than $70.00 (150)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> From $70.00 To $170.00 (310)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> From $170.00 To $270.00 (1410)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> From $270.00 To $370.00 (30)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> From $370.00 To $470.00 (0)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> More Than $500.00 (07)
+								</a>
+							</li>
+						</ul>
+
+						<div class="price-range">
+							<p class="clearfix">
+							  <label>-- Range Your Price:</label>
+							  <input type="text" id="amount">
+							</p>
+							<div id="slider-range"></div>
+						</div>
+					</div><!--end pro-range-slider-->
+
+
+					<div class="product-colors">
+						<div class="titleHeader clearfix">
+							<h3>Shop By Price</h3>
+						</div><!--end titleHeader-->
+
+						<ul class="unstyled pro-filter-color">
+							<li>
+								<a href="#" class="invarseColor">
+									<span class="label-color" style="width:10px; height:10px; background-color:red; display:inline-block;"></span>&nbsp;&nbsp;
+									Filter By Red color
+								</a>
+							</li>
+							<li>
+								<a href="#" class="invarseColor">
+									<span class="label-color" style="width:10px; height:10px; background-color:green; display:inline-block;"></span>&nbsp;&nbsp;
+									Filter By Green color
+								</a>
+							</li>
+							<li>
+								<a href="#" class="invarseColor">
+									<span class="label-color" style="width:10px; height:10px; background-color:brown; display:inline-block;"></span>&nbsp;&nbsp;
+									Filter By Brown color
+								</a>
+							</li>
+							<li>
+								<a href="#" class="invarseColor">
+									<span class="label-color" style="width:10px; height:10px; background-color:yellow; display:inline-block;"></span>&nbsp;&nbsp;
+									Filter By Yellow color
+								</a>
+							</li>
+							<li>
+								<a href="#" class="invarseColor">
+									<span class="label-color" style="width:10px; height:10px; background-color:blue; display:inline-block;"></span>&nbsp;&nbsp;
+									Filter By Blue color
+								</a>
+							</li>
+						</ul>
+					</div><!--end product-color-->
+
+
+					<div class="product-brands">
+						<div class="titleHeader clearfix">
+							<h3>Shop By Brands</h3>
+						</div><!--end titleHeader-->
+						<ul class="unstyled pro-filter-list">
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> Apple Products (7450)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> Dell Products (240)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> HP Products (870)
+								</a>
+							</li>
+							<li>
+								<a class="invarseColor" href="#">
+									<i class="icon-caret-right"></i> Microsoft Products (09)
+								</a>
+							</li>
+						</ul>
+					</div><!--end product-brands-->
+
+
+					<div class="special">
+						<div class="titleHeader clearfix">
+							<h3>Special</h3>
+						</div><!--end titleHeader-->
+
+						<ul class="vProductItemsTiny">
+							<li class="span4 clearfix">
+								<div class="thumbImage">
+									<a href="#"><img src="img/72x72.jpg" alt=""></a>
+								</div>
+								<div class="thumbSetting">
+									<div class="thumbTitle">
+										<a href="#" class="invarseColor">
+											Foliomania the title here
+										</a>
+									</div>
+									<div class="thumbPrice">
+										<span>$150.00</span>
+									</div>
+									<ul class="rating">
+										<li><i class="star-off"></i></li>
+										<li><i class="star-off"></i></li>
+										<li><i class="star-off"></i></li>
+										<li><i class="star-off"></i></li>
+										<li><i class="star-off"></i></li>
+									</ul>
+								</div>
+							</li>
+							<li class="span4 clearfix">
+								<div class="thumbImage">
+									<a href="#"><img src="img/72x72.jpg" alt=""></a>
+								</div>
+								<div class="thumbSetting">
+									<div class="thumbTitle">
+										<a href="#" class="invarseColor">
+											Foliomania the designer portfolio
+										</a>
+									</div>
+									<div class="thumbPrice">
+										<span>$150.00</span>
+									</div>
+									<ul class="rating">
+										<li><i class="star-on"></i></li>
+										<li><i class="star-on"></i></li>
+										<li><i class="star-on"></i></li>
+										<li><i class="star-off"></i></li>
+										<li><i class="star-off"></i></li>
+									</ul>
+								</div>
+							</li>
+							<li class="span4 clearfix">
+								<div class="thumbImage">
+									<a href="#"><img src="img/72x72.jpg" alt=""></a>
+								</div>
+								<div class="thumbSetting">
+									<div class="thumbTitle">
+										<a href="#" class="invarseColor">
+											Foliomania the designer portfolio
+										</a>
+									</div>
+									<div class="thumbPrice">
+										<span>$150.00</span>
+									</div>
+									<ul class="rating">
+										<li><i class="star-on"></i></li>
+										<li><i class="star-on"></i></li>
+										<li><i class="star-on"></i></li>
+										<li><i class="star-off"></i></li>
+										<li><i class="star-off"></i></li>
+									</ul>
+								</div>
+							</li>
+							<li class="span4 clearfix">
+								<div class="thumbImage">
+									<a href="#"><img src="img/72x72.jpg" alt=""></a>
+								</div>
+								<div class="thumbSetting">
+									<div class="thumbTitle">
+										<a href="#" class="invarseColor">
+											Foliomania the designer portfolio
+										</a>
+									</div>
+									<div class="thumbPrice">
+										<span>$150.00</span>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div><!--end special-->
+
+				</aside><!--end aside-->
+
+
+				<div class="span9">
+
+					<div id="productSlider" class="carousel slide">
+						<!-- Carousel items -->
+					    <div class="carousel-inner">
+					      <div class="active item"><img src="img/694x246.jpg" alt=""></div>
+					      <div class="item"><img src="img/694x246.jpg" alt=""></div>
+					      <div class="item"><img src="img/694x246.jpg" alt=""></div>
+					    </div>
+
+					    <!-- Carousel nav -->
+					    <a class="carousel-control left" href="#productSlider" data-slide="prev">&lsaquo;</a>
+					    <a class="carousel-control right" href="#productSlider" data-slide="next">&rsaquo;</a>
+					</div><!--end productSlider-->
+
+
+					<div class="productFilter clearfix">
+
+						<div class="sortBy inline pull-left">
+							Sort By
+							<select name="sortItem">
+								<option value="Default">Default</option>
+								<option value="">Name (A-A)</option>
+								<option value="">Name (Z-A)</option>
+								<option value="">Price (Low-Hight)</option>
+								<option value="">Price (Height-Low)</option>
+								<option value="">Highest Rating</option>
+								<option value="">Lowest Rating</option>
+								<option value="">Model (A-Z)</option>
+								<option value="">Model (Z-A)</option>
+							</select>
+						</div>
+
+						<div class="showItem inline pull-left">
+							Show
+							<select name="showItem">
+								<option value="15">15</option>
+								<option value="25">25</option>
+								<option value="50">50</option>
+								<option value="75">75</option>
+								<option value="100">100</option>
+							</select>
+						</div><!--end sortBy-->
+
+						<div class="compareItem inline pull-left">
+							<button class="btn">Product Compare (4)</button>
+						</div><!--end compareItem-->
+
+						<div class="displaytBy inline pull-right">
+							Display
+							<div class="btn-group">
+								<button class="btn btn-primary active"><i class="icon-th"></i></button>
+								<button class="btn"><i class="icon-list"></i></button>
+							</div>
+						</div><!--end displaytBy-->
+
+					</div><!--end productFilter-->
+
+
+					<div class="row">
+						<ul class="listProductItems clearfix">
+							<li class="clearfix">
+								<div class="span3">
+									<div class="thumbnail">
+										<a href="#"><img src="img/212x192.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="thumbSetting">
+										<div class="thumbTitle">
+											<h3>
+												<a href="#" class="invarseColor">
+													Foliomania the designer portfolio brochure
+												</a>
+												<span class="label label-info">Sales</span>
+											</h3>
+										</div>
+										<div class="thumbPriceRate clearfix">
+											<span><span class="strike-through">$177.00</span>$150.00</span>
+											<ul class="rating">
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-off"></i></li>
+											</ul>
+											<strong><a href="#">18 Reviews</a></strong>
+										</div>
+										<div class="thumbDesc">
+											<p>
+												Nam auctor nibh quis ipsum placerat sagittis ut at dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra [ <a href="#" data-title="Read More" data-tip="tooltip" data-placement="top">...</a> ]
+											</p>
+										</div>
+
+										<div class="thumbButtons">
+											<button class="btn btn-primary btn-small">
+												<i class="icon-shopping-cart"></i>
+												Add To Cart
+											</button>
+											<button class="btn btn-small">
+												<i class="icon-heart"></i> 
+												Add To Wishlist
+											</button>
+										
+											<button class="btn btn-small">
+												<i class="icon-refresh"></i> 
+												Add To Compare
+											</button>
+										</div><!--end thumbButtons-->
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="span3">
+									<div class="thumbnail">
+										<a href="#"><img src="img/212x192.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="thumbSetting">
+										<div class="thumbTitle">
+											<h3>
+												<a href="#" class="invarseColor">
+													Foliomania the designer portfolio brochure
+												</a>
+											</h3>
+										</div>
+										<div class="thumbPriceRate clearfix">
+											<span><span class="strike-through">$177.00</span>$150.00</span>
+											<ul class="rating">
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-off"></i></li>
+											</ul>
+											<strong><a href="#">18 Reviews</a></strong>
+										</div>
+										<div class="thumbDesc">
+											<p>
+												Nam auctor nibh quis ipsum placerat sagittis ut at dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra [ <a href="#" data-title="Read More" data-tip="tooltip" data-placement="top">...</a> ]
+											</p>
+										</div>
+
+										<div class="thumbButtons">
+											<button class="btn btn-primary btn-small">
+												<i class="icon-shopping-cart"></i>
+												Add To Cart
+											</button>
+											<button class="btn btn-small">
+												<i class="icon-heart"></i> 
+												Add To Wishlist
+											</button>
+										
+											<button class="btn btn-small">
+												<i class="icon-refresh"></i> 
+												Add To Compare
+											</button>
+										</div><!--end thumbButtons-->
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="span3">
+									<div class="thumbnail">
+										<a href="#"><img src="img/212x192.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="thumbSetting">
+										<div class="thumbTitle">
+											<h3>
+												<a href="#" class="invarseColor">
+													Foliomania the designer portfolio brochure
+												</a>
+											</h3>
+										</div>
+										<div class="thumbPriceRate clearfix">
+											<span>$150.00</span>
+											<ul class="rating">
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-off"></i></li>
+											</ul>
+											<strong><a href="#">18 Reviews</a></strong>
+										</div>
+										<div class="thumbDesc">
+											<p>
+												Nam auctor nibh quis ipsum placerat sagittis ut at dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra [ <a href="#" data-title="Read More" data-tip="tooltip" data-placement="top">...</a> ]
+											</p>
+										</div>
+
+										<div class="thumbButtons">
+											<button class="btn btn-primary btn-small">
+												<i class="icon-shopping-cart"></i>
+												Add To Cart
+											</button>
+											<button class="btn btn-small">
+												<i class="icon-heart"></i> 
+												Add To Wishlist
+											</button>
+										
+											<button class="btn btn-small">
+												<i class="icon-refresh"></i> 
+												Add To Compare
+											</button>
+										</div><!--end thumbButtons-->
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="span3">
+									<div class="thumbnail">
+										<a href="#"><img src="img/212x192.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="thumbSetting">
+										<div class="thumbTitle">
+											<h3>
+												<a href="#" class="invarseColor">
+													Foliomania the designer portfolio brochure
+												</a>
+												<span class="label label-info">Sales</span>
+											</h3>
+										</div>
+										<div class="thumbPriceRate clearfix">
+											<span>$150.00</span>
+											<ul class="rating">
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-off"></i></li>
+											</ul>
+											<strong><a href="#">18 Reviews</a></strong>
+										</div>
+										<div class="thumbDesc">
+											<p>
+												Nam auctor nibh quis ipsum placerat sagittis ut at dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra [ <a href="#" data-title="Read More" data-tip="tooltip" data-placement="top">...</a> ]
+											</p>
+										</div>
+
+										<div class="thumbButtons">
+											<button class="btn btn-primary btn-small">
+												<i class="icon-shopping-cart"></i>
+												Add To Cart
+											</button>
+											<button class="btn btn-small">
+												<i class="icon-heart"></i> 
+												Add To Wishlist
+											</button>
+										
+											<button class="btn btn-small">
+												<i class="icon-refresh"></i> 
+												Add To Compare
+											</button>
+										</div><!--end thumbButtons-->
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="span3">
+									<div class="thumbnail">
+										<a href="#"><img src="img/212x192.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="thumbSetting">
+										<div class="thumbTitle">
+											<h3>
+												<a href="#" class="invarseColor">
+													Foliomania the designer portfolio brochure
+												</a>
+											</h3>
+										</div>
+										<div class="thumbPriceRate clearfix">
+											<span>$150.00</span>
+											<ul class="rating">
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-off"></i></li>
+											</ul>
+											<strong><a href="#">18 Reviews</a></strong>
+										</div>
+										<div class="thumbDesc">
+											<p>
+												Nam auctor nibh quis ipsum placerat sagittis ut at dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra [ <a href="#" data-title="Read More" data-tip="tooltip" data-placement="top">...</a> ]
+											</p>
+										</div>
+
+										<div class="thumbButtons">
+											<button class="btn btn-primary btn-small">
+												<i class="icon-shopping-cart"></i>
+												Add To Cart
+											</button>
+											<button class="btn btn-small">
+												<i class="icon-heart"></i> 
+												Add To Wishlist
+											</button>
+										
+											<button class="btn btn-small">
+												<i class="icon-refresh"></i> 
+												Add To Compare
+											</button>
+										</div><!--end thumbButtons-->
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="span3">
+									<div class="thumbnail">
+										<a href="#"><img src="img/212x192.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="thumbSetting">
+										<div class="thumbTitle">
+											<h3>
+												<a href="#" class="invarseColor">
+													Foliomania the designer portfolio brochure
+												</a>
+												<span class="label label-success">Offer</span>
+											</h3>
+										</div>
+										<div class="thumbPriceRate clearfix">
+											<span>$150.00</span>
+											<ul class="rating">
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-on"></i></li>
+												<li><i class="star-off"></i></li>
+											</ul>
+											<strong><a href="#">18 Reviews</a></strong>
+										</div>
+										<div class="thumbDesc">
+											<p>
+												Nam auctor nibh quis ipsum placerat sagittis ut at dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra [ <a href="#" data-title="Read More" data-tip="tooltip" data-placement="top">...</a> ]
+											</p>
+										</div>
+
+										<div class="thumbButtons">
+											<button class="btn btn-primary btn-small">
+												<i class="icon-shopping-cart"></i>
+												Add To Cart
+											</button>
+											<button class="btn btn-small">
+												<i class="icon-heart"></i> 
+												Add To Wishlist
+											</button>
+										
+											<button class="btn btn-small">
+												<i class="icon-refresh"></i> 
+												Add To Compare
+											</button>
+										</div><!--end thumbButtons-->
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+
+					<div class="pagination pagination-right">
+						<span class="pull-left">Showing 9 of 20 pages:</span>
+						<ul>
+							<li><a class="invarseColor" href="#">Prev</a></li>
+							<li class="active"><a class="invarseColor" href="#">1</a></li>
+							<li><a class="invarseColor" href="#">2</a></li>
+							<li><a class="invarseColor" href="#">2</a></li>
+							<li><a class="invarseColor" href="#">3</a></li>
+							<li><a class="invarseColor" href="#">Next</a></li>
+						</ul>
+					</div><!--end pagination-->
+
+				</div><!--end span9-->
+
+			</div><!--end row-->
+
+		</div><!--end conatiner-->
+
+
+		<!--begain footer-->
+		<footer>
+		<div class="footerOuter">
+			<div class="container">
+				<div class="row-fluid">
+
+					<div class="span3">
+						<div class="titleHeader clearfix">
+							<h3>Usefull Links</h3>
+						</div>
+						
+						<div class="usefullLinks">
+							<div class="row-fluid">
+								<div class="span12">
+									<ul class="unstyled">
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> About Us</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Delivery Information</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Privecy Police</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Tarms &amp; Condations</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Customer Support</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Special Gifts</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Browse Site Map</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div><!--end span6-->
+
+
+					<div class="span3">
+						<div class="titleHeader clearfix">
+							<h3>Special Products</h3>
+						</div>
+
+						<ul class="pro-list-footer">
+							<li class="clearfix">
+								<div class="thumbnail">
+									<a href="#"><img src="img/64x64.jpg" alt="Product Image">
+									</a>
+								</div>
+								<div class="product-setting">
+									<div class="pro-title">
+										<a href="#">Foliomania the designer portfolio brochure</a>
+									</div>
+									<div class="pro-price">
+										$110.00
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="thumbnail">
+									<a href="#"><img src="img/64x64.jpg" alt="Product Image">
+									</a>
+								</div>
+								<div class="product-setting">
+									<div class="pro-title">
+										<a href="#">Foliomania the designer portfolio brochure</a>
+									</div>
+									<div class="pro-price">
+										$110.00
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="thumbnail">
+									<a href="#"><img src="img/64x64.jpg" alt="Product Image">
+									</a>
+								</div>
+								<div class="product-setting">
+									<div class="pro-title">
+										<a href="#">Foliomania the designer portfolio brochure</a>
+									</div>
+									<div class="pro-price">
+										$110.00
+									</div>
+								</div>
+							</li>
+						</ul><!--end pro-list-footer-->
+					</div><!--end span3-->
+
+					<div class="span3">
+						<div class="titleHeader clearfix">
+							<h3>Flickr Stream</h3>
+						</div>
+
+						<ul class="flickr-feed clearfix">
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+						</ul>
+					</div><!--end span3-->
+
+					<div class="span3">
+						<div class="titleHeader clearfix">
+							<h3>Send Message</h3>
+						</div>
+
+						<div class="newslatter">
+							<form method="get" action="http://egythemes.com/shoppest/page">
+								<input class="input-block-level" type="text" name="name" value="" placeholder="Your Name...">
+								<input class="input-block-level" type="text" name="email" value="" placeholder="Your E-Mail...">
+								<textarea class="input-block-level" name="message" placeholder="type your message here..."></textarea>
+								<button class="btn btn-primary btn-block" type="submit" name="">Send Message</button>
+							</form>
+						</div>
+
+					</div><!--end span3-->
+
+				</div><!--end row-fluid-->
+
+			</div><!--end container-->
+		</div><!--end footerOuter-->
+
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<ul class="payments inline pull-right">
+						<li class="visia"></li>
+						<li class="paypal"></li>
+						<li class="electron"></li>
+						<li class="discover"></li>
+					</ul>
+					<p>© Copyrights 2012 for <a href="index.html">shoppest.com</a></p>
+				</div>
+			</div>
+		</div>
+		</footer>
+		<!--end footer-->
+
+	</div><!--end wrapper-->
+
+
+	<!-- Sidebar Widget
+	================================================== -->
+	<div class="switcher">
+		<h3>Site Switcher</h3>
+		<a class="Widget-toggle-link">+</a>
+
+		<div class="switcher-content clearfix">
+
+			<div class="pattern-switch">
+				<h4>BG Pattern</h4>
+				<a style="background:url(img/backgrounds/bgnoise_lg.png);">bgnoise_lg</a>
+				<a style="background:url(img/backgrounds/bg.png);">bg</a>
+				<a style="background:url(img/backgrounds/foggy_birds.png);">foggy_birds</a>
+				<a style="background:url(img/backgrounds/gplaypattern.png);">gplaypattern</a>
+				<a style="background:url(img/backgrounds/grid_noise.png);">grid_noise</a>
+				<a style="background:url(img/backgrounds/lil_fiber.png);">lil_fiber</a>
+				<a style="background:url(img/backgrounds/scribble_light.png);">scribble_light</a>
+				<a style="background:url(img/backgrounds/tex2res5.png);">tex2res5</a>
+				<a style="background:url(img/backgrounds/white_plaster.png);">white_plaster</a>
+			</div><!--end pattern-switch-->
+
+		</div><!--end switcher-content-->
+	</div>
+	<!-- End Sidebar Widget-->
+
+
+
+	<!-- JS
+	================================================== -->
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery-ui-1.10.2.min.js"></script>
+	<!-- bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+	<!-- jQuery.Cookie -->
+	<script src="js/jquery.cookie.js"></script>
+    <!-- fancybox -->
+    <script src="js/fancybox/jquery.fancybox.js"></script>
+    <!-- jquery.tweet -->
+    <script src="js/jquery.tweet.js"></script>
+    <!-- custom function-->
+    <script src="js/custom.js"></script>
+    
+</body>
+
+</html>

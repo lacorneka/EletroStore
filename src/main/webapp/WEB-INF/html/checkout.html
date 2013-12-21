@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Shoppest: Checkout</title>
+	<meta name="description" content="">
+	<meta name="author" content="Ahmed Saeed">
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+	<!-- jquery ui css -->
+	<link rel="stylesheet" href="css/jquery-ui-1.10.1.min.css">
+	<link rel="stylesheet" href="css/customize.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/style.css">
+	<!-- fancybox -->
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+		<link rel="stylesheet" href="css/font-awesome-ie7.css">
+	<![endif]-->
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.html">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.html">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.html">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.html">
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<!--begain header-->
+			<header>
+				<div class="topHeader">
+					<div class="container">
+						<div class="pull-right">
+							<div class="btn-group">
+								<button class="btn dropdown-toggle" data-toggle="dropdown">
+									<i class="icon-shopping-cart"></i> 
+									(2) 
+									<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu cart-content pull-right">
+									<table class="table-cart">
+										<tbody>
+											<tr>
+												<td class="cart-product-info">
+													<a href="#"><img src="img/72x72.jpg" alt="product image"></a>
+													<div class="cart-product-desc">
+														<p><a class="invarseColor" href="#">Title1</a></p>
+														<ul class="unstyled">
+															<li>Available: Yes</li>
+															<li>Color: Black</li>
+														</ul>
+													</div>
+												</td>
+												<td class="cart-product-setting">
+													<p><strong>1x-$500.00</strong></p>
+													<a href="#" class="btn btn-mini remove-pro" data-tip="tooltip" data-title="Delete" data-original-title=""><i class="icon-trash"></i></a>
+												</td>
+											</tr>
+											<tr>
+												<td class="cart-product-info">
+													<a href="#"><img src="img/72x72.jpg" alt="product image"></a>
+													<div class="cart-product-desc">
+														<p><a class="invarseColor" href="#">Title</a></p>
+														<ul class="unstyled">
+															<li>Available: Yes</li>
+															<li>Color: Black</li>
+														</ul>
+													</div>
+												</td>
+												<td class="cart-product-setting">
+													<p><strong>2x-$450.00</strong></p>
+													<a href="#" class="btn btn-mini remove-pro" data-tip="tooltip" data-title="Delete" data-original-title=""><i class="icon-trash"></i></a>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td class="cart-product-info">
+													<a href="cart.html" class="btn btn-small">View cart</a>
+													<a href="checkout.html" class="btn btn-small btn-primary">Checkout</a>
+												</td>
+												<td>
+													<h3>$1,598.30</h3>
+												</td>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div><!--end pull-right-->
+						<div class="pull-right">
+							<form method="get" action="http://egythemes.com/shoppest/page" class="siteSearch">
+								<div class="input-append">
+									<input type="text" class="span2" id="appendedInputButton" placeholder="Start Typing...">
+									<button class="btn" type="submit" name=""><i class="icon-search"></i></button>
+								</div>
+							</form><!--end form-->
+						</div><!--end pull-right-->
+						<ul class="pull-right inline">
+							<li><a class="invarseColor" href="login.html">Login</a></li>
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="register.html">Register</a></li>
+							
+							
+							
+							
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="account.html">My Account</a></li>
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="wishlist.html">Wishlist(4)</a></li>
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="cart.html">Cart</a></li>
+							<li class="sep-vertical"></li>
+							<li><a class="invarseColor" href="checkout.html">Checkout</a></li>
+						</ul>
+					</div><!--end container-->
+				</div><!--end topHeader-->
+				<div class="subHeader">
+					<div class="container">
+						<div class="navbar">
+							<div class="siteLogo pull-left">
+								<h1><a href="index.html"><img src="img/logo.png" alt="Shoppest"></a></h1>
+							</div>
+
+							<ul class="nav">
+								<li class="active"><a href="#"><i class="icon-home"></i></a></li>
+
+								<li>
+									<a href="#">TV &amp; Home Theater<i class="icon-caret-down"></i></a>
+									<ul style="">
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> TVs</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Projectors &amp; Screens</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Blu-ray &amp; DVD Players</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Home Theater Systems</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Smart TVs &amp; Devices</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Digital TV Converters</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> Connections</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> TV Stands, Mounts &amp; Storage</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> TV &amp; Home Theater Services</a></li>
+										<li><a href="#"> <span>-</span><i class="icon-caret-right"></i> TV &amp; Home Theater Accessories</a></li>
+									</ul>
+								</li>
+
+							</ul><!--end nav-->
+						</div>
+					</div><!--end container-->
+				</div><!--end subHeader-->
+			</header>
+		<!-- end header -->
+
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="span9">
+					<div class="checkout-outer">
+						<div class="checkout-header">
+							<a href="#" class="invarseColor pull-right" data-tip="tooltip" data-placment="top" data-title="EDIT" style="margin-right:12px; color:#333; font-size:13px;"><i class="icon-pencil"></i></a>
+							<h4><i class="icon-caret-down"></i> Checkout Options</h4>
+						</div><!--end checkout-header-->
+
+						<div class="checkout-content">
+							<table>
+								<tr>
+									<td style="width:50%">
+										<h3>New Customer</h3><br>
+										<form method="post" action="http://egythemes.com/shoppest/page">
+											<label class="radio">
+											  <input type="radio" name="optionsRadios" value="1" checked>
+											  Registeration Account.
+											</label>
+											<label class="radio">
+											  <input type="radio" name="optionsRadios" value="0">
+											  Contuine as guest account.
+											</label>
+										</form>
+										<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
+										<a href="#" class="btn">Register</a>
+									</td>
+
+									<td style="width:50%">
+										<h3>Returning Customer</h3><br>
+										<form method="post" action="http://egythemes.com/shoppest/page">
+											<div class="controls">
+												<label for="log-email">Your E-Mail: <span class="text-error">*</span></label>
+												<input type="text" id="log-email" name="" value="" placeholder="example@example.com">
+											</div>
+											<div class="controls">
+												<label for="log-pass">Your Password: <span class="text-error">*</span></label>
+												<input type="password" id="log-pass" name="" value="" placeholder="**************">
+											</div>
+											<div class="controls">
+												<label class="checkbox">
+											      <input type="checkbox"> Check me out
+											    </label>
+											    <button type="submit" class="btn btn-primary">Login</button>
+											</div>
+										</form>
+									</td>
+								</tr>
+							</table>
+						</div><!--end checkout-content-->
+					</div><!--end checkout-outer-->
+
+
+					<div class="checkout-outer">
+						<div class="checkout-header">
+							<a href="#" class="invarseColor pull-right" data-tip="tooltip" data-placment="top" data-title="EDIT" style="margin-right:12px; color:#333; font-size:13px;"><i class="icon-pencil"></i></a>
+							<h4><i class="icon-caret-down"></i> Account and billing Details</h4>
+						</div><!--end checkout-header-->
+
+						<div class="checkout-content">
+							<form method="post" action="http://egythemes.com/shoppest/page" class="form-inline">
+								<label class="radio inline">
+								  <input type="radio" name="add" value="option1"> Use my exisiting data address
+								</label>&nbsp;&nbsp;
+								<label class="radio inline">
+								  <input type="radio" name="add" value="option2"> I want to asign new address
+								</label>
+							</form><!--end form-->
+
+							<hr>
+
+							<form method="post" action="http://egythemes.com/shoppest/page" class="form-horizontal">
+
+								<div class="control-group">
+								    <label class="control-label" for="inputFirstName">First Name: <span class="text-error">*</span></label>
+								    <div class="controls">
+								      <input type="text" id="inputFirstName" placeholder="John">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <label class="control-label" for="inputLastName">Last Name: <span class="text-error">*</span></label>
+								    <div class="controls">
+								      <input type="text" id="inputLastName" placeholder="Doe">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <label class="control-label" for="inputCompany">Company:</label>
+								    <div class="controls">
+								      <input type="text" id="inputCompany" placeholder="Shopfine, INC">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <label class="control-label" for="inputFirstAdd">First Address: <span class="text-error">*</span></label>
+								    <div class="controls">
+								      <input type="text" id="inputFirstAdd" placeholder="3st el-hakim">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <label class="control-label" for="inputSecondAdd">Second Address:</label>
+								    <div class="controls">
+								      <input type="text" id="inputSecondAdd" placeholder="6st el-hakim">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <label class="control-label" for="inputCity">City: <span class="text-error">*</span></label>
+								    <div class="controls">
+								      <input type="text" id="inputCity" placeholder="Cairo">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <label class="control-label" for="inputPostCode">Post Code: <span class="text-error">*</span></label>
+								    <div class="controls">
+								      <input type="text" id="inputPostCode" placeholder="12345">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <div class="control-label">Contury: <span class="text-error">*</span></div>
+								    <div class="controls">
+								      <select name="contury">
+								      	<option>-- Select Contury --</option>
+								      	<option>Contury1</option>
+								      	<option>Contury2</option>
+								      	<option>Contury3</option>
+								      	<option>Contury4</option>
+								      </select>
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <div class="control-label">Region/Stats: <span class="text-error">*</span></div>
+								    <div class="controls">
+								      <select name="region">
+								      	<option>-- Select Region --</option>
+								      	<option>Region/Stats1</option>
+								      	<option>Region/Stats2</option>
+								      	<option>Region/Stats3</option>
+								      	<option>Region/Stats4</option>
+								      	<option>Region/Stats5</option>
+								      </select>
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+							    <div class="controls">
+								    <button type="submit" class="btn btn-primary">Contuine</button>
+							    </div>
+							</div><!--end control-group-->
+
+							</form><!--end form-->
+						</div><!--end checkout-content-->
+					</div><!--end checkout-outer-->
+
+
+					<div class="checkout-outer">
+						<div class="checkout-header">
+							<a href="#" class="invarseColor pull-right" data-tip="tooltip" data-placment="top" data-title="EDIT" style="margin-right:12px; color:#333; font-size:13px;"><i class="icon-pencil"></i></a>
+
+							<h4><i class="icon-caret-right"></i> Delivery Notes</h4>
+						</div><!--end checkout-header-->
+
+						<div class="checkout-content">
+							
+							<form method="post" action="http://egythemes.com/shoppest/page" class="form-horizontal">
+								<div class="control-group">
+								    <label class="control-label" for="inputNotes">Your Notes: <span class="text-error">*</span></label>
+								    <div class="controls">
+								      <textarea id="inputNotes" placeholder="Down Your Notes Here..."></textarea>
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <div class="controls">
+									    <button type="submit" class="btn btn-primary">Contuine</button>
+								    </div>
+								</div><!--end control-group-->
+							</form>
+
+						</div><!--end checkout-content-->
+					</div><!--end checkout-outer-->
+
+
+					<div class="checkout-outer">
+						<div class="checkout-header">
+							<a href="#" class="invarseColor pull-right" data-tip="tooltip" data-placment="top" data-title="EDIT" style="margin-right:12px; color:#333; font-size:13px;"><i class="icon-pencil"></i></a>
+							<h4><i class="icon-caret-right"></i> Payment Methods</h4>
+						</div><!--end checkout-header-->
+
+						<div class="checkout-content">
+							
+							<form method="post" action="http://egythemes.com/shoppest/page" class="form-horizontal">
+								<div class="control-group">
+								    <div class="control-label">Visia Type: <span class="text-error">*</span></div>
+								    <div class="controls">
+								      <select name="region">
+								      	<option>-- Select Region --</option>
+								      	<option>Lorem</option>
+								      	<option>Lorem</option>
+								      	<option>Lorem</option>
+								      </select>
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <label class="control-label" for="inputcartNum">cart Number: <span class="text-error">*</span></label>
+								    <div class="controls">
+								      <input type="text" id="inputcartNum" placeholder="12345">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <label class="control-label" for="inputcartSec">cart Secuirty: <span class="text-error">*</span></label>
+								    <div class="controls">
+								      <input type="text" id="inputcartSec" placeholder="12345">
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <div class="control-label">Visia Type: <span class="text-error">*</span></div>
+								    <div class="controls">
+								      <select name="region" class="input-small">
+								      	<option>-- Year --</option>
+								      	<option>2013</option>
+								      	<option>2012</option>
+								      	<option>2011</option>
+								      </select>
+
+								      <select name="region" class="input-small">
+								      	<option>-- Month --</option>
+								      	<option>9</option>
+								      	<option>8</option>
+								      	<option>6</option>
+								      </select>
+								    </div>
+								</div><!--end control-group-->
+
+								<div class="control-group">
+								    <div class="controls">
+									    <button type="submit" class="btn btn-primary">Contuine</button>
+								    </div>
+								</div><!--end control-group-->
+							</form>
+
+						</div><!--end checkout-content-->
+					</div><!--end checkout-outer-->
+
+				</div><!--end span9-->
+
+
+				<div class="span3">
+					<div class="titleHeader clearfix">
+						<h3>Account</h3>
+					</div><!--end titleHeader-->
+					<ul class="unstyled my-account">
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Login or Register</a></li>
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Forget my Password</a></li>
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> My Account</a></li>
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> My wishlist</a></li>
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Order History</a></li>
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Downloads</a></li>
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Returns</a></li>
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> TRANSACTIONS</a></li>
+						<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Newlatters</a></li>
+					</ul>
+
+
+					<div class="twitter-feed">
+						<div class="titleHeader clearfix">
+							<h3>Twitter Feeds</h3>
+						</div><!--end titleHeader-->
+						<div class="tweet">
+							<!-- tweets will generate automaticlly here-->
+						</div><!--end tweet-->
+					</div><!--end twitter-feed-->
+
+				</div><!--end span3-->
+
+
+			</div><!--end row-->
+
+		</div><!--end conatiner-->
+
+
+		<!--begain footer-->
+		<footer>
+		<div class="footerOuter">
+			<div class="container">
+				<div class="row-fluid">
+
+					<div class="span3">
+						<div class="titleHeader clearfix">
+							<h3>Usefull Links</h3>
+						</div>
+						
+						<div class="usefullLinks">
+							<div class="row-fluid">
+								<div class="span12">
+									<ul class="unstyled">
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> About Us</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Delivery Information</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Privecy Police</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Tarms &amp; Condations</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Customer Support</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Special Gifts</a></li>
+										<li><a class="invarseColor" href="#"><i class="icon-caret-right"></i> Browse Site Map</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div><!--end span6-->
+
+
+					<div class="span3">
+						<div class="titleHeader clearfix">
+							<h3>Special Products</h3>
+						</div>
+
+						<ul class="pro-list-footer">
+							<li class="clearfix">
+								<div class="thumbnail">
+									<a href="#"><img src="img/64x64.jpg" alt="Product Image">
+									</a>
+								</div>
+								<div class="product-setting">
+									<div class="pro-title">
+										<a href="#">Foliomania the designer portfolio brochure</a>
+									</div>
+									<div class="pro-price">
+										$110.00
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="thumbnail">
+									<a href="#"><img src="img/64x64.jpg" alt="Product Image">
+									</a>
+								</div>
+								<div class="product-setting">
+									<div class="pro-title">
+										<a href="#">Foliomania the designer portfolio brochure</a>
+									</div>
+									<div class="pro-price">
+										$110.00
+									</div>
+								</div>
+							</li>
+							<li class="clearfix">
+								<div class="thumbnail">
+									<a href="#"><img src="img/64x64.jpg" alt="Product Image">
+									</a>
+								</div>
+								<div class="product-setting">
+									<div class="pro-title">
+										<a href="#">Foliomania the designer portfolio brochure</a>
+									</div>
+									<div class="pro-price">
+										$110.00
+									</div>
+								</div>
+							</li>
+						</ul><!--end pro-list-footer-->
+					</div><!--end span3-->
+
+					<div class="span3">
+						<div class="titleHeader clearfix">
+							<h3>Flickr Stream</h3>
+						</div>
+
+						<ul class="flickr-feed clearfix">
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+							<li>
+								<div class="thumbnail">
+								<a href="#"><img src="img/64x64.jpg" alt="Flickr Image"></a>
+								</div>
+							</li>
+						</ul>
+					</div><!--end span3-->
+
+					<div class="span3">
+						<div class="titleHeader clearfix">
+							<h3>Send Message</h3>
+						</div>
+
+						<div class="newslatter">
+							<form method="get" action="http://egythemes.com/shoppest/page">
+								<input class="input-block-level" type="text" name="name" value="" placeholder="Your Name...">
+								<input class="input-block-level" type="text" name="email" value="" placeholder="Your E-Mail...">
+								<textarea class="input-block-level" name="message" placeholder="type your message here..."></textarea>
+								<button class="btn btn-primary btn-block" type="submit" name="">Send Message</button>
+							</form>
+						</div>
+
+					</div><!--end span3-->
+
+				</div><!--end row-fluid-->
+
+			</div><!--end container-->
+		</div><!--end footerOuter-->
+
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<ul class="payments inline pull-right">
+						<li class="visia"></li>
+						<li class="paypal"></li>
+						<li class="electron"></li>
+						<li class="discover"></li>
+					</ul>
+					<p>© Copyrights 2012 for <a href="index.html">shoppest.com</a></p>
+				</div>
+			</div>
+		</div>
+		</footer>
+		<!--end footer-->
+
+	</div><!--end wrapper-->
+
+
+	<!-- Sidebar Widget
+	================================================== -->
+	<div class="switcher">
+		<h3>Site Switcher</h3>
+		<a class="Widget-toggle-link">+</a>
+
+		<div class="switcher-content clearfix">
+
+			<div class="pattern-switch">
+				<h4>BG Pattern</h4>
+				<a style="background:url(img/backgrounds/bgnoise_lg.png);">bgnoise_lg</a>
+				<a style="background:url(img/backgrounds/bg.png);">bg</a>
+				<a style="background:url(img/backgrounds/foggy_birds.png);">foggy_birds</a>
+				<a style="background:url(img/backgrounds/gplaypattern.png);">gplaypattern</a>
+				<a style="background:url(img/backgrounds/grid_noise.png);">grid_noise</a>
+				<a style="background:url(img/backgrounds/lil_fiber.png);">lil_fiber</a>
+				<a style="background:url(img/backgrounds/scribble_light.png);">scribble_light</a>
+				<a style="background:url(img/backgrounds/tex2res5.png);">tex2res5</a>
+				<a style="background:url(img/backgrounds/white_plaster.png);">white_plaster</a>
+			</div><!--end pattern-switch-->
+
+		</div><!--end switcher-content-->
+	</div>
+	<!-- End Sidebar Widget-->
+
+
+
+	<!-- JS
+	================================================== -->
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery-ui-1.10.2.min.js"></script>
+	<!-- bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+	<!-- jQuery.Cookie -->
+	<script src="js/jquery.cookie.js"></script>
+    <!-- fancybox -->
+    <script src="js/fancybox/jquery.fancybox.js"></script>
+    <!-- jquery.tweet -->
+    <script src="js/jquery.tweet.js"></script>
+    <!-- custom function-->
+    <script src="js/custom.js"></script>
+    
+</body>
+
+</html>
