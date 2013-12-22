@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/includes/taglibs.jsp"%>
+
 
 <div class="span8">
 	<div id="slideShow" class="carousel slide">
 		<!-- Carousel items -->
 		<div class="carousel-inner">
 			<div class="active item">
-				<img src="img/614x300.jpg" alt="slide1">
+				<img src="<c:url value='/resources/img/614x300.jpg'/>" alt="slide1">
 			</div>
 			<div class="item">
-				<img src="img/614x300.jpg" alt="slide1">
+				<img src="<c:url value='/resources/img/614x300.jpg'/>" alt="slide1">
 			</div>
 			<div class="item">
-				<img src="img/614x300.jpg" alt="slide1">
+				<img src="<c:url value='/resources/img/614x300.jpg'/>" alt="slide1">
 			</div>
 		</div>
 		<!--end carousel-inner-->
@@ -31,17 +33,17 @@
 	<ul class="thumb-banner">
 		<li>
 			<div class="thumbnail">
-				<a href="#"><img src="img/292x83.jpg" alt="banner"></a>
+				<a href="#"><img src="<c:url value='/resources/img/292x83.jpg'/>" alt="banner"></a>
 			</div>
 		</li>
 		<li>
 			<div class="thumbnail">
-				<a href="#"><img src="img/292x83.jpg" alt="banner"></a>
+				<a href="#"><img src="<c:url value='/resources/img/292x83.jpg'/>" alt="banner"></a>
 			</div>
 		</li>
 		<li>
 			<div class="thumbnail">
-				<a href="#"><img src="img/292x83.jpg" alt="banner"></a>
+				<a href="#"><img src="<c:url value='/resources/img/292x83.jpg'/>" alt="banner"></a>
 			</div>
 		</li>
 	</ul>

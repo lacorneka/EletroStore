@@ -12,7 +12,7 @@ import EletroStore.entity.*;
 
 public interface UserDao {
 
-	public void addUser(User user);
+	public boolean addUser(User user);
 
 	public void updateUser(User user);
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>      
+<!DOCTYPE tiles-definitions PUBLIC  
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"  
+    "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="admin-base" template="/WEB-INF/jsp/template/template-admin.jsp">
+    	<put-attribute name="title" value="Dashboard Admin" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/index.jsp" />
+    </definition>
+    <definition name="admin-welcome" extends="admin-base">
+        <put-attribute name="title" value="Dashboard Admin | Welcome"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/index.jsp"/>
+    </definition>
+</tiles-definitions>  

@@ -4,11 +4,14 @@ package EletroStore.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,6 +29,17 @@ public class User implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer memberid;
+	public User(String firstname, String lastname, String email,
+			String password, String phonenumber, String zipcode) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.password = password;
+		this.phonenumber = phonenumber;
+		this.zipcode = zipcode;
+	}
+
 	private String firstname;
 	private String lastname;
 	private String email;

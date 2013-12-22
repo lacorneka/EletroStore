@@ -56,35 +56,6 @@
 	</div>
 	<!--end wrapper-->
 
-	<!-- Sidebar Widget
-	================================================== -->
-	<div class="switcher">
-		<h3>Site Switcher</h3>
-		<a class="Widget-toggle-link">+</a>
-
-		<div class="switcher-content clearfix">
-
-			<div class="pattern-switch">
-				<h4>BG Pattern</h4>
-				<a style="background: url(<c:url value='/resources/img/backgrounds/bgnoise_lg.png'/>);">bgnoise_lg</a>
-				<a style="background: url(<c:url value='/resources/img/backgrounds/bg.png'/>);">bg</a> <a
-					style="background: url(<c:url value='/resources/img/backgrounds/foggy_birds.png'/>);">foggy_birds</a>
-				<a style="background: url(<c:url value='/resources/img/backgrounds/gplaypattern.png'/>);">gplaypattern</a>
-				<a style="background: url(<c:url value='/resources/img/backgrounds/grid_noise.png'/>);">grid_noise</a>
-				<a style="background: url(<c:url value='/resources/img/backgrounds/lil_fiber.png'/>);">lil_fiber</a>
-				<a style="background: url(<c:url value='/resources/img/backgrounds/scribble_light.png'/>);">scribble_light</a>
-				<a style="background: url(<c:url value='/resources/img/backgrounds/tex2res5.png'/>);">tex2res5</a>
-				<a style="background: url(<c:url value='/resources/img/backgrounds/white_plaster.png'/>);">white_plaster</a>
-			</div>
-			<!--end pattern-switch-->
-
-		</div>
-		<!--end switcher-content-->
-	</div>
-	<!-- End Sidebar Widget-->
-
-
-
 	<!-- JS
 	================================================== -->
 	<script src="<c:url value='/resources/js/jquery-1.9.1.min.js'/>"></script>

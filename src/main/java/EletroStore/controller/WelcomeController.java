@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import EletroStore.entity.User;
 import EletroStore.service.UserService;
 
+
 @Controller
 public class WelcomeController {
 
@@ -36,6 +37,20 @@ public class WelcomeController {
         	model.addAttribute("name", user.getFirstname() + " " + user.getLastname());
         }
         return "welcome";        
+    }
+    
+    /**
+     * @param model
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, value = { "welcome2" })
+    public String showWelcomePage2(Model model) {
+        logger.debug("Page Request: /welcome.do");
+        User user = userDetailsService.getCurrentUser();
+        if(user!=null){
+        	model.addAttribute("name", user.getFirstname() + " " + user.getLastname());
+        }
+        return "admin-welcome";        
     }
     
     /**

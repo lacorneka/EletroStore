@@ -110,7 +110,7 @@
 			<div class="navbar">
 				<div class="siteLogo pull-left">
 					<h1>
-						<a href="welcome.do"><img src="<c:url value='/resources//img/logo.png'/>" alt="Shoppest"></a>
+						<a href="welcome.do"><img src="<c:url value='/resources/img/logo.png'/>" alt="Eletro"></a>
 					</h1>
 				</div>
 

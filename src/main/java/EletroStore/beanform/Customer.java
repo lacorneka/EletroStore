@@ -1,15 +1,12 @@
 package EletroStore.beanform;
 
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Length.List;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.factory.annotation.Required;
 
-@FieldMatch(first = "password", second = "retypepassword", message = "The password fields must match")
 public class Customer {
 	private String firstname;
 	private String lastname;
@@ -29,20 +26,11 @@ public class Customer {
 	private String retypepassword;
 	
 	@Pattern(regexp="(^$|[0-9]{10})")
+	@NotEmpty
 	private String phonenumber;
 	@NotEmpty
 	private String address;
 	private String zipcode;	
-
-	private boolean isAgreed = true;
-	
-
-	public boolean isAgreed() {
-		return isAgreed;
-	}
-	public void setAgreed(boolean isAgreed) {
-		this.isAgreed = isAgreed;
-	}
 
 	public String getFirstname() {
 		return firstname;

@@ -10,7 +10,7 @@
 			</form:label>
 			<div class="controls">
 				<form:input path="email" placeholder="example@example.com" />
-				<span style="margin-left: 10px;"><form:errors path="email" cssClass="error text-error" /></span>								
+				<form:errors path="email" cssClass="error text-error" style="margin-left: 10px;"/>								
 			</div>
 		</div>
 		<!--end control-group-->
@@ -21,7 +21,7 @@
 			</form:label>
 			<div class="controls">
 				<form:password path="password" placeholder="**********" />
-				<span style="margin-left: 10px;"><form:errors path="password" cssClass="error text-error" /></span>								
+				<span ><form:errors path="password" cssClass="error text-error" /></span>								
 			</div>
 		</div>
 

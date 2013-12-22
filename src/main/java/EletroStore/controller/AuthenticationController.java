@@ -23,7 +23,7 @@ public class AuthenticationController {
 	/**
 	 * Handles requests to the /login.do page
 	 **/
-	@RequestMapping(method = RequestMethod.GET, value = { "login" })
+	@RequestMapping(method = RequestMethod.GET, value = { "login.do" })
 	public String showLoginPage(Model model) {
 		logger.debug("Page Request: /login.do");
 		return "login";

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.UserDao;
 import EletroStore.entity.*;
@@ -24,9 +25,23 @@ public class UserDaoImpl implements UserDao {
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
-	public void addUser(User user) {
-		getCurrentSession().save(user);
+	
+	@Transactional(readOnly=false)
+	public boolean addUser(User user) {
+		try {
+		Userroles roles = new Userroles();
+		user.setEnable(true);
+		Session session = sessionFactory.openSession(); 
+		session.save(user);		
+		roles.setUser(user);
+		roles.setRole("ROLE_USER");
+		session.save(roles);
+		session.close();
+		return true;
+		} catch (Exception e) {
+			logger.trace("Exception: " + e.getMessage() );
+			return false;
+		}
 	}
 
 	public void updateUser(User user) {
