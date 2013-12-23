@@ -1,6 +1,6 @@
 package EletroStore.entity;
 
-// Generated Dec 21, 2013 4:07:42 AM by Hibernate Tools 4.0.0
+// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;

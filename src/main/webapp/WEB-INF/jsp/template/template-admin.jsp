@@ -72,7 +72,7 @@
 </head>
 <body>
 	<!-- Header -->
-	<header class="header navbar navbar-fixed-top" role="banner">
+	<header class="header navbar navbar-fixed-top" >
 		<!-- Top Navigation Bar -->
 		<div class="container">
 			<!-- Logo -->

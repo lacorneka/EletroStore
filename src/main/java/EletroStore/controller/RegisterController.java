@@ -43,7 +43,7 @@ public class RegisterController {
 			User user = new User(customer.getFirstname(),
 					customer.getLastname(), customer.getEmail(),
 					customer.getPassword(), customer.getPhonenumber(),
-					customer.getZipcode());
+					customer.getZipcode(),null, null, null,null,null,null);
 			if (userDao.addUser(user)) {
 				return "welcome";
 			} else {

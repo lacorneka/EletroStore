@@ -1,17 +1,14 @@
 package EletroStore.entity;
 
-// Generated Dec 21, 2013 6:47:14 AM by Hibernate Tools 4.0.0
+// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,19 +24,8 @@ public class User implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1155766549371193217L;
 	private Integer memberid;
-	public User(String firstname, String lastname, String email,
-			String password, String phonenumber, String zipcode) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.password = password;
-		this.phonenumber = phonenumber;
-		this.zipcode = zipcode;
-	}
-
 	private String firstname;
 	private String lastname;
 	private String email;
