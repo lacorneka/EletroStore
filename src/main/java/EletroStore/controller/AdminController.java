@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import EletroStore.beanform.Brand;
-import EletroStore.beanform.Customer;
 import EletroStore.dao.UserDao;
-import EletroStore.entity.User;
 
 /**
  * @author HNP
@@ -43,6 +41,7 @@ public class AdminController {
 
 		@RequestMapping(value = "/brand", method = RequestMethod.GET)
 		public String displayCustomerForm(ModelMap model) {
+			logger.debug("Page Request: /add.do");
 			model.addAttribute("brand", new Brand());
 			return "brand-add";
 		}
