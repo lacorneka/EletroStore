@@ -88,12 +88,10 @@
 				<li><a class="invarseColor" href="login.do">Login</a></li>
 				<li class="sep-vertical"></li>
 				<li><a class="invarseColor" href="register.do">Register</a></li>
-
-
-
-
 				<li class="sep-vertical"></li>
 				<li><a class="invarseColor" href="account.do">My Account</a></li>
+				<li class="sep-vertical"></li>
+				<li><a class="invarseColor" href="<c:url value="j_spring_security_logout" />">Log out</a></li>
 				<li class="sep-vertical"></li>
 				<li><a class="invarseColor" href="wishlist.do">Wishlist(4)</a></li>
 				<li class="sep-vertical"></li>

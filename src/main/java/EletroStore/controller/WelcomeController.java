@@ -61,6 +61,6 @@ public class WelcomeController {
         logger.debug("Page Request: /admin/welcome.do");
         User user = userDetailsService.getCurrentUser();
         model.addAttribute("name", user.getFirstname() + " " + user.getLastname());
-        return "admin.welcome";
+        return "admin-welcome";
     }
 }

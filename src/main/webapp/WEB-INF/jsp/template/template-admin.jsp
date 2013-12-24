@@ -95,7 +95,9 @@
 				<!-- User Login Dropdown -->
 				<li class="dropdown user"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <i class="icon-male"></i> <span
-						class="username">#username</span> <i class="icon-caret-down small"></i>
+						class="username">						
+						<sec:authentication property="principal.username" />						
+						</span> <i class="icon-caret-down small"></i>
 				</a>
 					<ul class="dropdown-menu">
 						<li><a href="account.do"><i class="icon-user"></i> My
@@ -125,7 +127,7 @@
 					</li>
 					<li class="current">
 						<a href="#"> <i
-							class="icon-table"></i> Provider Management
+							class="icon-table"></i> Brand Management
 					</a>
 					</li>
 					<li>
