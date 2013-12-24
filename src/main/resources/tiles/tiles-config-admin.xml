@@ -11,4 +11,8 @@
         <put-attribute name="title" value="Dashboard Admin | Welcome"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/index.jsp"/>
     </definition>
+    <definition name="brand-add" extends="admin-base">
+        <put-attribute name="title" value="Dashboard Admin | Welcome"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/brand/create.jsp"/>
+    </definition>
 </tiles-definitions>  
