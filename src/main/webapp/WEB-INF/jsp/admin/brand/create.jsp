@@ -1,7 +1,7 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ include file="/WEB-INF/includes/taglibs.jsp"%>
 <h2>Create</h2>
 
-<form:form method="POST" modelAttribute="brand" action="/admin/brand/add.do"
+<%-- <form:form method="POST" modelAttribute="brand" action="/admin/brand/add.do"
 	class="form-horizontal" enctype="multipart/form-data">
 	<h4>Brand</h4>
 	<hr/>
@@ -15,20 +15,32 @@
 			style="margin-left: 10px;" />
 	</div>
 
-	<form:label path="image" cssClass="control-label">Image:				
+	<div class="control-label">Image:				
 			<span class="text-error">*</span>
-	</form:label>
+	</div>
 	<div class="controls">
 		<input name="imageFile" type="file" />
-		<form:input path="image" placeholder="" />
-		<form:errors path="image" cssClass="error text-error"
-			style="margin-left: 10px;" />
 	</div>
 	<input type="submit" value="Add" />
 </form:form>
+ --%>
+ 
+ <form:form method="post" action="brand/add.do"  modelAttribute="brand" enctype="multipart/form-data">
+ 
+    <p>Select files to upload. Press Add button to add more file inputs.</p>
+	<c:if test="${not empty error}">
+		<div class="text-error">${params.error}</div>
+	</c:if>
+
+	<table id="fileTable">
+        <tr>
+            <td><input name="imageFile" type="file" /></td>
+        </tr>
+
+    </table>
+    <br/><input type="submit" value="Upload" />
+</form:form>
 
 <div>
-	<a href="/admin/brand.do">Back to list</a>
+	<a href="brand.do">Back to list</a>
 </div>
-
-@section Scripts { @Scripts.Render("~/bundles/jqueryval") }

@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class Brand {
 	@NotEmpty
 	private String brandname;
-	@NotEmpty
+
 	MultipartFile imageFile;
 	
 	public String getBrandname() {
