@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<c:set var="product" value="${requestScope.product}" />
+
 <div class="row">
 
 	<div class="span12">
@@ -10,7 +12,7 @@
 			<div class="product-details clearfix">
 				<div class="span6">
 					<div class="product-title">
-						<h1>Foliomania the designer portfolio brochure</h1>
+						<h1>${product.productname }</h1>
 					</div>
 
 					<div class="product-img-thumb-floated">
@@ -21,8 +23,8 @@
 					<!--product-img-thumb-->
 
 					<div class="product-img-floated">
-						<a class="fancybox" href="img/650x700.jpg"><img
-							src="img/372x370.jpg" alt=""></a>
+						<a class="fancybox" href="${product.image1}"><img
+							src="${product.image1}" alt=""></a>
 					</div>
 					<!--end product-img-->
 
@@ -32,7 +34,7 @@
 				<div class="span6">
 					<div class="product-set">
 						<div class="product-price">
-							<span>$150.00</span>
+							<span>${product.price }$</span>
 						</div>
 						<!--end product-price-->
 						<div class="product-rate clearfix">
@@ -48,11 +50,11 @@
 						<!--end product-inputs-->
 						<div class="product-info">
 							<dl class="dl-horizontal">
-								<dt>Availabilty:</dt>
-								<dd>Available In Stock</dd>
+								<dt>Model:</dt>
+								<dd>${product.model}</dd>
 
-								<dt>Product Code:</dt>
-								<dd>No. CtAw9458</dd>
+								<dt>Warranties:</dt>
+								<dd>${product.warranty } Month</dd>
 
 								<dt>Manfactuer:</dt>
 								<dd>Nicka Corparation</dd>
@@ -112,34 +114,7 @@
 
 			<div class="tab-content">
 				<div class="tab-pane active" id="descraption">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Integer a eros neque. In sapien est, malesuada non interdum id,
-						cursus vel neque. Curabitur quis sem vel justo dictum ullamcorper
-						ac vehicula lacus. Duis nisi dolor, suscipit id adipiscing ac,
-						vestibulum in magna. Vestibulum ante ipsum primis in faucibus orci
-						luctus et ultrices posuere cubilia Curae; Fusce ut metus sem.
-						Etiam in odio eu metus ornare convallis in sit amet lorem.
-
-						Suspendisse potenti. In non nisl sem, eu rutrum augue. Donec eu
-						dolor vel massa ornare cursus id eget erat. Mauris in ante magna.
-						Curabitur eget risus mi, non interdum lacus. Duis magna leo,
-						rhoncus eget malesuada quis, semper a quam. Morbi imperdiet
-						imperdiet lectus ac pellentesque. Integer diam sem, vulputate in
-						feugiat ut, porttitor eu libero. Integer non dolor ipsum. Cras
-						condimentum mattis turpis quis vestibulum. Nulla a augue ipsum.
-						Donec aliquam velit vel metus fermentum dictum sodales metus
-						condimentum. Nullam id massa quis nulla molestie ultrices eget sed
-						nulla. Cras feugiat odio at tellus euismod lacinia.</p>
-					<p>Suspendisse potenti. In non nisl sem, eu rutrum augue. Donec
-						eu dolor vel massa ornare cursus id eget erat. Mauris in ante
-						magna. Curabitur eget risus mi, non interdum lacus. Duis magna
-						leo, rhoncus eget malesuada quis, semper a quam. Morbi imperdiet
-						imperdiet lectus ac pellentesque. Integer diam sem, vulputate in
-						feugiat ut, porttitor eu libero. Integer non dolor ipsum. Cras
-						condimentum mattis turpis quis vestibulum. Nulla a augue ipsum.
-						Donec aliquam velit vel metus fermentum dictum sodales metus
-						condimentum. Nullam id massa quis nulla molestie ultrices eget sed
-						nulla. Cras feugiat odio at tellus euismod lacinia.</p>
+					${product.description }
 				</div>
 				<div class="tab-pane" id="specfications">
 					<table class="table table-compare">

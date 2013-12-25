@@ -2,7 +2,7 @@ package EletroStore.beanform;
 
 import EletroStore.entity.*;
 
-public class Product {
+public class Products {
 	private Integer productid;
 	private Productcatalog productcatalog;
 	private Deals deals;

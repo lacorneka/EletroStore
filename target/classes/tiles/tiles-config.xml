@@ -31,6 +31,11 @@
         <put-attribute name="content" value="/WEB-INF/jsp/product.jsp"/>
     </definition>
     
+    <definition name="listproduct" extends="base">
+        <put-attribute name="title" value="List Products" />
+        <put-attribute name="content" value="/WEB-INF/jsp/listproducts.jsp"/>
+    </definition>
+    
     <definition name="403" extends="base">
         <put-attribute name="title" value="Wooooooops!"/>
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp"/>
