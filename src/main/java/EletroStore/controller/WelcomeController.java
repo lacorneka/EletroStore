@@ -1,5 +1,10 @@
 package EletroStore.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import EletroStore.entity.User;
+import EletroStore.dao.ProductsDao;
+import EletroStore.entity.*;
 import EletroStore.service.UserService;
 
 
@@ -26,13 +32,20 @@ public class WelcomeController {
     @Autowired
     UserService userDetailsService;
     
+    @Autowired
+    ProductsDao productsDao;
+    
     /**
      * Handles requests to the /welcome.do page
      **/
     @RequestMapping(method = RequestMethod.GET, value = { "welcome" })
-    public String showWelcomePage(Model model) {
+    public String showWelcomePage(Model model, HttpServletRequest request, HttpServletResponse response) {
         logger.debug("Page Request: /welcome.do");
         User user = userDetailsService.getCurrentUser();
+        
+        List<Products> lsproduct = (List<Products>) productsDao.getAllProducts().subList(0, 4);
+        request.setAttribute("listproduct", lsproduct);
+        
         if(user!=null){
         	model.addAttribute("name", user.getFirstname() + " " + user.getLastname());
         }

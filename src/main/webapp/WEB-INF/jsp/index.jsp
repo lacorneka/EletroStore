@@ -9,13 +9,16 @@
 			<!-- Carousel items -->
 			<div class="carousel-inner">
 				<div class="active item">
-					<img src="<c:url value='/resources/img/614x300.jpg'/>" alt="slide1">
+					<img src="<c:url value='/resources/img/banner/banner1.jpg'/>"
+						alt="slide1">
 				</div>
 				<div class="item">
-					<img src="<c:url value='/resources/img/614x300.jpg'/>" alt="slide1">
+					<img src="<c:url value='/resources/img/banner/banner2.jpg'/>"
+						alt="slide1">
 				</div>
 				<div class="item">
-					<img src="<c:url value='/resources/img/614x300.jpg'/>" alt="slide1">
+					<img src="<c:url value='/resources/img/banner/banner3.jpg'/>"
+						alt="slide1">
 				</div>
 			</div>
 			<!--end carousel-inner-->
@@ -35,11 +38,11 @@
 		<div id="latestItems">
 
 			<div class="titleHeader clearfix">
-				<h3>All Products</h3>
+				<h3>Typical Products</h3>
 				<div class="pagers">
 					<div class="btn-toolbar">
 						<div class="btn-toolbar">
-							<button class="btn btn-mini">View All</button>
+							<a href="listproduct.do" class="btn btn-mini">View All</a>
 						</div>
 					</div>
 					<!--end btn-toolbar-->
@@ -52,130 +55,36 @@
 			<div class="row">
 				<ul class="hProductItems clearfix" id="cycleFeatured">
 
-					<li class="span3 clearfix">
-						<div class="thumbnail">
-							<a href="#"><img src="<c:url value='/resources/img/212x192.jpg'/>" alt=""></a>
-						</div>
-						<div class="thumbSetting">
-							<div class="thumbTitle">
-								<h3>
-									<a href="#" class="invarseColor">Prodcut Title Here</a>
-								</h3>
+					<c:forEach var="product" items="${requestScope.listproduct }">
+						<li class="span3 clearfix">
+							<div class="thumbnail">
+								<a href="product.do?productid=${product.productid}"><img
+									src="<c:url value='/resources/img/product/${product.image1}'/>" alt=""></a>
 							</div>
-							<ul class="rating clearfix">
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-off"></i></li>
-							</ul>
-							<div class="product-desc">
-								<p>Praesent ac condimentum felis. Nulla at nisl orci, at
-									dignissim dolor raesent ac condimentum felis...</p>
-							</div>
-							<div class="thumbPrice">
-								<span>$150.00</span>
-							</div>
+							<div class="thumbSetting">
+								<div class="thumbTitle">
+									<h3>
+										<a href="#" class="invarseColor">${product.productname}</a>
+									</h3>
+								</div>
+								<ul class="rating clearfix">
+									<li><i class="star-on"></i></li>
+									<li><i class="star-on"></i></li>
+									<li><i class="star-on"></i></li>
+									<li><i class="star-on"></i></li>
+									<li><i class="star-off"></i></li>
+								</ul>
+								<div class="thumbPrice">
+									<span>${product.price}$</span>
+								</div>
 
-							<div class="thumbButtons">
-								<button class="btn btn-primary btn-small btn-block">
-									ADD TO CART</button>
+								<div class="thumbButtons">
+									<a href="Cart.do?productid=${product.productid }" class="btn btn-primary btn-small btn-block">
+										ADD TO CART</a>
+								</div>
 							</div>
-						</div>
-					</li>
-					<li class="span3 clearfix">
-						<div class="thumbnail">
-							<a href="#"><img src="<c:url value='/resources/img/212x192.jpg'/>" alt=""></a>
-						</div>
-						<div class="thumbSetting">
-							<div class="thumbTitle">
-								<h3>
-									<a href="#" class="invarseColor">Prodcut Title Here</a>
-								</h3>
-							</div>
-							<ul class="rating clearfix">
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-off"></i></li>
-							</ul>
-							<div class="product-desc">
-								<p>Praesent ac condimentum felis. Nulla at nisl orci, at
-									dignissim dolor...</p>
-							</div>
-							<div class="thumbPrice">
-								<span><span class="strike-through">$175.00</span>$150.00</span>
-							</div>
-
-							<div class="thumbButtons">
-								<button class="btn btn-primary btn-small btn-block">
-									ADD TO CART</button>
-							</div>
-						</div>
-					</li>
-					<li class="span3 clearfix">
-						<div class="thumbnail">
-							<a href="#"><img src="<c:url value='/resources/img/212x192.jpg'/>" alt=""></a>
-						</div>
-						<div class="thumbSetting">
-							<div class="thumbTitle">
-								<h3>
-									<a href="#" class="invarseColor">Prodcut Title Here</a>
-								</h3>
-							</div>
-							<ul class="rating clearfix">
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-off"></i></li>
-							</ul>
-							<div class="product-desc">
-								<p>Praesent ac condimentum felis. Nulla at nisl orci, at
-									dignissim dolor...</p>
-							</div>
-							<div class="thumbPrice">
-								<span>$150.00</span>
-							</div>
-
-							<div class="thumbButtons">
-								<button class="btn btn-primary btn-small btn-block">
-									SELECT OPTION</button>
-							</div>
-						</div>
-					</li>
-					<li class="span3 clearfix">
-						<div class="thumbnail">
-							<a href="#"><img src="<c:url value='/resources/img/212x192.jpg'/>" alt=""></a>
-						</div>
-						<div class="thumbSetting">
-							<div class="thumbTitle">
-								<h3>
-									<a href="#" class="invarseColor">Prodcut Title Here</a>
-								</h3>
-							</div>
-							<ul class="rating clearfix">
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-off"></i></li>
-							</ul>
-							<div class="product-desc">
-								<p>Praesent ac condimentum felis. Nulla at nisl orci, at
-									dignissim dolor raesent ac condimentum felis...</p>
-							</div>
-							<div class="thumbPrice">
-								<span><span class="strike-through">$175.00</span>$150.00</span>
-							</div>
-
-							<div class="thumbButtons">
-								<button class="btn btn-primary btn-small btn-block">
-									ADD TO CART</button>
-							</div>
-						</div>
-					</li>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<!--end row-->
@@ -200,14 +109,15 @@
 			</div>
 			<!--end titleHeader-->
 			<ul class="brandList clearfix">
-				<li><a href="#"><img src="<c:url value='/resources/img/brand/sony.gif'/>"
-						alt="logo1"></a></li>
 				<li><a href="#"><img
-						src="<c:url value='/resources/img/brand/panasonic.gif'/>" alt="logo"></a></li>
-				<li><a href="#"><img src="<c:url value='/resources/img/brand/toshiba.gif'/>"
+						src="<c:url value='/resources/img/brand/sony.gif'/>" alt="logo1"></a></li>
+				<li><a href="#"><img
+						src="<c:url value='/resources/img/brand/panasonic.gif'/>"
 						alt="logo"></a></li>
-				<li><a href="#"><img src="<c:url value='/resources/img/brand/lg.gif'/>"
-						alt="logo"></a></li>
+				<li><a href="#"><img
+						src="<c:url value='/resources/img/brand/toshiba.gif'/>" alt="logo"></a></li>
+				<li><a href="#"><img
+						src="<c:url value='/resources/img/brand/lg.gif'/>" alt="logo"></a></li>
 			</ul>
 		</div>
 		<!--end brands-->

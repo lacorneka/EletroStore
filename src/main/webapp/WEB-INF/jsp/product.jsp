@@ -14,17 +14,16 @@
 					<div class="product-title">
 						<h1>${product.productname }</h1>
 					</div>
-
 					<div class="product-img-thumb-floated">
 						<a class="fancybox" href="img/650x700.jpg"><img
-							src="img/68x60.jpg" alt=""></a> <a class="fancybox"
-							href="img/650x700.jpg"><img src="img/68x60.jpg" alt=""></a>
+							src="<c:url value='/resources/img/product/${product.image1}'/>" alt="" style="width: 60px;"></a> <a class="fancybox"
+							href=''><img src="<c:url value='/resources/img/product/${product.image2}'/>" alt="" style="width: 60px;"></a>
 					</div>
 					<!--product-img-thumb-->
 
 					<div class="product-img-floated">
-						<a class="fancybox" href="${product.image1}"><img
-							src="${product.image1}" alt=""></a>
+						<a class="fancybox" href="#"><img
+							src="<c:url value='/resources/img/product/${product.image1}'/>" alt="" style="width: 370px;"></a>
 					</div>
 					<!--end product-img-->
 

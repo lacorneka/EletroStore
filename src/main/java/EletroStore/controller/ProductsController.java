@@ -24,12 +24,16 @@ public class ProductsController {
 
 	private static Logger logger = LoggerFactory
 			.getLogger(ProductsController.class);
+	@Autowired
+	private ProductsDao productsDao;
 	
 
 	@RequestMapping(value = { "/product" }, method = RequestMethod.GET)
 	public String doProducts(Model model, HttpServletRequest request, HttpServletResponse response) {		
 		
 		String productid = request.getParameter("productid");
+		Products p = productsDao.findById(Integer.parseInt(productid));
+		request.setAttribute("product", p); 
 		
 		logger.info("Done load product");
 		return "product";
