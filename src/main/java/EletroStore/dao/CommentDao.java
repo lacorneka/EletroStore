@@ -28,4 +28,6 @@ public interface CommentDao {
 	public List<?> getAllComment();
 
 	public List<?> findByExample(Comment instance);
+
+	public List<Comment> getListCommentByProductid(String productid);
 }

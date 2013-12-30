@@ -673,6 +673,7 @@ table th, table td{
   padding: 3px;
   border: 1px solid #e0e0e0;
   background-color:#fff;
+  width: 70px;
 }
 .table td img:hover {
   border: 1px solid #999;

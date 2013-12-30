@@ -16,22 +16,22 @@ import org.springframework.transaction.annotation.Transactional;
 import EletroStore.dao.ProductsDao;
 import EletroStore.entity.Products;
 
-
 @Repository("productsDao")
 public class ProductsDaoIml implements ProductsDao {
 
-	private static Logger logger = LoggerFactory.getLogger(ProductsDaoIml.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(ProductsDaoIml.class);
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	@Transactional
 	public void persist(Products transientInstance) {
 		logger.debug("persisting Products instance");
@@ -44,7 +44,7 @@ public class ProductsDaoIml implements ProductsDao {
 		}
 	}
 
-	@Transactional(readOnly=false)
+	@Transactional(readOnly = false)
 	public void attachDirty(Products instance) {
 		logger.debug("attaching dirty Products instance");
 		try {
@@ -55,12 +55,13 @@ public class ProductsDaoIml implements ProductsDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public List<?> getAllProducts() {
 		logger.debug("Get all Products item");
 		try {
-			List<?> productslist = getCurrentSession().createQuery("from Products").list();
+			List<?> productslist = getCurrentSession().createQuery(
+					"from Products").list();
 			logger.debug("Get success!");
 			return productslist;
 		} catch (RuntimeException re) {
@@ -68,7 +69,6 @@ public class ProductsDaoIml implements ProductsDao {
 			throw re;
 		}
 	}
-
 
 	@Transactional
 	public void delete(Products persistentInstance) {
@@ -81,7 +81,7 @@ public class ProductsDaoIml implements ProductsDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public Products merge(Products detachedInstance) {
 		logger.debug("merging Products instance");
@@ -101,7 +101,7 @@ public class ProductsDaoIml implements ProductsDao {
 		logger.debug("updating Products instance");
 		try {
 			getCurrentSession().update(detachedInstance);
-			logger.debug("update successful");			
+			logger.debug("update successful");
 		} catch (RuntimeException re) {
 			logger.error("update failed", re);
 			throw re;
@@ -111,7 +111,7 @@ public class ProductsDaoIml implements ProductsDao {
 	@Transactional
 	public Products findById(java.lang.Integer id) {
 		logger.debug("getting Products instance with id: " + id);
-		try {            
+		try {
 			Products instance = (Products) getCurrentSession().get(
 					"EletroStore.entity.Products", id);
 			if (instance == null) {
@@ -138,6 +138,20 @@ public class ProductsDaoIml implements ProductsDao {
 			return results;
 		} catch (RuntimeException re) {
 			logger.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Transactional
+	public List<Products> getProductList(String productcatalogid) {
+		logger.debug("getting Products instance by catalog");
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			String hql = "from Products p where p.productcatalog.catalogid = '"
+					+ productcatalogid + "'";
+			return session.createQuery(hql).list();
+		} catch (RuntimeException re) {
+			logger.error("get Product by catalog failed", re);
 			throw re;
 		}
 	}

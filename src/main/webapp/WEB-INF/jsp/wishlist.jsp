@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<c:set var="wishlists" scope="session" value="${sessionScope.wishlists}" />
+
 <div class="row">
 
 	<div class="span12">
@@ -10,49 +12,49 @@
 				<tr>
 					<th><span>Image</span></th>
 					<th class="desc"><span>Descraption</span></th>
-					<th><span>Model</span></th>
-					<th><span>Stock</span></th>
+					<th><span>Day add</span></th>
 					<th><span>Unit Price</span></th>
 					<th><span>Action</span></th>
 				</tr>
 			</thead>
 			<tbody>
-
-				<tr>
-					<td><a href="#"><img src="img/72x72.jpg" alt=""></a></td>
-					<td class="desc">
-						<h4>
-							<a href="#" class="invarseColor"> Foliomania the designer </a>
-						</h4>
-						<ul class="rating clearfix">
-							<li><i class="star-on"></i></li>
-							<li><i class="star-on"></i></li>
-							<li><i class="star-on"></i></li>
-							<li><i class="star-off"></i></li>
-							<li><i class="star-off"></i></li>
-						</ul>
-						<ul class="unstyled">
-							<li>No. CtAw9458</li>
-						</ul>
-					</td>
-					<td>Some Model name here.</td>
-					<td><i style="color: #468847; font-size: 18px;"
-						class="icon-sign-blank"></i></td>
-					<td>
-						<h2>$150.00</h2>
-					</td>
-					<td>
-						<button class="btn btn-small btn-primary" data-title="+To Cart"
-							data-placement="top" data-tip="tooltip">
-							<i class="icon-shopping-cart"></i>
-						</button>
-						<button class="btn btn-small" data-title="Remove"
-							data-placement="top" data-tip="tooltip">
-							<i class="icon-trash"></i>
-						</button>
-					</td>
-				</tr>
-
+				<c:if test="${wishlists.size() > 0}">
+					<c:forEach var="i" begin="0" end="${wishlists.size()-1}">
+						<c:set var="pr" value="${wishlists[i].products}" />
+						<tr>
+							<td><a href="#"><img
+									src="<c:url value='/resources/img/product/${pr.image1}'/>"
+									alt=""></a></td>
+							<td class="desc">
+								<h4>
+									<a href="#" class="invarseColor"> ${pr.productname} </a>
+								</h4>
+								<ul class="rating clearfix">
+									<li><i class="star-on"></i></li>
+									<li><i class="star-on"></i></li>
+									<li><i class="star-on"></i></li>
+									<li><i class="star-off"></i></li>
+									<li><i class="star-off"></i></li>
+								</ul>
+							</td>
+							<td>
+								<h2>${wishlists[i].dateadd}</h2>
+							</td>
+							<td>
+								<h2>${pr.price}</h2>
+							</td>
+							<td><a class="btn btn-small btn-primary"
+								href="cart.do?productid=${pr.productid}" data-title="+To Cart"
+								data-placement="top" data-tip="tooltip"> <i
+									class="icon-shopping-cart"></i>
+							</a> <a class="btn btn-small" data-title="Remove"
+								href="deleteProductWishlist.do?productid=${pr.productid}"
+								data-placement="top" data-tip="tooltip"> <i
+									class="icon-trash"></i>
+							</a></td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 	</div>

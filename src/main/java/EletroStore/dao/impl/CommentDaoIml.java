@@ -4,6 +4,7 @@ package EletroStore.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
@@ -16,22 +17,21 @@ import org.springframework.transaction.annotation.Transactional;
 import EletroStore.dao.CommentDao;
 import EletroStore.entity.Comment;
 
-
 @Repository("commentDao")
 public class CommentDaoIml implements CommentDao {
 
 	private static Logger logger = LoggerFactory.getLogger(CommentDaoIml.class);
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	@Transactional
 	public void persist(Comment transientInstance) {
 		logger.debug("persisting Comment instance");
@@ -44,7 +44,7 @@ public class CommentDaoIml implements CommentDao {
 		}
 	}
 
-	@Transactional(readOnly=false)
+	@Transactional(readOnly = false)
 	public void attachDirty(Comment instance) {
 		logger.debug("attaching dirty Comment instance");
 		try {
@@ -55,12 +55,13 @@ public class CommentDaoIml implements CommentDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public List<?> getAllComment() {
 		logger.debug("Get all Comment item");
 		try {
-			List<?> commentlist = getCurrentSession().createQuery("from Comment").list();
+			List<?> commentlist = getCurrentSession().createQuery(
+					"from Comment").list();
 			logger.debug("Get success!");
 			return commentlist;
 		} catch (RuntimeException re) {
@@ -68,7 +69,6 @@ public class CommentDaoIml implements CommentDao {
 			throw re;
 		}
 	}
-
 
 	@Transactional
 	public void delete(Comment persistentInstance) {
@@ -81,7 +81,7 @@ public class CommentDaoIml implements CommentDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public Comment merge(Comment detachedInstance) {
 		logger.debug("merging Comment instance");
@@ -101,7 +101,7 @@ public class CommentDaoIml implements CommentDao {
 		logger.debug("updating Comment instance");
 		try {
 			getCurrentSession().update(detachedInstance);
-			logger.debug("update successful");			
+			logger.debug("update successful");
 		} catch (RuntimeException re) {
 			logger.error("update failed", re);
 			throw re;
@@ -111,7 +111,7 @@ public class CommentDaoIml implements CommentDao {
 	@Transactional
 	public Comment findById(java.lang.Integer id) {
 		logger.debug("getting Comment instance with id: " + id);
-		try {            
+		try {
 			Comment instance = (Comment) getCurrentSession().get(
 					"EletroStore.entity.Comment", id);
 			if (instance == null) {
@@ -140,5 +140,12 @@ public class CommentDaoIml implements CommentDao {
 			logger.error("find by example failed", re);
 			throw re;
 		}
+	}
+
+	@Transactional
+	public List<Comment> getListCommentByProductid(String productid) {
+		Query query = getCurrentSession().createQuery(
+				"from Comment c where c.products.productid =" + productid);
+		return query.list();
 	}
 }

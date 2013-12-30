@@ -28,4 +28,6 @@ public interface ProductsDao {
 	public List<?> getAllProducts();
 
 	public List<?> findByExample(Products instance);
+
+	public List<Products> getProductList(String string);
 }
