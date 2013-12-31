@@ -20,8 +20,12 @@ public interface BrandDao {
 	public void delete(Brand persistentInstance);
 
 	public Brand merge(Brand detachedInstance);
+	
+	public void update(Brand detachedInstance);
 
 	public Brand findById(java.lang.Integer id);
+
+	public List<?> getAllBrand();
 
 	public List<?> findByExample(Brand instance);
 }

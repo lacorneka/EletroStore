@@ -1,6 +1,6 @@
 package EletroStore.entity;
 
-// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
+// Generated Dec 31, 2013 1:56:48 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,21 +22,17 @@ import javax.persistence.TemporalType;
 @Table(name = "wishlist", catalog = "bestbuy")
 public class Wishlist implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2960470869889981675L;
 	private Integer wishlistid;
 	private User user;
-	private Products products;
+	private Product product;
 	private Date dateadd;
 
 	public Wishlist() {
 	}
 
-	public Wishlist(User user, Products products, Date dateadd) {
+	public Wishlist(User user, Product product, Date dateadd) {
 		this.user = user;
-		this.products = products;
+		this.product = product;
 		this.dateadd = dateadd;
 	}
 
@@ -63,12 +59,12 @@ public class Wishlist implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "productid")
-	public Products getProducts() {
-		return this.products;
+	public Product getProduct() {
+		return this.product;
 	}
 
-	public void setProducts(Products products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

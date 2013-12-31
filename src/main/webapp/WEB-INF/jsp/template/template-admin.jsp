@@ -87,7 +87,7 @@
 			<!-- /Sidebar Toggler -->
 			<!-- Top Left Menu -->
 			<ul class="nav navbar-nav navbar-left hidden-xs hidden-sm">
-				<li><a href="welcome.do"> Home Page </a></li>
+				<li><a href="${pageContext.request.contextPath}/welcome.do"> Home Page </a></li>
 			</ul>
 			<!-- /Top Left Menu -->
 			<!-- Top Right Menu -->
@@ -104,7 +104,7 @@
 								Profile</a></li>
 						<li class="divider"></li>
 						<li><a
-							href="javascript:document.getElementById('logoutForm').submit()"><i
+							href="${pageContext.request.contextPath}/j_spring_security_logout"><i
 								class="icon-key"></i> Log Out</a></li>
 					</ul></li>
 				<!-- /user login dropdown -->
@@ -120,36 +120,41 @@
 			<div id="sidebar-content">
 				<!--=== Navigation ===-->
 				<ul id="nav">
-					<li>
-						<a href="#"> <i
+					<li <c:if test="${sessionScope.adminCurrentPage == 'dashboard'}"><c:out value=" class=current"></c:out></c:if>>
+						<a href="welcome.do"> <i
 							class="icon-dashboard"></i> Dashboard
 					</a>
 					</li>
-					<li class="current">
-						<a href="#"> <i
-							class="icon-table"></i> Brand Management
+					<li <c:if test="${sessionScope.adminCurrentPage == 'brand'}"><c:out value=" class=current"></c:out></c:if>>
+						<a href="brand.do" > <i class="icon-table"></i> Brand Management
 					</a>
 					</li>
-					<li>
-						<a href="#"> <i
+					<li <c:if test="${sessionScope.adminCurrentPage == 'category'}"><c:out value=" class=current"></c:out></c:if>>
+						<a href="category.do"> <i
 							class="icon-table"></i> Category Management
 					</a>
 					</li>
 					<li>
-						<a href="#"> <i
+						<a href="product.do"> <i
 							class="icon-table"></i> Product Management
 					</a>
 					</li>
 
 					<li>
-						<a href="#"><i class="icon-table"></i>
+						<a href="order.do"><i class="icon-table"></i>
 							Order Management
 					</a>
 					</li>
 
-					<li>
-						<a href="#"> <i class="icon-table"></i>
+					<li <c:if test="${sessionScope.adminCurrentPage == 'user'}"><c:out value=" class=current"></c:out></c:if>>
+						<a href="user.do"> <i class="icon-table"></i>
 							User Management
+					</a>
+					</li>
+
+					<li <c:if test="${sessionScope.adminCurrentPage == 'advertisement'}"><c:out value=" class=current"></c:out></c:if>>
+						<a href="advertisement.do"> <i class="icon-table"></i>
+							Ads Management
 					</a>
 					</li>
 
