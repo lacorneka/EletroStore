@@ -1,6 +1,6 @@
 package EletroStore.entity;
 
-// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
+// Generated Dec 31, 2013 1:56:48 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +16,6 @@ import javax.persistence.Table;
 @Table(name = "advertisement", catalog = "bestbuy")
 public class Advertisement implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2607216498724582351L;
 	private Integer adid;
 	private String adname;
 	private String addescription;

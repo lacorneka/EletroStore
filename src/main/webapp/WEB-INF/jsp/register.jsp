@@ -1,6 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<form:form method="POST" commandName="customer" action="registering.do"
-	class="form-horizontal">
+<form:form method="POST" modelAttribute="customer"
+	action="registering.do" class="form-horizontal">
 
 	<div class="legend">&nbsp;&nbsp;&nbsp;&nbsp;Account Informations</div>
 	<div class="control-group">
@@ -91,13 +91,11 @@
 	<!--end control-group-->
 
 	<div class="control-group">
-		<div class="controls">
-			<%-- 				<form:checkbox path="isAgreed" />	 --%>
-			<%-- 				<form:label path="isAgreed">
-						I've read and agreed on <a href="#">Terms &amp; Condations</a>
-				</form:label> <br>
-				<span style="margin-left: 10px;"><form:errors path="isAgreed" cssClass="error text-error" /></span>													 --%>
-			<input type="submit" class="btn btn-primary" value="Register">
+		<div class="controls">		
+			I've read and agreed on <a href="#">Terms &amp; Conditions</a>
+			<br/>
+			 <input type="submit" class="btn btn-primary"
+				value="Register">
 		</div>
 	</div>
 

@@ -20,95 +20,124 @@ import EletroStore.entity.Brand;
 @Repository("brandDao")
 public class BrandDaoIml implements BrandDao {
 
-	private static Logger log = LoggerFactory.getLogger(BrandDaoIml.class);
-
-	@Autowired
+	private static Logger logger = LoggerFactory.getLogger(BrandDaoIml.class);
 	private SessionFactory sessionFactory;
-
+	
+	@Autowired
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
 	
 	@Transactional
 	public void persist(Brand transientInstance) {
-		log.debug("persisting Brand instance");
+		logger.debug("persisting Brand instance");
 		try {
 			getCurrentSession().persist(transientInstance);
-			log.debug("persist successful");
+			logger.debug("persist successful");
 		} catch (RuntimeException re) {
-			log.error("persist failed", re);
+			logger.error("persist failed", re);
 			throw re;
 		}
 	}
 
 	@Transactional(readOnly=false)
 	public void attachDirty(Brand instance) {
-		log.debug("attaching dirty Brand instance");
+		logger.debug("attaching dirty Brand instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
-			log.debug("attach successful");
+			logger.debug("attach successful");
 		} catch (RuntimeException re) {
-			log.error("attach failed", re);
+			logger.error("attach failed", re);
+			throw re;
+		}
+	}
+	
+	@Transactional
+	public List<?> getAllBrand() {
+		logger.debug("Get all Brand item");
+		try {
+			List<?> brandlist = getCurrentSession().createQuery("from Brand").list();
+			logger.debug("Get success!");
+			return brandlist;
+		} catch (RuntimeException re) {
+			logger.error("attach failed", re);
 			throw re;
 		}
 	}
 
+
 	@Transactional
 	public void delete(Brand persistentInstance) {
-		log.debug("deleting Brand instance");
+		logger.debug("deleting Brand instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
-			log.debug("delete successful");
+			logger.debug("delete successful");
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			logger.error("delete failed", re);
 			throw re;
 		}
 	}
 	
 	@Transactional
 	public Brand merge(Brand detachedInstance) {
-		log.debug("merging Brand instance");
+		logger.debug("merging Brand instance");
 		try {
 			Brand result = (Brand) getCurrentSession().merge(
 					detachedInstance);
-			log.debug("merge successful");
+			logger.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
-			log.error("merge failed", re);
+			logger.error("merge failed", re);
 			throw re;
 		}
 	}
-	
+
+	@Transactional
+	public void update(Brand detachedInstance) {
+		logger.debug("updating Brand instance");
+		try {
+			getCurrentSession().update(detachedInstance);
+			logger.debug("update successful");			
+		} catch (RuntimeException re) {
+			logger.error("update failed", re);
+			throw re;
+		}
+	}
+
 	@Transactional
 	public Brand findById(java.lang.Integer id) {
-		log.debug("getting Brand instance with id: " + id);
-		try {
+		logger.debug("getting Brand instance with id: " + id);
+		try {            
 			Brand instance = (Brand) getCurrentSession().get(
-					"EletroStore.dao.Brand", id);
+					"EletroStore.entity.Brand", id);
 			if (instance == null) {
-				log.debug("get successful, no instance found");
+				logger.debug("get successful, no instance found");
 			} else {
-				log.debug("get successful, instance found");
+				logger.debug("get successful, instance found");
 			}
 			return instance;
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
+			logger.error("get failed", re);
 			throw re;
 		}
 	}
 
 	@Transactional
 	public List<?> findByExample(Brand instance) {
-		log.debug("finding Brand instance by example");
+		logger.debug("finding Brand instance by example");
 		try {
 			List<?> results = getCurrentSession()
-					.createCriteria("EletroStore.dao.Brand")
+					.createCriteria("EletroStore.entity.Brand")
 					.add(Example.create(instance)).list();
-			log.debug("find by example successful, result size: "
+			logger.debug("find by example successful, result size: "
 					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
+			logger.error("find by example failed", re);
 			throw re;
 		}
 	}

@@ -14,7 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.UserDao;
-import EletroStore.entity.*;
+import EletroStore.entity.User;
+import EletroStore.entity.Userroles;
 import EletroStore.service.UserService;
 
 @Service("userDetailsService")
@@ -52,7 +53,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		try {
 			org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder
 					.getContext().getAuthentication().getPrincipal();
-			return userDao.getUser(user.getUsername());
+			String hql = "from User user where user.email='"
+					+ user.getUsername() + "'";
+			User u = (User) userDao.uniqueQuery(hql);
+			if (u.getEnable()) {
+				return u;
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
 			return null;
 		}
@@ -62,7 +70,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			String username) {
 		logger.debug("Spring security loading user details for user: "
 				+ username);
-		User user = userDao.getUser(username);
+		String hql = "from User user where user.email= '" + username + "'";
+		User user = (User) userDao.uniqueQuery(hql);
+		if (user.getEnable()) {
 		Collection<Userroles> roles = user.getUserroleses();
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		Iterator<Userroles> iterator = roles.iterator();
@@ -70,8 +80,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			authorities.add(new SimpleGrantedAuthority(iterator.next()
 					.getRole()));
 		}
-		return new org.springframework.security.core.userdetails.User(username,
-				user.getPassword(), authorities);
-
+			return new org.springframework.security.core.userdetails.User(
+					username, user.getPassword(), authorities);
 	}
+		return null;
+}
 }

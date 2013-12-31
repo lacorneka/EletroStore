@@ -15,13 +15,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.WishlistDao;
-import EletroStore.entity.*;
+import EletroStore.entity.Wishlist;
+
 
 @Repository("wishlistDao")
 public class WishlistDaoIml implements WishlistDao {
 
-	private static Logger logger = LoggerFactory
-			.getLogger(WishlistDaoIml.class);
+	private static Logger logger = LoggerFactory.getLogger(WishlistDaoIml.class);
 	private SessionFactory sessionFactory;
 
 	@Autowired
@@ -61,8 +61,7 @@ public class WishlistDaoIml implements WishlistDao {
 	public List<?> getAllWishlist() {
 		logger.debug("Get all Wishlist item");
 		try {
-			List<?> wishlistlist = getCurrentSession().createQuery(
-					"from Wishlist").list();
+			List<?> wishlistlist = getCurrentSession().createQuery("from Wishlist").list();
 			logger.debug("Get success!");
 			return wishlistlist;
 		} catch (RuntimeException re) {
@@ -70,6 +69,7 @@ public class WishlistDaoIml implements WishlistDao {
 			throw re;
 		}
 	}
+
 
 	@Transactional
 	public void delete(Wishlist persistentInstance) {

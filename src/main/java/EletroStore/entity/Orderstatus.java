@@ -1,6 +1,6 @@
 package EletroStore.entity;
 
-// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
+// Generated Dec 31, 2013 1:56:48 PM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,10 +20,6 @@ import javax.persistence.Table;
 @Table(name = "orderstatus", catalog = "bestbuy")
 public class Orderstatus implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3674038900952150553L;
 	private Integer orderstatusid;
 	private String orderstatusname;
 	private Set<Orders> orderses = new HashSet<Orders>(0);

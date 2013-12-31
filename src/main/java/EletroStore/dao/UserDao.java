@@ -3,7 +3,8 @@
  */
 package EletroStore.dao;
 import java.util.List;
-import EletroStore.entity.*;
+
+import EletroStore.entity.User;
 
 /**
  * @author HNP
@@ -12,15 +13,23 @@ import EletroStore.entity.*;
 
 public interface UserDao {
 
-	public boolean addUser(User user);
+	public void persist(User transientInstance);
 
-	public void updateUser(User user);
+	public void attachDirty(User instance);
 
-	public User getUser(int memberid);
+	public void delete(User persistentInstance);
 
-	public User getUser(String email);
+	public User merge(User detachedInstance);
+	
+	public void update(User detachedInstance);
 
-	public void deleteUser(int id);
+	public User findById(java.lang.Integer id);
 
-	public List<User> getUsers();
+	public List<?> getAllUser();
+
+	public List<?> findByExample(User instance);
+	
+	public Object uniqueQuery(String hql);
+	
+	public List<?> listQuery(String hql);
 }

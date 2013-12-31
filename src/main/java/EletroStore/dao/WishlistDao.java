@@ -4,7 +4,7 @@
 package EletroStore.dao;
 import java.util.List;
 
-import EletroStore.entity.*;
+import EletroStore.entity.Wishlist;
 
 /**
  * @author HNP
@@ -28,8 +28,6 @@ public interface WishlistDao {
 	public List<?> getAllWishlist();
 
 	public List<?> findByExample(Wishlist instance);
-
-	public List<Wishlist> getWishlListByUser(User user);
 
 	public boolean removeWishListByProductid(String productid);
 }

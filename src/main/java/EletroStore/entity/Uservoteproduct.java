@@ -1,6 +1,6 @@
 package EletroStore.entity;
 
-// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
+// Generated Dec 31, 2013 1:56:48 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,23 +22,19 @@ import javax.persistence.TemporalType;
 @Table(name = "uservoteproduct", catalog = "bestbuy")
 public class Uservoteproduct implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2224512344276021203L;
 	private Integer voteid;
 	private User user;
-	private Products products;
+	private Product product;
 	private Integer star;
 	private Date datetime;
 
 	public Uservoteproduct() {
 	}
 
-	public Uservoteproduct(User user, Products products, Integer star,
+	public Uservoteproduct(User user, Product product, Integer star,
 			Date datetime) {
 		this.user = user;
-		this.products = products;
+		this.product = product;
 		this.star = star;
 		this.datetime = datetime;
 	}
@@ -66,12 +62,12 @@ public class Uservoteproduct implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "productid")
-	public Products getProducts() {
-		return this.products;
+	public Product getProduct() {
+		return this.product;
 	}
 
-	public void setProducts(Products products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@Column(name = "star")

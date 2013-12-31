@@ -1,12 +1,11 @@
-
 package EletroStore.dao.impl;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,93 +14,182 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.UserDao;
-import EletroStore.entity.*;
+import EletroStore.entity.User;
+import EletroStore.entity.Userroles;
 
 @Repository("userDao")
 public class UserDaoImpl implements UserDao {
 
 	private static Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+	private SessionFactory sessionFactory;
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
-	@Transactional(readOnly=false)
-	public boolean addUser(User user) {
+
+	@Transactional
+	public void persist(User transientInstance) {
+		logger.debug("persisting User instance");
 		try {
-		Userroles roles = new Userroles();
-		user.setEnable(true);
-		Md5PasswordEncoder md5 = new Md5PasswordEncoder();
-		String encodedPass = md5.encodePassword(user.getPassword(),null);
-		user.setPassword(encodedPass);
-		Session session = sessionFactory.openSession(); 
-		session.save(user);
-		roles.setUser(user);
-		roles.setRole("ROLE_USER");
-		session.save(roles);
-		session.close();
-		return true;
-		} catch (Exception e) {
-			logger.trace("Exception: " + e.getMessage() );
-			return false;
+			getCurrentSession().persist(transientInstance);
+			logger.debug("persist successful");
+		} catch (RuntimeException re) {
+			logger.error("persist failed", re);
+			throw re;
 		}
 	}
 
-	public void updateUser(User user) {
-		User userToUpdate = getUser(user.getMemberid());
-		getCurrentSession().update(userToUpdate);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<User> getUsers() {
-		return getCurrentSession().createQuery("from User").list();
-	}
-
-	public User getUser(int memberid) {
-		User user = (User) getCurrentSession().get(User.class, memberid);
-		if (user == null) {
-			logger.trace("User not found: " + memberid);
-		} else {
-			logger.trace("User found: " + memberid);
-			Iterator<Userroles> roleIterator = user.getUserroleses().iterator();
-            while(roleIterator.hasNext()) {
-                Userroles role = roleIterator.next();
-                logger.trace("\tUser role: " + role.getRole());
-            }
-		}
-		return user;
-	}
-
-	public void deleteUser(int id) {
-		User user = getUser(id);
-		if (user != null) {
-			getCurrentSession().delete(user);
+	@Transactional(readOnly = false)
+	public void attachDirty(User instance) {
+		logger.debug("attaching dirty User instance");
+		try {
+			Userroles roles = new Userroles();
+			instance.setEnable(true);
+			Md5PasswordEncoder md5 = new Md5PasswordEncoder();
+			String encodedPass = md5.encodePassword(instance.getPassword(),
+					null);
+			instance.setPassword(encodedPass);
+			roles.setUser(instance);
+			roles.setRole("ROLE_USER");
+			getCurrentSession().save(instance);
+			getCurrentSession().save(roles);
+			logger.debug("attach successful");
+		} catch (RuntimeException re) {
+			logger.error("attach failed", re);
+			throw re;
 		}
 	}
 
-	public User getUser(String username) {
-		if (username==null || username.isEmpty()){
-			logger.trace("Empty name is passed !!! ");
-			return null;
-		}
-		User user = (User) getCurrentSession()
-				.createQuery("from User user where user.email=?")
-				.setParameter(0, username).uniqueResult();
+	@Transactional
+	public List<?> getAllUser() {
+		logger.debug("Get all User item");
+		try {
+			List<?> userlist = getCurrentSession().createQuery("from User")
+					.list();
+			for (Object u : userlist) {
+				User instance = (User) u;
+				Hibernate.initialize(instance.getComments());
+				Hibernate.initialize(instance.getOrderses());
+				Hibernate.initialize(instance.getUserroleses());
+				Hibernate.initialize(instance.getUservoteproducts());
+				Hibernate.initialize(instance.getWishlists());
 
-		if (user == null) {
-			logger.trace("User not found: " + username);
-		} else {
-			logger.trace("User found: " + username);
-			Hibernate.initialize(user.getWishlists());
-			Iterator<Userroles> roleIterator = user.getUserroleses().iterator();
-            while(roleIterator.hasNext()) {
-                Userroles role = roleIterator.next();
-                logger.trace("\tUser role: " + role.getRole());
-            }
+			}
+			logger.debug("Get success!");
+			return userlist;
+		} catch (RuntimeException re) {
+			logger.error("attach failed", re);
+			throw re;
 		}
-		return user;
+	}
+
+	@Transactional
+	public void delete(User persistentInstance) {
+		logger.debug("deleting User instance");
+		try {
+			getCurrentSession().delete(persistentInstance);
+			logger.debug("delete successful");
+		} catch (RuntimeException re) {
+			logger.error("delete failed", re);
+			throw re;
+		}
+	}
+
+	@Transactional
+	public User merge(User detachedInstance) {
+		logger.debug("merging User instance");
+		try {
+			User result = (User) getCurrentSession().merge(detachedInstance);
+			logger.debug("merge successful");
+			return result;
+		} catch (RuntimeException re) {
+			logger.error("merge failed", re);
+			throw re;
+		}
+	}
+
+	@Transactional
+	public void update(User detachedInstance) {
+		logger.debug("updating User instance");
+		try {
+			getCurrentSession().update(detachedInstance);
+			logger.debug("update successful");
+		} catch (RuntimeException re) {
+			logger.error("update failed", re);
+			throw re;
+		}
+	}
+
+	@Transactional
+	public User findById(java.lang.Integer id) {
+		logger.debug("getting User instance with id: " + id);
+		try {
+			User instance = (User) getCurrentSession().get(
+					"EletroStore.entity.User", id);
+			Hibernate.initialize(instance.getComments());
+			Hibernate.initialize(instance.getOrderses());
+			Hibernate.initialize(instance.getUserroleses());
+			Hibernate.initialize(instance.getUservoteproducts());
+			Hibernate.initialize(instance.getWishlists());
+			logger.debug("get successful, instance found");
+			return instance;
+		} catch (RuntimeException re) {
+			logger.error("get failed", re);
+			throw re;
+		}
+	}
+
+	@Transactional
+	public List<?> findByExample(User instance) {
+		logger.debug("finding User instance by example");
+		try {
+			List<?> results = getCurrentSession()
+					.createCriteria("EletroStore.entity.User")
+					.add(Example.create(instance)).list();
+			logger.debug("find by example successful, result size: "
+					+ results.size());
+			return results;
+		} catch (RuntimeException re) {
+			logger.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	public Object uniqueQuery(String hql) {
+		logger.debug("Query: " + hql);
+		try {
+			Object instance = (User) getCurrentSession().createQuery(hql)
+					.uniqueResult();
+			if (instance == null) {
+				logger.debug("get successful, no instance found");
+			} else {
+				logger.debug("get successful, instance found");
+			}
+			return instance;
+		} catch (RuntimeException re) {
+			logger.error("get failed", re);
+			throw re;
+		}
+	}
+
+	public List<?> listQuery(String hql) {
+		logger.debug("Query: " + hql);
+		try {
+			List<?> instance = getCurrentSession().createQuery(hql).list();
+			if (instance == null) {
+				logger.debug("get successful, no instance found");
+			} else {
+				logger.debug("get successful, instance found");
+			}
+			return instance;
+		} catch (RuntimeException re) {
+			logger.error("get failed", re);
+			throw re;
+		}
 	}
 }

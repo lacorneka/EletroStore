@@ -16,7 +16,7 @@
 		access-decision-manager-ref="accessDecisionManager">
 		<security:intercept-url pattern="/login"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/admin/*"
+		<security:intercept-url pattern="/admin/**"
 			access="ROLE_ADMIN" />
 		<security:form-login login-page="/login.do"
 			authentication-failure-url="/login.do?error=1"
