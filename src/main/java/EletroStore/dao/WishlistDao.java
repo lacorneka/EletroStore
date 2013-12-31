@@ -4,6 +4,7 @@
 package EletroStore.dao;
 import java.util.List;
 
+import EletroStore.entity.User;
 import EletroStore.entity.Wishlist;
 
 /**
@@ -30,4 +31,7 @@ public interface WishlistDao {
 	public List<?> findByExample(Wishlist instance);
 
 	public boolean removeWishListByProductid(String productid);
+	
+	public List<Wishlist> getWishlListByUser(User user);
+
 }

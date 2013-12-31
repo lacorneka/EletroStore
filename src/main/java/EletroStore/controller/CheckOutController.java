@@ -37,11 +37,11 @@ public class CheckOutController {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String email = auth.getName(); // get logged in username
-		ArrayList<Products> listproductscart = (ArrayList<Products>) session
+		ArrayList<Product> listproductscart = (ArrayList<Product>) session
 				.getAttribute("listproductscart");
 		float sumprice = 0;
 		for (int i = 0; i < listproductscart.size(); i++) {
-			Products pr = listproductscart.get(i);
+			Product pr = listproductscart.get(i);
 			float price = pr.getPrice();// - (sp.getGiaBan() * sp.getGiamGia() /
 										// 100);
 			sumprice = sumprice + price
@@ -61,11 +61,11 @@ public class CheckOutController {
 		//ordersDAO.addOrders(order);
 		// donDatHangDAO.themDonDatHang(ddh);
 		for (int i = 0; i < listproductscart.size(); i++) {
-			Products pr = listproductscart.get(i);
+			Product pr = listproductscart.get(i);
 			Orderdetail orde = new Orderdetail();
 			orde.setOrders(order);
 			// orde.setsetSoThuTu(i + 1);
-			orde.setProducts(pr);
+			orde.setProduct(pr);
 			// orde.set(sp.getGiaBan() - sp.getGiaBan() * sp.getGiamGia() /
 			// 100);
 			orde.setQuantity(pr.getQuantityforsell());

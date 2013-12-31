@@ -13,15 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import EletroStore.dao.ProductsDao;
-import EletroStore.entity.Products;
+import EletroStore.dao.ProductDao;
+import EletroStore.entity.Product;
 
 @Controller
 @Transactional
 public class CartController {
 
 	@Autowired
-	private ProductsDao productDao;
+	private ProductDao productDao;
 
 	HttpSession session;
 
@@ -30,12 +30,12 @@ public class CartController {
 			HttpServletResponse response) {
 
 		session = request.getSession();
-		ArrayList<Products> listproductscart;
+		ArrayList<Product> listproductscart;
 		if (session.getAttribute("listproductscart") == null) {
-			listproductscart = new ArrayList<Products>();
+			listproductscart = new ArrayList<Product>();
 			session.setAttribute("listproductscart", listproductscart);
 		} else {
-			listproductscart = (ArrayList<Products>) session
+			listproductscart = (ArrayList<Product>) session
 					.getAttribute("listproductscart");
 		}
 
@@ -43,7 +43,7 @@ public class CartController {
 		if (productid != null) {
 			boolean kq = false;
 			for (int i = 0; i < listproductscart.size(); i++) {
-				Products product = listproductscart.get(i);
+				Product product = listproductscart.get(i);
 				if (product.getProductid() == Integer.parseInt(productid)) {
 					product.setQuantityforsell(product.getQuantityforsell() + 1);
 					product.setQuantity(product.getQuantity() - 1);
@@ -52,7 +52,7 @@ public class CartController {
 				}
 			}
 			if (kq == false) {
-				Products pr = productDao.findById(Integer.valueOf(productid));
+				Product pr = productDao.findById(Integer.valueOf(productid));
 				pr.setQuantityforsell(1);
 				listproductscart.add(pr);
 			}

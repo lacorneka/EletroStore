@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import EletroStore.dao.ProductsDao;
+import EletroStore.dao.ProductDao;
 import EletroStore.entity.*;
 import EletroStore.service.UserService;
 
@@ -33,7 +33,7 @@ public class WelcomeController {
     UserService userDetailsService;
     
     @Autowired
-    ProductsDao productsDao;
+    ProductDao productsDao;
     
     /**
      * Handles requests to the /welcome.do page
@@ -43,7 +43,7 @@ public class WelcomeController {
         logger.debug("Page Request: /welcome.do");
         User user = userDetailsService.getCurrentUser();
         
-        List<Products> lsproduct = (List<Products>) productsDao.getAllProducts().subList(0, 4);
+        List<Product> lsproduct = (List<Product>) productsDao.getAllProduct().subList(0, 4);
         request.setAttribute("listproduct", lsproduct);
         
         if(user!=null){

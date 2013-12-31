@@ -32,4 +32,6 @@ public interface UserDao {
 	public Object uniqueQuery(String hql);
 	
 	public List<?> listQuery(String hql);
+
+	public User getUser(String email);
 }

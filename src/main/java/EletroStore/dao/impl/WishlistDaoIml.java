@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.WishlistDao;
+import EletroStore.entity.User;
 import EletroStore.entity.Wishlist;
 
 
@@ -153,7 +154,7 @@ public class WishlistDaoIml implements WishlistDao {
 							+ user.getMemberid()).list();
 			for(Wishlist w : wishlists) {
 				Hibernate.initialize(w.getUser());
-				Hibernate.initialize(w.getProducts());
+				Hibernate.initialize(w.getProduct());
 			}
 			return wishlists;
 		} catch (RuntimeException re) {

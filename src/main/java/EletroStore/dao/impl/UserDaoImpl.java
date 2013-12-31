@@ -192,4 +192,10 @@ public class UserDaoImpl implements UserDao {
 			throw re;
 		}
 	}
+
+	public User getUser(String email) {
+		String hql = "from User user where user.email='"
+				+ email + "'";
+		return (User)uniqueQuery(hql);
+	}
 }

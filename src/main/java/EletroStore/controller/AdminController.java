@@ -13,8 +13,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ import EletroStore.beanform.BrandBean;
 import EletroStore.beanform.CategoryBean;
 import EletroStore.beanform.ProductBean;
 import EletroStore.dao.AdvertisementDao;
-import EletroStore.dao.UserDao;
+import EletroStore.dao.BrandDao;
 import EletroStore.dao.CategoryDao;
 import EletroStore.dao.ConditionDao;
 import EletroStore.dao.ProductDao;
@@ -40,13 +40,14 @@ import EletroStore.entity.Userroles;
 
 /**
  * @author HNP
- *
+ * 
  */
 @RequestMapping(value = "/admin")
+@Controller
 public class AdminController {
 
-		@Autowired
-		UserDao userDao;
+	@Autowired
+	BrandDao brandDao;
 	@Autowired
 	CategoryDao categoryDao;
 	@Autowired
@@ -58,9 +59,9 @@ public class AdminController {
 	@Autowired
 	ConditionDao conditionDao;
 
-		private static Logger logger = LoggerFactory
-				.getLogger(AdminController.class);
-		
+	private static Logger logger = LoggerFactory
+			.getLogger(AdminController.class);
+
 	@RequestMapping(value = { "/", "welcome" })
 	public String viewDashboard(Model model, HttpSession session) {
 		session.setAttribute("adminCurrentPage", "dashboard");
@@ -82,7 +83,7 @@ public class AdminController {
 		logger.info("Landing in addBrand Form");
 		model.addAttribute("brand", new BrandBean());
 		return "brand-add";
-		}
+	}
 
 	@RequestMapping(value = "addingbrand")
 	public String addNewBrand(Model model,
@@ -101,8 +102,8 @@ public class AdminController {
 			}
 			if (result.hasErrors()) {
 				logger.info("Vadilication not met");
-			return "brand-add";
-		}
+				return "brand-add";
+			}
 			MultipartFile imageFile = brand.getImageFile();
 			String imageFileName = imageFile.getOriginalFilename();
 			model.addAttribute("imageName", imageFileName);
@@ -146,7 +147,7 @@ public class AdminController {
 		temp.setId(-1);
 		model.addAttribute("brand", temp);
 		return "brand-edit";
-}
+	}
 
 	@RequestMapping(value = "editingbrand")
 	public String editBrand(Model model,
@@ -536,55 +537,56 @@ public class AdminController {
 		}
 		try {
 			logger.info("Add new product");
-//			if (product.getImage1().isEmpty() || product.getImage2().isEmpty()) {
-//				result.rejectValue("image1", "error.image1",
-//						"Upload failed! Try again!");
-//				result.rejectValue("image2", "error.image2",
-//						"Upload failed! Try again!");
-//
-//				logger.info("Upload file failed");
-//			}
-		/*	if (product.getDealprice() != null) {
-				if (product.getPrice() <= product.getDealprice()) {
-					result.rejectValue("dealprice", "error.dealprice",
-							"Deal price must be less than origin price");
-
-				}
-			}*/
+			// if (product.getImage1().isEmpty() ||
+			// product.getImage2().isEmpty()) {
+			// result.rejectValue("image1", "error.image1",
+			// "Upload failed! Try again!");
+			// result.rejectValue("image2", "error.image2",
+			// "Upload failed! Try again!");
+			//
+			// logger.info("Upload file failed");
+			// }
+			/*
+			 * if (product.getDealprice() != null) { if (product.getPrice() <=
+			 * product.getDealprice()) { result.rejectValue("dealprice",
+			 * "error.dealprice", "Deal price must be less than origin price");
+			 * 
+			 * } }
+			 */
 			if (result.hasErrors()) {
 				logger.info("Vadilication not met");
 				return "redirect:addproduct.do";
 			}
-//			String filePath = request.getSession().getServletContext()
-//					.getRealPath("/") + "resources\\img\\product\\";
+			// String filePath = request.getSession().getServletContext()
+			// .getRealPath("/") + "resources\\img\\product\\";
 			MultipartFile image1 = product.getImage1();
 			MultipartFile image2 = product.getImage2();
-//			String image1Path = filePath + image1.getOriginalFilename();
-//			String image2Path = filePath + image2.getOriginalFilename();
+			// String image1Path = filePath + image1.getOriginalFilename();
+			// String image2Path = filePath + image2.getOriginalFilename();
 			logger.trace("Save Image File");
-//			File saveFile1 = new File(image1Path);
-//			File saveFile2 = new File(image2Path);
-//			image1.transferTo(saveFile1);
-//			image2.transferTo(saveFile2);
+			// File saveFile1 = new File(image1Path);
+			// File saveFile2 = new File(image2Path);
+			// image1.transferTo(saveFile1);
+			// image2.transferTo(saveFile2);
 			Brand brand = brandDao.findById(product.getBrandID());
 			Productcatalog catalog = categoryDao.findById(product
 					.getCategoryID());
 			Condition condition = conditionDao.findById(product
 					.getConditionID());
-			Product temp = new Product(catalog,condition,brand);
+			Product temp = new Product(catalog, condition, brand);
 			temp.setProductname(product.getProductname());
-//			temp.setModel(product.getModel());
-//			temp.setPrice(product.getPrice());
-//			temp.setDealprice(product.getDealprice());
-//			temp.setDescription(product.getDescription());
-//			temp.setTax(product.getTax());
-//			temp.setQuantity(product.getQuantity());
-//			temp.setQuantityforsell(product.getQuantityforsell());
-//			temp.setWarranty(product.getWarranty());
-//			temp.setFeatures(product.getFeatures());
-//			temp.setSpecifications(product.getSpecifications());
-//			temp.setImage1(image1.getOriginalFilename());
-//			temp.setImage2(image2.getOriginalFilename());
+			// temp.setModel(product.getModel());
+			// temp.setPrice(product.getPrice());
+			// temp.setDealprice(product.getDealprice());
+			// temp.setDescription(product.getDescription());
+			// temp.setTax(product.getTax());
+			// temp.setQuantity(product.getQuantity());
+			// temp.setQuantityforsell(product.getQuantityforsell());
+			// temp.setWarranty(product.getWarranty());
+			// temp.setFeatures(product.getFeatures());
+			// temp.setSpecifications(product.getSpecifications());
+			// temp.setImage1(image1.getOriginalFilename());
+			// temp.setImage2(image2.getOriginalFilename());
 			productDao.attachDirty(temp);
 		} catch (Exception e) {
 			model.addAttribute("error", "Failed: " + e.getMessage());

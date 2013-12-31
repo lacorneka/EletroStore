@@ -19,25 +19,25 @@ import EletroStore.dao.*;
 
 @Controller
 @Transactional
-public class ProductsController {
+public class ProductController {
 
 	private static Logger logger = LoggerFactory
-			.getLogger(ProductsController.class);
+			.getLogger(ProductController.class);
 	@Autowired
-	private ProductsDao productsDao;
+	private ProductDao productsDao;
 
 	@Autowired
 	private CommentDao commentDao;
 
 	@RequestMapping(value = { "/product" }, method = RequestMethod.GET)
-	public String doProducts(Model model, HttpServletRequest request,
+	public String doProduct(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		String productid = request.getParameter("productid");
-		Products p = productsDao.findById(Integer.parseInt(productid));
+		Product p = productsDao.findById(Integer.parseInt(productid));
 		request.setAttribute("product", p);
 
-		List<Products> listproductaccessories = productsDao.getProductList(p
+		List<Product> listproductaccessories = productsDao.getProductList(p
 				.getProductcatalog().getCatalogid().toString());
 		request.setAttribute("listproductaccessories", listproductaccessories);
 
@@ -49,10 +49,10 @@ public class ProductsController {
 	}
 
 	@RequestMapping(value = { "/listproduct" }, method = RequestMethod.GET)
-	public String doListProducts(Model model, HttpServletRequest request,
+	public String doListProduct(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		List<Products> lst = (List<Products>) productsDao.getAllProducts();
+		List<Product> lst = (List<Product>) productsDao.getAllProduct();
 		request.setAttribute("listproduct", lst);
 
 		logger.info("Done get all product");

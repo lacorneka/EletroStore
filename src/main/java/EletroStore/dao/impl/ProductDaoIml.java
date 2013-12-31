@@ -154,4 +154,18 @@ public class ProductDaoIml implements ProductDao {
 			throw re;
 		}
 	}
+	
+	@Transactional
+	public List<Product> getProductList(String productcatalogid) {
+		logger.debug("getting Product instance by catalog");
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			String hql = "from Product p where p.productcatalog.catalogid = '"
+					+ productcatalogid + "'";
+			return session.createQuery(hql).list();
+		} catch (RuntimeException re) {
+			logger.error("get Product by catalog failed", re);
+			throw re;
+		}
+	}
 }

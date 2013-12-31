@@ -28,4 +28,7 @@ public interface ProductDao {
 	public List<?> getAllProduct();
 
 	public List<?> findByExample(Product instance);
+	
+	public List<Product> getProductList(String productcatalogid);
+
 }

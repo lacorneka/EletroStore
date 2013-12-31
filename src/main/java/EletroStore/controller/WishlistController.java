@@ -38,7 +38,7 @@ public class WishlistController {
 	private UserDao userDao;
 
 	@Autowired
-	private ProductsDao productDao;
+	private ProductDao productDao;
 
 	@Autowired
 	UserService userDetailsService;
@@ -77,7 +77,7 @@ session.removeAttribute("wishlists");
 			String productid;
 			productid = request.getParameter("productid");
 			for (Wishlist wishlist : wishlists) {
-				if (Integer.parseInt(productid) == wishlist.getProducts()
+				if (Integer.parseInt(productid) == wishlist.getProduct()
 						.getProductid()) {
 					flagWishlist = true;
 					break;
@@ -86,7 +86,7 @@ session.removeAttribute("wishlists");
 				
 			}
 			if (flagWishlist == false) {
-				Products product = productDao.findById(Integer
+				Product product = productDao.findById(Integer
 						.parseInt(productid));
 				Date date = new Date();
 				Wishlist wishlist = new Wishlist(user, product, date);
