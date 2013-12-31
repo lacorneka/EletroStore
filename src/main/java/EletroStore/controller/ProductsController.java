@@ -39,7 +39,7 @@ public class ProductsController {
 
 		List<Products> listproductaccessories = productsDao.getProductList(p
 				.getProductcatalog().getCatalogid().toString());
-		request.setAttribute("listproductaccessories", listproductaccessories.subList(0, 4));
+		request.setAttribute("listproductaccessories", listproductaccessories);
 
 		List<Comment> listcomment = commentDao
 				.getListCommentByProductid(productid);

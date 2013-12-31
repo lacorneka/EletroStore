@@ -45,18 +45,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	 */
 
 	public EletroStore.entity.User getCurrentUser() {
-		logger.info("Current User: "+SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+		logger.info("Current User: "
+				+ SecurityContextHolder.getContext().getAuthentication()
+						.getPrincipal().toString());
 
 		try {
-		org.springframework.security.core.userdetails.User user =
-				(org.springframework.security.core.userdetails.User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return userDao.getUser(user.getUsername());
+			org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder
+					.getContext().getAuthentication().getPrincipal();
+			return userDao.getUser(user.getUsername());
 		} catch (Exception e) {
-		return null;
+			return null;
 		}
 	}
 
-	public org.springframework.security.core.userdetails.User loadUserByUsername(String username) {
+	public org.springframework.security.core.userdetails.User loadUserByUsername(
+			String username) {
 		logger.debug("Spring security loading user details for user: "
 				+ username);
 		User user = userDao.getUser(username);

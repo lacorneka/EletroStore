@@ -4,6 +4,7 @@ package EletroStore.dao.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -94,6 +95,7 @@ public class UserDaoImpl implements UserDao {
 			logger.trace("User not found: " + username);
 		} else {
 			logger.trace("User found: " + username);
+			Hibernate.initialize(user.getWishlists());
 			Iterator<Userroles> roleIterator = user.getUserroleses().iterator();
             while(roleIterator.hasNext()) {
                 Userroles role = roleIterator.next();

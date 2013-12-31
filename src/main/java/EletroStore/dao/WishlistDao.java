@@ -30,4 +30,6 @@ public interface WishlistDao {
 	public List<?> findByExample(Wishlist instance);
 
 	public List<Wishlist> getWishlListByUser(User user);
+
+	public boolean removeWishListByProductid(String productid);
 }

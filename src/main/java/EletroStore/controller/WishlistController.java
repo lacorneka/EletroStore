@@ -1,5 +1,6 @@
 package EletroStore.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import EletroStore.dao.*;
 import EletroStore.entity.*;
+import EletroStore.service.UserService;
 
 @Controller
 @Transactional
@@ -28,34 +30,48 @@ public class WishlistController {
 	HttpSession session;
 	private static Logger logger = LoggerFactory
 			.getLogger(WishlistController.class);
-	
+
 	@Autowired
 	private WishlistDao wishListDao;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private ProductsDao productDao;
+
+	@Autowired
+	UserService userDetailsService;
 
 	@RequestMapping(value = { "/wishlist.do" }, method = RequestMethod.GET)
 	public String doWishList(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		session = request.getSession();
-		List<Wishlist> wishlists = null;
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		String email = auth.getName();
-		User user = userDao.getUser(email);
+session.removeAttribute("wishlists");
+		if (userDetailsService.getCurrentUser() == null) {
+			logger.info("User not loged in then go to login page");
+			return "login";
+		}
 		
+		User user = userDetailsService.getCurrentUser();
+//		if (session.getAttribute("wishlists") == null) {
+//		wishlists = wishListDao.getWishlListByUser(user);
+//		model.addAttribute("wishlists", wishlists);
+		List<Wishlist> wishlists;
 		if (session.getAttribute("wishlists") == null) {
 			wishlists = wishListDao.getWishlListByUser(user);
 			session.setAttribute("wishlists", wishlists);
 		} else {
-			wishlists = (List<Wishlist>) session.getAttribute("wishlists");
+			wishlists = (List<Wishlist>) session
+					.getAttribute("wishlists");
 		}
-		
+
+//			session.setAttribute("wishlists", wishlists);
+//		} else {
+//			wishlists = (List<Wishlist>) session.getAttribute("wishlists");
+//		}
+
 		boolean flagWishlist = false;
 		if (request.getParameter("productid") != null) {
 			String productid;
@@ -66,18 +82,24 @@ public class WishlistController {
 					flagWishlist = true;
 					break;
 				}
+				
+				
 			}
 			if (flagWishlist == false) {
-				Products product = productDao.findById(Integer.parseInt(productid));
+				Products product = productDao.findById(Integer
+						.parseInt(productid));
 				Date date = new Date();
 				Wishlist wishlist = new Wishlist(user, product, date);
 				wishlists.add(wishlist);
 				wishListDao.attachDirty(wishlist);
-				session.setAttribute("wishlists", wishlists);
+				//session.setAttribute("wishlists", wishlists);
+				//
 			}
-
+			session.setAttribute("wishlists", wishlists);
 		}
 		
+		//request.setAttribute("wishlists", wishlists);
+
 		return "wishlist";
 	}
 
@@ -88,6 +110,19 @@ public class WishlistController {
 
 		List<Wishlist> wishlists;
 		session = request.getSession();
+		if (userDetailsService.getCurrentUser() == null) {
+			logger.info("User not loged in then go to login page");
+			return "login";
+		}
+		
+		User user = userDetailsService.getCurrentUser();
+		String productid;
+		productid = request.getParameter("productid");
+		wishListDao.removeWishListByProductid(productid);
+		logger.info("Product Wishlist deleted");
+		wishlists = wishListDao.getWishlListByUser(user);
+		session.setAttribute("wishlists", wishlists);
+		
 		return "wishlist";
 	}
 

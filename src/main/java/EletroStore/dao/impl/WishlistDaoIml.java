@@ -4,6 +4,7 @@ package EletroStore.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
@@ -147,12 +148,33 @@ public class WishlistDaoIml implements WishlistDao {
 	public List<Wishlist> getWishlListByUser(User user) {
 		logger.debug("finding Wishlist instance by user");
 		try {
-			return getCurrentSession().createQuery(
+			List<Wishlist> wishlists =  getCurrentSession().createQuery(
 					"from Wishlist w where w.user.memberid= "
 							+ user.getMemberid()).list();
+			for(Wishlist w : wishlists) {
+				Hibernate.initialize(w.getUser());
+				Hibernate.initialize(w.getProducts());
+			}
+			return wishlists;
 		} catch (RuntimeException re) {
 			logger.error("find by user failed", re);
 			throw re;
 		}
 	}
+
+	@Transactional
+	public boolean removeWishListByProductid(String productid) {
+		String hql = "delete from Wishlist w where w.products.productid = "
+				+ productid;
+		try {
+			getCurrentSession().createQuery(hql).executeUpdate();
+			logger.info("Delete wishlist from database completed");
+			return true;
+		} catch (RuntimeException e) {
+			logger.info("Delete wishlist from database failed,error:", e);
+			System.err.print(e);
+		}
+		return false;
+	}
+
 }

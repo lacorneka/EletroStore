@@ -200,7 +200,9 @@
 						items="${requestScope.listproductaccessories }">
 						<li class="span3 clearfix">
 							<div class="thumbnail">
-								<a href="#"><img src="img/212x192.jpg" alt=""></a>
+								<a href="#"><img
+									src="<c:url value='/resources/img/product/${product.image1}'/>"
+									alt=""></a>
 							</div>
 							<div class="thumbSetting">
 								<div class="thumbTitle">
