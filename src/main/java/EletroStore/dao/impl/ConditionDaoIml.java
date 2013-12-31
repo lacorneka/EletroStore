@@ -17,7 +17,7 @@ import EletroStore.dao.ConditionDao;
 import EletroStore.entity.Condition;
 
 
-@Repository("conditionDao")
+@Repository("ConditionDao")
 public class ConditionDaoIml implements ConditionDao {
 
 	private static Logger logger = LoggerFactory.getLogger(ConditionDaoIml.class);

@@ -1,6 +1,6 @@
 package EletroStore.entity;
 
-// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
+// Generated Dec 31, 2013 1:56:48 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,20 +19,16 @@ import javax.persistence.Table;
 @Table(name = "orderdetail", catalog = "bestbuy")
 public class Orderdetail implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2396727457443796454L;
 	private Integer orderdetailid;
-	private Products products;
+	private Product product;
 	private Orders orders;
 	private Integer quantity;
 
 	public Orderdetail() {
 	}
 
-	public Orderdetail(Products products, Orders orders, Integer quantity) {
-		this.products = products;
+	public Orderdetail(Product product, Orders orders, Integer quantity) {
+		this.product = product;
 		this.orders = orders;
 		this.quantity = quantity;
 	}
@@ -50,12 +46,12 @@ public class Orderdetail implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "productid")
-	public Products getProducts() {
-		return this.products;
+	public Product getProduct() {
+		return this.product;
 	}
 
-	public void setProducts(Products products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -14,24 +14,24 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.WishlistDao;
-import EletroStore.entity.*;
+import EletroStore.entity.Wishlist;
+
 
 @Repository("wishlistDao")
 public class WishlistDaoIml implements WishlistDao {
 
-	private static Logger logger = LoggerFactory
-			.getLogger(WishlistDaoIml.class);
+	private static Logger logger = LoggerFactory.getLogger(WishlistDaoIml.class);
 	private SessionFactory sessionFactory;
-
+	
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	@Transactional
 	public void persist(Wishlist transientInstance) {
 		logger.debug("persisting Wishlist instance");
@@ -44,7 +44,7 @@ public class WishlistDaoIml implements WishlistDao {
 		}
 	}
 
-	@Transactional(readOnly = false)
+	@Transactional(readOnly=false)
 	public void attachDirty(Wishlist instance) {
 		logger.debug("attaching dirty Wishlist instance");
 		try {
@@ -55,13 +55,12 @@ public class WishlistDaoIml implements WishlistDao {
 			throw re;
 		}
 	}
-
+	
 	@Transactional
 	public List<?> getAllWishlist() {
 		logger.debug("Get all Wishlist item");
 		try {
-			List<?> wishlistlist = getCurrentSession().createQuery(
-					"from Wishlist").list();
+			List<?> wishlistlist = getCurrentSession().createQuery("from Wishlist").list();
 			logger.debug("Get success!");
 			return wishlistlist;
 		} catch (RuntimeException re) {
@@ -69,6 +68,7 @@ public class WishlistDaoIml implements WishlistDao {
 			throw re;
 		}
 	}
+
 
 	@Transactional
 	public void delete(Wishlist persistentInstance) {
@@ -81,7 +81,7 @@ public class WishlistDaoIml implements WishlistDao {
 			throw re;
 		}
 	}
-
+	
 	@Transactional
 	public Wishlist merge(Wishlist detachedInstance) {
 		logger.debug("merging Wishlist instance");
@@ -101,7 +101,7 @@ public class WishlistDaoIml implements WishlistDao {
 		logger.debug("updating Wishlist instance");
 		try {
 			getCurrentSession().update(detachedInstance);
-			logger.debug("update successful");
+			logger.debug("update successful");			
 		} catch (RuntimeException re) {
 			logger.error("update failed", re);
 			throw re;
@@ -111,7 +111,7 @@ public class WishlistDaoIml implements WishlistDao {
 	@Transactional
 	public Wishlist findById(java.lang.Integer id) {
 		logger.debug("getting Wishlist instance with id: " + id);
-		try {
+		try {            
 			Wishlist instance = (Wishlist) getCurrentSession().get(
 					"EletroStore.entity.Wishlist", id);
 			if (instance == null) {
@@ -138,20 +138,6 @@ public class WishlistDaoIml implements WishlistDao {
 			return results;
 		} catch (RuntimeException re) {
 			logger.error("find by example failed", re);
-			throw re;
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Wishlist> getWishlListByUser(User user) {
-		logger.debug("finding Wishlist instance by user");
-		try {
-			return getCurrentSession().createQuery(
-					"from Wishlist w where w.user.memberid= "
-							+ user.getMemberid()).list();
-		} catch (RuntimeException re) {
-			logger.error("find by user failed", re);
 			throw re;
 		}
 	}

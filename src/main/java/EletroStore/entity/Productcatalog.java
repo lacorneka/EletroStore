@@ -1,6 +1,6 @@
 package EletroStore.entity;
 
-// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
+// Generated Dec 31, 2013 1:56:48 PM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,14 +20,10 @@ import javax.persistence.Table;
 @Table(name = "productcatalog", catalog = "bestbuy")
 public class Productcatalog implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7877348210474941356L;
 	private Integer catalogid;
 	private String catalogimage;
 	private String catalogname;
-	private Set<Products> productses = new HashSet<Products>(0);
+	private Set<Product> products = new HashSet<Product>(0);
 
 	public Productcatalog() {
 	}
@@ -37,10 +33,10 @@ public class Productcatalog implements java.io.Serializable {
 	}
 
 	public Productcatalog(String catalogimage, String catalogname,
-			Set<Products> productses) {
+			Set<Product> products) {
 		this.catalogimage = catalogimage;
 		this.catalogname = catalogname;
-		this.productses = productses;
+		this.products = products;
 	}
 
 	@Id
@@ -73,12 +69,12 @@ public class Productcatalog implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productcatalog")
-	public Set<Products> getProductses() {
-		return this.productses;
+	public Set<Product> getProducts() {
+		return this.products;
 	}
 
-	public void setProductses(Set<Products> productses) {
-		this.productses = productses;
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 
 }

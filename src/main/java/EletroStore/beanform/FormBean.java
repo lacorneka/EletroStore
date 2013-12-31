@@ -3,17 +3,25 @@ package EletroStore.beanform;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-public class Brand {
-	@NotEmpty
-	private String brandname;
-
-	MultipartFile imageFile;
+public abstract class FormBean {
 	
-	public String getBrandname() {
-		return brandname;
+	private int id;
+	@NotEmpty
+	private String name;
+	MultipartFile imageFile;
+		
+	public int getId() {
+		return id;
 	}
-	public void setBrandname(String brandname) {
-		this.brandname = brandname;
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public MultipartFile getImageFile() {
 		return imageFile;

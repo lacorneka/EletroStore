@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/includes/taglibs.jsp"%>
-	
+
 <!--begin header-->
 <header>
 	<div class="topHeader">
@@ -16,7 +16,8 @@
 							<tbody>
 								<tr>
 									<td class="cart-product-info"><a href="#"><img
-											src="<c:url value='/resources/img/72x72.jpg'/>" alt="product image"></a>
+											src="<c:url value='/resources/img/72x72.jpg'/>"
+											alt="product image"></a>
 										<div class="cart-product-desc">
 											<p>
 												<a class="invarseColor" href="#">Title1</a>
@@ -36,7 +37,8 @@
 								</tr>
 								<tr>
 									<td class="cart-product-info"><a href="#"><img
-											src="<c:url value='/resources/img/72x72.jpg'/>" alt="product image"></a>
+											src="<c:url value='/resources/img/72x72.jpg'/>"
+											alt="product image"></a>
 										<div class="cart-product-desc">
 											<p>
 												<a class="invarseColor" href="#">Title</a>
@@ -85,19 +87,31 @@
 			</div>
 			<!--end pull-right-->
 			<ul class="pull-right inline">
-				<li><a class="invarseColor" href="login.do">Login</a></li>
-				<li class="sep-vertical"></li>
-				<li><a class="invarseColor" href="register.do">Register</a></li>
-				<li class="sep-vertical"></li>
-				<li><a class="invarseColor" href="account.do">My Account</a></li>
-				<li class="sep-vertical"></li>
-				<li><a class="invarseColor" href="<c:url value="j_spring_security_logout" />">Log out</a></li>
-				<li class="sep-vertical"></li>
+				<sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
+					<li><a class="invarseColor" href="login.do">Login</a></li>
+					<li class="sep-vertical"></li>
+					<li><a class="invarseColor" href="register.do">Register</a></li>
+					<li class="sep-vertical"></li>
+				</sec:authorize>
+				<sec:authorize ifAnyGranted="ROLE_ADMIN">
+					<li><a class="invarseColor" href="admin/welcome.do">Dashboard</a></li>
+					<li class="sep-vertical"></li>
+				</sec:authorize>
+
 				<li><a class="invarseColor" href="wishlist.do">Wishlist(4)</a></li>
 				<li class="sep-vertical"></li>
 				<li><a class="invarseColor" href="cart.do">Cart</a></li>
 				<li class="sep-vertical"></li>
 				<li><a class="invarseColor" href="checkout.do">Checkout</a></li>
+
+				<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
+					<li class="sep-vertical"></li>
+					<li><a class="invarseColor" href="account.do">My Account</a></li>
+					<li class="sep-vertical"></li>
+					<li><a class="invarseColor"
+						href="<c:url value="j_spring_security_logout" />">Log out</a></li>
+				</sec:authorize>
+
 			</ul>
 		</div>
 		<!--end container-->
@@ -108,7 +122,8 @@
 			<div class="navbar">
 				<div class="siteLogo pull-left">
 					<h1>
-						<a href="welcome.do"><img src="<c:url value='/resources/img/logo.png'/>" alt="Eletro"></a>
+						<a href="welcome.do"><img
+							src="<c:url value='/resources/img/logo.png'/>" alt="Eletro"></a>
 					</h1>
 				</div>
 

@@ -1,6 +1,6 @@
 package EletroStore.entity;
 
-// Generated Dec 23, 2013 6:20:06 AM by Hibernate Tools 4.0.0
+// Generated Dec 31, 2013 1:56:48 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,10 +25,6 @@ import javax.persistence.TemporalType;
 @Table(name = "orders", catalog = "bestbuy")
 public class Orders implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2021392571407155471L;
 	private Integer orderid;
 	private Orderstatus orderstatus;
 	private User user;

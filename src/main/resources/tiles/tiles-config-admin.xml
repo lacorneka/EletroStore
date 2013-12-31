@@ -3,16 +3,92 @@
     "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"  
     "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition name="admin-base" template="/WEB-INF/jsp/template/template-admin.jsp">
-    	<put-attribute name="title" value="Dashboard Admin" />
+	<definition name="admin-base" template="/WEB-INF/jsp/template/template-admin.jsp">
+		<put-attribute name="title" value="Dashboard Admin" />
 		<put-attribute name="content" value="/WEB-INF/jsp/admin/index.jsp" />
-    </definition>
-    <definition name="admin-welcome" extends="admin-base">
-        <put-attribute name="title" value="Dashboard Admin | Welcome"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/admin/index.jsp"/>
-    </definition>
-    <definition name="brand-add" extends="admin-base">
-        <put-attribute name="title" value="Dashboard Admin | Welcome"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/admin/brand/create.jsp"/>
-    </definition>
+	</definition>
+	<definition name="admin-welcome" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Welcome" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/index.jsp" />
+	</definition>
+	<definition name="brand-add" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Add new brand" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/brand/create.jsp" />
+	</definition>
+	<definition name="brand-index" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Show all brands" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/brand/index.jsp" />
+	</definition>
+	<definition name="brand-edit" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Edit brand" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/brand/edit.jsp" />
+	</definition>
+
+	<definition name="category-add" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Add new category" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/category/create.jsp" />
+	</definition>
+	<definition name="category-index" extends="admin-base">
+		<put-attribute name="title"
+			value="Dashboard Admin | Show all categories" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/category/index.jsp" />
+	</definition>
+	<definition name="category-edit" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Edit category" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/category/edit.jsp" />
+	</definition>
+
+
+	<definition name="advertisement-add" extends="admin-base">
+		<put-attribute name="title"
+			value="Dashboard Admin | Add new advertisement" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/advertisement/create.jsp" />
+	</definition>
+	<definition name="advertisement-index" extends="admin-base">
+		<put-attribute name="title"
+			value="Dashboard Admin | Show all advertisements" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/advertisement/index.jsp" />
+	</definition>
+	<definition name="advertisement-edit" extends="admin-base">
+		<put-attribute name="title"
+			value="Dashboard Admin | Edit advertisement" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/advertisement/edit.jsp" />
+	</definition>
+
+
+	<definition name="user-index" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Show all users" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/user/index.jsp" />
+	</definition>
+	<definition name="user-edit" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Edit user" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/user/edit.jsp" />
+	</definition>
+
+
+	<definition name="product-add" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Add new product" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/product/create.jsp" />
+	</definition>
+	<definition name="product-index" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Show all products" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/product/index.jsp" />
+	</definition>
+	<definition name="product-edit" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Edit product" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/product/edit.jsp" />
+	</definition>
+		<definition name="product-detail" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Product detail" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/product/detail.jsp" />
+	</definition>
 </tiles-definitions>  
