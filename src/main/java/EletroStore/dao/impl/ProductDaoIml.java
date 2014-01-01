@@ -5,6 +5,7 @@ package EletroStore.dao.impl;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
@@ -167,5 +168,33 @@ public class ProductDaoIml implements ProductDao {
 			logger.error("get Product by catalog failed", re);
 			throw re;
 		}
+	}
+
+	public List<Product> getProductListCatalog(int catalogid, int productonpage,
+			int page, int sortby) {
+		int n = (page - 1) * productonpage;
+		int m = productonpage;
+		String hql;
+		hql = String.format(
+				"from Product p where p.productcatalog.catalogid =%s",
+				catalogid);
+		if (sortby == -1)
+			hql += " order by p.productname asc";
+		if (sortby == 0)
+			hql += " order by p.productname desc";
+		if (sortby == 1)
+			hql += " order by p.price asc";
+		if (sortby == 2)
+			hql += " order by p.price desc";
+		if (sortby == 3)
+			hql += " order by p.rating desc";
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		if (productonpage != -1) {
+			query.setFirstResult(n);
+			query.setMaxResults(m);
+}
+		List<Product> listProduct = query.list();
+		return listProduct;
 	}
 }
