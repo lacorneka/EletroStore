@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/includes/taglibs.jsp"%>
 
+<c:set var="wishlists" scope="session" value="${sessionScope.wishlists}" />
+<c:set var="listproductscart" scope="session"
+	value="${sessionScope.listproductscart}" />
+	
 <!--begin header-->
 <header>
 	<div class="topHeader">
@@ -9,7 +13,9 @@
 			<div class="pull-right">
 				<div class="btn-group">
 					<button class="btn dropdown-toggle" data-toggle="dropdown">
-						<i class="icon-shopping-cart"></i> (2) <span class="caret"></span>
+						<i class="icon-shopping-cart"></i> 
+						<c:if test="${not empty listproductscart}">(${listproductscart.size()})</c:if>
+						 <span class="caret"></span>
 					</button>
 					<div class="dropdown-menu cart-content pull-right">
 						<table class="table-cart">
@@ -98,9 +104,9 @@
 					<li class="sep-vertical"></li>
 				</sec:authorize>
 
-				<li><a class="invarseColor" href="wishlist.do">Wishlist(4)</a></li>
+				<li><a class="invarseColor" href="wishlist.do">Wishlist(${wishlists.size()})</a></li>
 				<li class="sep-vertical"></li>
-				<li><a class="invarseColor" href="cart.do">Cart</a></li>
+				<li><a class="invarseColor" href="cart.do">Cart(${listproductscart.size()})</a></li>
 				<li class="sep-vertical"></li>
 				<li><a class="invarseColor" href="checkout.do">Checkout</a></li>
 

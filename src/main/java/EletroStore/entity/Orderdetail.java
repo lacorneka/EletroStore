@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "orderdetail", catalog = "bestbuy")
 public class Orderdetail implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2144173819662536596L;
 	private Integer orderdetailid;
 	private Product product;
 	private Orders orders;

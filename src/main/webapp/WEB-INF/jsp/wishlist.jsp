@@ -20,7 +20,7 @@
 			<tbody>
 				<c:if test="${wishlists.size() > 0}">
 					<c:forEach var="i" begin="0" end="${wishlists.size()-1}">
-						<c:set var="pr" value="${wishlists[i].products}" />
+						<c:set var="pr" value="${wishlists[i].product}" />
 						<tr>
 							<td><a href="#"><img
 									src="<c:url value='/resources/img/product/${pr.image1}'/>"

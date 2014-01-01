@@ -20,6 +20,10 @@ import javax.persistence.Table;
 @Table(name = "condition", catalog = "bestbuy")
 public class Condition implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer conditionid;
 	private String conditionname;
 	private Set<Product> products = new HashSet<Product>(0);
@@ -52,7 +56,7 @@ public class Condition implements java.io.Serializable {
 		this.conditionname = conditionname;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "condition")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "conditions")
 	public Set<Product> getProducts() {
 		return this.products;
 	}

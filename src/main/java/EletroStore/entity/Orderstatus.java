@@ -20,6 +20,10 @@ import javax.persistence.Table;
 @Table(name = "orderstatus", catalog = "bestbuy")
 public class Orderstatus implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3674038900952150553L;
 	private Integer orderstatusid;
 	private String orderstatusname;
 	private Set<Orders> orderses = new HashSet<Orders>(0);

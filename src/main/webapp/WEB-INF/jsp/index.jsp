@@ -54,39 +54,40 @@
 
 			<div class="row">
 				<ul class="hProductItems clearfix" id="cycleFeatured">
+					<c:if test="${not empty requestScope.listproduct }">
+						<c:forEach var="product" items="${requestScope.listproduct }">
+							<li class="span3 clearfix">
+								<div class="thumbnail">
+									<a href="product.do?productid=${product.productid}"><img
+										src="<c:url value='/resources/img/product/${product.image1}'/>"
+										alt=""></a>
+								</div>
+								<div class="thumbSetting">
+									<div class="thumbTitle">
+										<h3>
+											<a href="product.do?productid=${product.productid}"
+												class="invarseColor">${product.productname}</a>
+										</h3>
+									</div>
+									<ul class="rating clearfix">
+										<li><i class="star-on"></i></li>
+										<li><i class="star-on"></i></li>
+										<li><i class="star-on"></i></li>
+										<li><i class="star-on"></i></li>
+										<li><i class="star-off"></i></li>
+									</ul>
+									<div class="thumbPrice">
+										<span>${product.price}$</span>
+									</div>
 
-					<c:forEach var="product" items="${requestScope.listproduct }">
-						<li class="span3 clearfix">
-							<div class="thumbnail">
-								<a href="product.do?productid=${product.productid}"><img
-									src="<c:url value='/resources/img/product/${product.image1}'/>"
-									alt=""></a>
-							</div>
-							<div class="thumbSetting">
-								<div class="thumbTitle">
-									<h3>
-										<a href="product.do?productid=${product.productid}"
-											class="invarseColor">${product.productname}</a>
-									</h3>
+									<div class="thumbButtons">
+										<a href="cart.do?productid=${product.productid }"
+											class="btn btn-primary btn-small btn-block"> ADD TO CART</a>
+									</div>
 								</div>
-								<ul class="rating clearfix">
-									<li><i class="star-on"></i></li>
-									<li><i class="star-on"></i></li>
-									<li><i class="star-on"></i></li>
-									<li><i class="star-on"></i></li>
-									<li><i class="star-off"></i></li>
-								</ul>
-								<div class="thumbPrice">
-									<span>${product.price}$</span>
-								</div>
-
-								<div class="thumbButtons">
-									<a href="cart.do?productid=${product.productid }"
-										class="btn btn-primary btn-small btn-block"> ADD TO CART</a>
-								</div>
-							</div>
-						</li>
-					</c:forEach>
+							</li>
+						</c:forEach>
+					</c:if>
 				</ul>
 			</div>
 			<!--end row-->

@@ -20,6 +20,10 @@ import javax.persistence.Table;
 @Table(name = "brand", catalog = "bestbuy")
 public class Brand implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 915307297729474913L;
 	private Integer brandid;
 	private String brandname;
 	private String brandimage;

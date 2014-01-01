@@ -26,6 +26,10 @@ import javax.persistence.TemporalType;
 @Table(name = "wishlist", catalog = "bestbuy")
 public class Wishlist implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4104474346552905085L;
 	private Integer wishlistid;
 	private User user;
 	private Product product;

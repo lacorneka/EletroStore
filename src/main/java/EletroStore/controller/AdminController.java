@@ -62,7 +62,7 @@ public class AdminController {
 	private static Logger logger = LoggerFactory
 			.getLogger(AdminController.class);
 
-	@RequestMapping(value = { "/", "welcome" })
+	@RequestMapping(value = "welcome")
 	public String viewDashboard(Model model, HttpSession session) {
 		session.setAttribute("adminCurrentPage", "dashboard");
 		return "admin-welcome";
@@ -537,37 +537,39 @@ public class AdminController {
 		}
 		try {
 			logger.info("Add new product");
-			// if (product.getImage1().isEmpty() ||
-			// product.getImage2().isEmpty()) {
-			// result.rejectValue("image1", "error.image1",
-			// "Upload failed! Try again!");
-			// result.rejectValue("image2", "error.image2",
-			// "Upload failed! Try again!");
-			//
-			// logger.info("Upload file failed");
-			// }
-			/*
-			 * if (product.getDealprice() != null) { if (product.getPrice() <=
-			 * product.getDealprice()) { result.rejectValue("dealprice",
-			 * "error.dealprice", "Deal price must be less than origin price");
-			 * 
-			 * } }
-			 */
+			if (product.getImage1().isEmpty() || product.getImage2().isEmpty()) {
+				result.rejectValue("image1", "error.image1",
+						"Upload failed! Try again!");
+				result.rejectValue("image2", "error.image2",
+						"Upload failed! Try again!");
+
+				logger.info("Upload file failed");
+			}
+
+			if (product.getDealprice() != null) {
+				if (product.getPrice() <= product.getDealprice()) {
+					result.rejectValue("dealprice", "error.dealprice",
+							"Deal price must be less than origin price");
+
+				}
+			}
+
 			if (result.hasErrors()) {
 				logger.info("Vadilication not met");
 				return "redirect:addproduct.do";
 			}
-			// String filePath = request.getSession().getServletContext()
-			// .getRealPath("/") + "resources\\img\\product\\";
+			String filePath = request.getSession().getServletContext()
+					.getRealPath("/")
+					+ "resources\\img\\product\\";
 			MultipartFile image1 = product.getImage1();
 			MultipartFile image2 = product.getImage2();
-			// String image1Path = filePath + image1.getOriginalFilename();
-			// String image2Path = filePath + image2.getOriginalFilename();
+			String image1Path = filePath + image1.getOriginalFilename();
+			String image2Path = filePath + image2.getOriginalFilename();
 			logger.trace("Save Image File");
-			// File saveFile1 = new File(image1Path);
-			// File saveFile2 = new File(image2Path);
-			// image1.transferTo(saveFile1);
-			// image2.transferTo(saveFile2);
+			File saveFile1 = new File(image1Path);
+			File saveFile2 = new File(image2Path);
+			image1.transferTo(saveFile1);
+			image2.transferTo(saveFile2);
 			Brand brand = brandDao.findById(product.getBrandID());
 			Productcatalog catalog = categoryDao.findById(product
 					.getCategoryID());
@@ -575,18 +577,20 @@ public class AdminController {
 					.getConditionID());
 			Product temp = new Product(catalog, condition, brand);
 			temp.setProductname(product.getProductname());
-			// temp.setModel(product.getModel());
-			// temp.setPrice(product.getPrice());
-			// temp.setDealprice(product.getDealprice());
-			// temp.setDescription(product.getDescription());
-			// temp.setTax(product.getTax());
-			// temp.setQuantity(product.getQuantity());
-			// temp.setQuantityforsell(product.getQuantityforsell());
-			// temp.setWarranty(product.getWarranty());
-			// temp.setFeatures(product.getFeatures());
-			// temp.setSpecifications(product.getSpecifications());
-			// temp.setImage1(image1.getOriginalFilename());
-			// temp.setImage2(image2.getOriginalFilename());
+			temp.setModel(product.getModel());
+			temp.setPrice(product.getPrice());
+			temp.setDealprice(product.getDealprice());
+			temp.setDescription(product.getDescription());
+			temp.setTax(product.getTax());
+			temp.setQuantity(product.getQuantity());
+			temp.setQuantityforsell(product.getQuantityforsell());
+			temp.setWarranty(product.getWarranty());
+			temp.setFeatures(product.getFeatures());
+			temp.setSpecifications(product.getSpecifications());
+			temp.setImage1(image1.getOriginalFilename());
+			temp.setImage2(image2.getOriginalFilename());
+			temp.setProductviews(0);
+			temp.setTotalbuyer(0);
 			productDao.attachDirty(temp);
 		} catch (Exception e) {
 			model.addAttribute("error", "Failed: " + e.getMessage());
@@ -614,8 +618,18 @@ public class AdminController {
 	@RequestMapping(value = "editproduct")
 	public String editProductHandler(Model model, HttpServletRequest request) {
 		logger.info("Edit Product");
+		List<?> brandList = brandDao.getAllBrand();
+		List<?> categoryList = categoryDao.getAllCategory();
+		List<?> conditionList = conditionDao.getAllCondition();
+		model.addAttribute("brands", brandList);
+		model.addAttribute("categories", categoryList);
+		model.addAttribute("conditions", conditionList);
+		int id = Integer.parseInt(request.getParameter("editID"));
 		ProductBean temp = new ProductBean();
+		Product cp = productDao.findById(id);
 		model.addAttribute("product", temp);
+		model.addAttribute("p", cp);
+
 		return "product-edit";
 	}
 
@@ -623,15 +637,105 @@ public class AdminController {
 	public String editProduct(Model model,
 			@ModelAttribute("product") ProductBean product,
 			BindingResult result, HttpServletRequest request) {
+		int id = Integer.parseInt(request.getParameter("editID"));
 
 		try {
 			logger.info("Edit product");
+			Product temp = productDao.findById(id);
+
+			String filePath = request.getSession().getServletContext()
+					.getRealPath("/")
+					+ "resources\\img\\product\\";
+			MultipartFile image1 = product.getImage1();
+			MultipartFile image2 = product.getImage2();
+			if (!image1.isEmpty()) {
+				logger.trace("Save Image 1 File");
+				String image1Path = filePath + image1.getOriginalFilename();
+				File saveFile1 = new File(image1Path);
+				image1.transferTo(saveFile1);
+				temp.setImage1(image1.getOriginalFilename());
+			}
+			if (!image2.isEmpty()) {
+				logger.trace("Save Image 2 File");
+				String image2Path = filePath + image2.getOriginalFilename();
+				File saveFile2 = new File(image2Path);
+				image2.transferTo(saveFile2);
+				temp.setImage2(image2.getOriginalFilename());
+			}
+			Brand brand = brandDao.findById(product.getBrandID());
+			Productcatalog catalog = categoryDao.findById(product
+					.getCategoryID());
+			Condition condition = conditionDao.findById(product
+					.getConditionID());
+			temp.setBrand(brand);
+			temp.setProductcatalog(catalog);
+			temp.setConditions(condition);
+			if (product.getProductname() != null) {
+				temp.setProductname(product.getProductname());
+			}
+			if (product.getModel() != null) {
+				temp.setModel(product.getModel());
+			}
+			if (product.getPrice() != null) {
+				temp.setPrice(product.getPrice());
+			}
+			if (product.getDealprice() != null) {
+				temp.setDealprice(product.getDealprice());
+			}
+			if (product.getDescription() != null) {
+				temp.setDescription(product.getDescription());
+			}
+			if (product.getTax() != null) {
+				temp.setTax(product.getTax());
+			}
+			if (product.getQuantity() != null) {
+				temp.setQuantity(product.getQuantity());
+			}
+
+			if (product.getQuantityforsell() != null) {
+				temp.setQuantityforsell(product.getQuantityforsell());
+			}
+			if (product.getWarranty() != null) {
+				temp.setWarranty(product.getWarranty());
+			}
+			if (product.getFeatures() != null) {
+				temp.setFeatures(product.getFeatures());
+			}
+			if (product.getSpecifications() != null) {
+				temp.setSpecifications(product.getSpecifications());
+			}
+			if (product.getProductviews() != null) {
+				temp.setProductviews(0);
+			}
+			if (product.getTotalbuyer() != null) {
+				temp.setTotalbuyer(0);
+			}
+			productDao.update(temp);
 		} catch (Exception e) {
-			model.addAttribute("error", "Failed: " + e.getCause());
+			model.addAttribute("error", "Failed: " + e.getMessage());
 			logger.info("Exception " + e.getCause());
+			List<?> brandList = brandDao.getAllBrand();
+			List<?> categoryList = categoryDao.getAllCategory();
+			List<?> conditionList = conditionDao.getAllCondition();
+			model.addAttribute("brands", brandList);
+			model.addAttribute("categories", categoryList);
+			model.addAttribute("conditions", conditionList);
+			ProductBean temp = new ProductBean();
+			Product cp = productDao.findById(id);
+			model.addAttribute("product", temp);
+			model.addAttribute("p", cp);
 			return "product-edit";
 		}
 		return "redirect:product.do";
+	}
+
+	@RequestMapping(value = "productdetail")
+	public String showProductDetail(Model model, HttpServletRequest request) {
+		logger.info("Product Detail");
+		int id = Integer.parseInt(request.getParameter("detailID"));
+		Product p = productDao.findById(id);
+		model.addAttribute("p", p);
+		return "product-detail";
 	}
 
 }

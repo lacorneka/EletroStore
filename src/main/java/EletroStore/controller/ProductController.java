@@ -97,8 +97,6 @@ public class ProductController {
 			request.setAttribute("listproduct", listproduct);
 		} 
 
-		
-
 		logger.info("Done load product");
 		return "listproduct";
 	}

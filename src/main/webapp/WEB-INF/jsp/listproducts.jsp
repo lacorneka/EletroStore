@@ -29,11 +29,10 @@
 
 				<div class="sortBy inline pull-left">
 					Sort By <select name="sortby">
-						<option value="Default">Default</option>
-						<option value="">Name (A-Z)</option>
-						<option value="">Name (Z-A)</option>
-						<option value="">Price (Low-Hight)</option>
-						<option value="">Price (Height-Low)</option>
+						<option value="Default">Name (A-Z)</option>
+						<option value="0">Name (Z-A)</option>
+						<option value="1">Price (Low-Hight)</option>
+						<option value="2">Price (Height-Low)</option>
 					</select>
 				</div>
 
