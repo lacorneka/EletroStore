@@ -145,7 +145,7 @@ public class CommentDaoIml implements CommentDao {
 	@Transactional
 	public List<Comment> getListCommentByProductid(String productid) {
 		Query query = getCurrentSession().createQuery(
-				"from Comment c where c.products.productid =" + productid);
+				"from Comment c where c.product.productid =" + productid);
 		return query.list();
 	}
 }

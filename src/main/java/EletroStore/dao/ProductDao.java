@@ -2,6 +2,7 @@
  * 
  */
 package EletroStore.dao;
+
 import java.util.List;
 
 import EletroStore.entity.Product;
@@ -20,7 +21,7 @@ public interface ProductDao {
 	public void delete(Product persistentInstance);
 
 	public Product merge(Product detachedInstance);
-	
+
 	public void update(Product detachedInstance);
 
 	public Product findById(java.lang.Integer id);
@@ -28,7 +29,10 @@ public interface ProductDao {
 	public List<?> getAllProduct();
 
 	public List<?> findByExample(Product instance);
-	
+
 	public List<Product> getProductList(String productcatalogid);
+
+	public List<Product> getProductListCatalog(int catalogid, int productonpage,
+			int page, int sortby);
 
 }
