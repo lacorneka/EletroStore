@@ -5,6 +5,8 @@ package EletroStore.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
 import EletroStore.entity.Product;
 
 /**
@@ -32,7 +34,12 @@ public interface ProductDao {
 
 	public List<Product> getProductList(String productcatalogid);
 
-	public List<Product> getProductListCatalog(int catalogid, int productonpage,
+	public List<Product> getProductListCatalog(String catalogid, int productonpage,
 			int page, int sortby);
 
+    public int numberOfPageCompute(int numberOfProduct, int productOnPage);
+    
+	public Query getProductList(String catalogid, int sortby);
+
+	public int numberOfProduct(String catalogid, int sortby);
 }

@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<form method="get" action="listproduct.do" class="siteSearch">
+<form name="listproduct" method="get" action="listproduct.do"
+	class="siteSearch">
 	<div class="row">
 		<aside class="span3">
 			<div class="categories">
@@ -13,7 +14,8 @@
 				<ul class="unstyled">
 					<c:forEach var="category" items="${requestScope.listcategory}">
 						<li><a class="invarseColor"
-							href="listproduct.do?catalogid=${category.catalogid}" type="submit">${category.catalogname}</a></li>
+							href="listproduct.do?catalogid=${category.catalogid}"
+							type="submit">${category.catalogname}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -28,22 +30,45 @@
 			<div class="productFilter clearfix">
 
 				<div class="sortBy inline pull-left">
-					Sort By <select name="sortby">
-						<option value="Default">Default</option>
-						<option value="">Name (A-Z)</option>
-						<option value="">Name (Z-A)</option>
-						<option value="">Price (Low-Hight)</option>
-						<option value="">Price (Height-Low)</option>
+					Sort By <select name="sortby" onchange="submit();">
+						<option value="-1"
+							<c:if test="${-1 eq sortby}">selected='selected'</c:if>>Default</option>
+						<option value="0"
+							<c:if test="${0 eq sortby}">selected='selected'</c:if>>Name
+							(A-Z)</option>
+						<option value="1"
+							<c:if test="${1 eq sortby}">selected='selected'</c:if>>Name
+							(Z-A)</option>
+						<option value="2"
+							<c:if test="${2 eq sortby}">selected='selected'</c:if>>Price
+							(Low-Hight)</option>
+						<option value="3"
+							<c:if test="${3 eq sortby}">selected='selected'</c:if>>Price
+							(Hight-Low)</option>
+						<option value="4"
+							<c:if test="${4 eq sortby}">selected='selected'</c:if>>Rating
+							(Low-Hight)</option>
+						<option value="5"
+							<c:if test="${5 eq sortby}">selected='selected'</c:if>>Rating
+							(Hight-Low)</option>
 					</select>
 				</div>
 
 				<div class="showItem inline pull-left">
-					Show <select name="productonpage">
-						<option value="2">2</option>
-						<option value="4">4</option>
-						<option value="6">6</option>
-						<option value="8">8</option>
-						<option value="10">10</option>
+					Show <select name="productonpage" onchange="submit();">
+						<c:forEach var="i" begin="1" end="25" step="2">
+							<option
+								<c:if  test="${i * 2 == productonpage}" >
+                                    selected='selected'
+                                </c:if>
+								value='${i*2}'>${i*2}</option>
+						</c:forEach>
+
+						<option
+							<c:if  test="${-1 == productonpage}" >
+                                selected='selected'
+                            </c:if>
+							value='-1'>All</option>
 					</select>
 				</div>
 				<!--end sortBy-->
@@ -109,12 +134,20 @@
 				</ul>
 			</div>
 
-
+			<input name="page" type="hidden" value="1" />
+			<script>
+				function DoSubmit(i) {
+					document.listproduct.page.value = i;
+					document.listproduct.submit();					
+				}
+			</script>
 			<div class="pagination pagination-right">
 				<span class="pull-left">Showing 1 of 2 pages:</span>
 				<ul>
-					<li class="active"><a class="invarseColor" href="#">1</a></li>
-					<li><a class="invarseColor" href="#">2</a></li>
+					<c:forEach var="i" begin="1" end="${requestScope.pagecount}">
+						<li <c:if test="${i eq page}">class="active"</c:if>><a
+							class="invarseColor" href="#" onclick="DoSubmit(${i})"> ${i} </a></li>
+					</c:forEach>
 				</ul>
 			</div>
 			<!--end pagination-->

@@ -170,30 +170,66 @@ public class ProductDaoIml implements ProductDao {
 		}
 	}
 
-	public List<Product> getProductListCatalog(int catalogid, int productonpage,
-			int page, int sortby) {
+	public int numberOfPageCompute(int numberOfProduct, int productOnPage) {
+		int k;
+		if (productOnPage != -1) {
+			k = numberOfProduct / productOnPage;
+			if (k * productOnPage < numberOfProduct) {
+				k++;
+			}
+		} else {
+			k = 1;
+		}
+		return k;
+	}
+
+	@Transactional
+	public Query getProductList(String catalogid, int sortby) {
+		String hql;
+		hql = "from Product p";
+		if (catalogid != null && !catalogid.isEmpty()) {
+			hql += " where p.productcatalog.catalogid = " + catalogid;
+		}
+		if (sortby == 0)
+			hql += " order by p.productname asc";
+		if (sortby == 1)
+			hql += " order by p.productname desc";
+		if (sortby == 2)
+			hql += " order by p.price asc";
+		if (sortby == 3)
+			hql += " order by p.price desc";
+		if (sortby == 4)
+			hql += " order by p.rating asc";
+		if (sortby == 5)
+			hql += " order by p.rating desc";
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Query query = session.createQuery(hql);
+
+		return query;
+	}
+	
+	@Transactional
+	public int numberOfProduct(String catalogid, int sortby) {
+		Query query = getProductList(catalogid, sortby);
+		int n = query.list().size();
+		return n;
+	}
+
+	@Transactional
+	public List<Product> getProductListCatalog(String catalogid,
+			int productonpage, int page, int sortby) {
 		int n = (page - 1) * productonpage;
 		int m = productonpage;
-		String hql;
-		hql = String.format(
-				"from Product p where p.productcatalog.catalogid =%s",
-				catalogid);
-		if (sortby == -1)
-			hql += " order by p.productname asc";
-		if (sortby == 0)
-			hql += " order by p.productname desc";
-		if (sortby == 1)
-			hql += " order by p.price asc";
-		if (sortby == 2)
-			hql += " order by p.price desc";
-		if (sortby == 3)
-			hql += " order by p.rating desc";
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(hql);
+
+		Query query = getProductList(catalogid, sortby);
+
 		if (productonpage != -1) {
 			query.setFirstResult(n);
 			query.setMaxResults(m);
-}
+		}
+		@SuppressWarnings("unchecked")
 		List<Product> listProduct = query.list();
 		return listProduct;
 	}

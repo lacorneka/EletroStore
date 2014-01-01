@@ -53,51 +53,53 @@ public class ProductController {
 	public String doListProduct(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 
+		logger.info("Show product list was filtered and sorted");
+
+		logger.info("Get catalog list show on the left");
 		List<Productcatalog> listCatalog = (List<Productcatalog>) categoryDao
 				.getAllCategory();
 		request.setAttribute("listcategory", listCatalog);
+
+		String catalogid = request.getParameter("catalogid");
+		logger.info("Get catalog id: " + catalogid);
+
+		int productonpage = 2;
+		if (request.getParameter("productonpage") != null) {
+			logger.info("Get product id: "
+					+ request.getParameter("productonpage"));
+			productonpage = Integer.parseInt(request
+					.getParameter("productonpage"));
+		}
+
+		int page = 1;
+		if (request.getParameter("page") != null) {
+			logger.info("Get curent page: " + request.getParameter("page"));
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+
+		int sortby = -1;
+		if (request.getParameter("sortby") != null) {
+			logger.info("Get Sort type: " + request.getParameter("sortby"));
+			sortby = Integer.parseInt(request.getParameter("sortby"));
+		}
+
+		int numberOfProduct = productsDao.numberOfProduct(catalogid, sortby);
+		logger.info("Number of product list by sort and filter: "
+				+ numberOfProduct);		
+		int pagecount = productsDao.numberOfPageCompute(numberOfProduct,
+				productonpage);
+		logger.info("Number of page: "
+				+ pagecount);		
 		
-		List<Product> listProduct = (List<Product>) productsDao.getAllProduct();
-		request.setAttribute("listproduct", listProduct);
-
-		if (request.getParameter("catalogid") != null) {
-			int catalogid = Integer.parseInt(request.getParameter("catalogid"));
-			Productcatalog productcatalog = categoryDao.findById(catalogid);
-
-			int productonpage = 2;
-			if (request.getParameter("productonpage") != null) {
-				productonpage = Integer.parseInt(request
-						.getParameter("productonpage"));
-			}
-
-			int page = 1;
-			if (request.getParameter("page") != null) {
-				page = Integer.parseInt(request.getParameter("page"));
-			}
-
-			int sortby = -1;
-			if (request.getParameter("sortby") != null) {
-				sortby = Integer.parseInt(request.getParameter("sortby"));
-			}
-
-			int n = categoryDao.findByExample(productcatalog).size();
-			int pagecount = n / productonpage;
-			if (n % productonpage != 0) {
-				pagecount++;
-			}
-
-			List<Product> listproduct = productsDao.getProductListCatalog(catalogid,
-					productonpage, page, sortby);
-
-			request.setAttribute("productcatalog", productcatalog);
-			request.setAttribute("productonpage", productonpage);
-			request.setAttribute("page", page);
-			request.setAttribute("sortby", sortby);
-			request.setAttribute("pagecount", pagecount);
-			request.setAttribute("listproduct", listproduct);
-		} 
-
+		List<Product> listproduct = productsDao.getProductListCatalog(
+				catalogid, productonpage, page, sortby);
+		logger.info("List product was sorted and filtered ");		
 		
+		request.setAttribute("productonpage", productonpage);
+		request.setAttribute("page", page);
+		request.setAttribute("sortby", sortby);
+		request.setAttribute("pagecount", pagecount);
+		request.setAttribute("listproduct", listproduct);
 
 		logger.info("Done load product");
 		return "listproduct";
