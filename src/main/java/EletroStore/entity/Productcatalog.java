@@ -20,6 +20,10 @@ import javax.persistence.Table;
 @Table(name = "productcatalog", catalog = "bestbuy")
 public class Productcatalog implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6232246381083500315L;
 	private Integer catalogid;
 	private String catalogimage;
 	private String catalogname;

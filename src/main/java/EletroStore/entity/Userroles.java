@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "userroles", catalog = "bestbuy")
 public class Userroles implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2595289737533879840L;
 	private Integer userRoleId;
 	private User user;
 	private String role;

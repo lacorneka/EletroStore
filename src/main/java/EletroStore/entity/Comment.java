@@ -22,6 +22,10 @@ import javax.persistence.TemporalType;
 @Table(name = "comment", catalog = "bestbuy")
 public class Comment implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7962300479912399252L;
 	private Integer commentid;
 	private User user;
 	private Product product;

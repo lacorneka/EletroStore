@@ -165,7 +165,7 @@ public class WishlistDaoIml implements WishlistDao {
 
 	@Transactional
 	public boolean removeWishListByProductid(String productid) {
-		String hql = "delete from Wishlist w where w.products.productid = "
+		String hql = "delete from Wishlist w where w.product.productid = "
 				+ productid;
 		try {
 			getCurrentSession().createQuery(hql).executeUpdate();

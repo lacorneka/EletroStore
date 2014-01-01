@@ -26,10 +26,10 @@
 				<th>Category</th>
 				<th>Condition</th>
 				<th>Price</th>
-				<th>Deal price</th>
+				<!-- <th>Deal price</th>
 				<th>Tax</th>
 				<th>Quantity</th>
-				<th>Rating</th>
+				<th>Rating</th>-->
 				<th>Description</th>
 				<th>Image</th>
 				<th>Views</th>
@@ -42,12 +42,12 @@
 					<td>${p.model}</td>
 					<td>${p.brand.brandname}</td>
 					<td>${p.productcatalog.catalogname}</td>
-					<td>${p.condition.conditionname}</td>
+					<td>${p.conditions.conditionname}</td>
 					<td>${p.price}</td>
-					<td>${p.dealprice}</td>
+					<%-- <td>${p.dealprice}</td>
 					<td>${p.tax}</td>
 					<td>${p.warranty}</td>
-					<td>${p.rating}</td>
+					<td>${p.rating}</td> --%>
 					<td>${p.description}</td>
 					<td><img style="max-height: 150px; max-width: 150px;"
 						src="<c:url value='/resources/img/product/${p.image1}'/>"
@@ -56,6 +56,7 @@
 					<td>${p.totalbuyer}</td>
 
 					<td><a href="editproduct.do?editID=${p.productid}">Edit</a> <a
+						href="productdetail.do?detailID=${p.productid}">Detail</a> <a
 						href="deleteproduct.do?deleteID=${p.productid}">Delete</a></td>
 				</tr>
 			</c:forEach>

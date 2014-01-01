@@ -20,8 +20,9 @@
 			access="ROLE_ADMIN" />
 		<security:form-login login-page="/login.do"
 			authentication-failure-url="/login.do?error=1"
-			authentication-success-handler-ref="eletroAuthenticationSuccessHandeler"
+			default-target-url="/welcome.do"
 			always-use-default-target="false" />
+			<!-- 			authentication-success-handler-ref="eletroAuthenticationSuccessHandeler" -->
 		<security:access-denied-handler
 			error-page="/error/403.do" />
 		<!-- Alternatively you can have a custom implementation of AccessDeniedHandler. 

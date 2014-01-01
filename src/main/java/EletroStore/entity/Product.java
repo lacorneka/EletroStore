@@ -23,6 +23,10 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "product", catalog = "bestbuy", uniqueConstraints = @UniqueConstraint(columnNames = "productname"))
 public class Product implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8299408464781200882L;
 	private Integer productid;
 	private Productcatalog productcatalog;
 	private Condition conditions;
@@ -115,13 +119,14 @@ public class Product implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "conditions", nullable = false)
-	public Condition getCondition() {
-		return this.conditions;
+	public Condition getConditions() {
+		return conditions;
 	}
 
-	public void setCondition(Condition conditions) {
+	public void setConditions(Condition conditions) {
 		this.conditions = conditions;
 	}
+
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "brand", nullable = false)

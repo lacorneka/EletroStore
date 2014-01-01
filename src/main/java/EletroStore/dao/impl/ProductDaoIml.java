@@ -17,22 +17,21 @@ import org.springframework.transaction.annotation.Transactional;
 import EletroStore.dao.ProductDao;
 import EletroStore.entity.Product;
 
-
 @Repository("productDao")
 public class ProductDaoIml implements ProductDao {
 
 	private static Logger logger = LoggerFactory.getLogger(ProductDaoIml.class);
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	@Transactional
 	public void persist(Product transientInstance) {
 		logger.debug("persisting Product instance");
@@ -45,7 +44,7 @@ public class ProductDaoIml implements ProductDao {
 		}
 	}
 
-	@Transactional(readOnly=false)
+	@Transactional(readOnly = false)
 	public void attachDirty(Product instance) {
 		logger.debug("attaching dirty Product instance");
 		Session session = sessionFactory.openSession();
@@ -58,18 +57,19 @@ public class ProductDaoIml implements ProductDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public List<?> getAllProduct() {
 		logger.debug("Get all Product item");
 		try {
-			List<?> Productslist = getCurrentSession().createQuery("from Product").list();
+			List<?> Productslist = getCurrentSession().createQuery(
+					"from Product").list();
 			for (Object o : Productslist) {
 				Product instance = (Product) o;
 				Hibernate.initialize(instance.getComments());
 				Hibernate.initialize(instance.getOrderdetails());
 				Hibernate.initialize(instance.getBrand());
-				Hibernate.initialize(instance.getCondition());
+				Hibernate.initialize(instance.getConditions());
 				Hibernate.initialize(instance.getProductcatalog());
 				Hibernate.initialize(instance.getUservoteproducts());
 
@@ -82,7 +82,6 @@ public class ProductDaoIml implements ProductDao {
 		}
 	}
 
-
 	@Transactional
 	public void delete(Product persistentInstance) {
 		logger.debug("deleting Product instance");
@@ -94,7 +93,7 @@ public class ProductDaoIml implements ProductDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public Product merge(Product detachedInstance) {
 		logger.debug("merging Product instance");
@@ -114,7 +113,7 @@ public class ProductDaoIml implements ProductDao {
 		logger.debug("updating Product instance");
 		try {
 			getCurrentSession().update(detachedInstance);
-			logger.debug("update successful");			
+			logger.debug("update successful");
 		} catch (RuntimeException re) {
 			logger.error("update failed", re);
 			throw re;
@@ -124,14 +123,14 @@ public class ProductDaoIml implements ProductDao {
 	@Transactional
 	public Product findById(java.lang.Integer id) {
 		logger.debug("getting Product instance with id: " + id);
-		try {            
+		try {
 			Product instance = (Product) getCurrentSession().get(
 					"EletroStore.entity.Product", id);
-			if (instance == null) {
-				logger.debug("get successful, no instance found");
-			} else {
-				logger.debug("get successful, instance found");
-			}
+			Hibernate.initialize(instance);
+			Hibernate.initialize(instance.getBrand());
+			Hibernate.initialize(instance.getConditions());
+			Hibernate.initialize(instance.getProductcatalog());
+			logger.debug("get successful, instance found");
 			return instance;
 		} catch (RuntimeException re) {
 			logger.error("get failed", re);
@@ -154,7 +153,8 @@ public class ProductDaoIml implements ProductDao {
 			throw re;
 		}
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Product> getProductList(String productcatalogid) {
 		logger.debug("getting Product instance by catalog");
