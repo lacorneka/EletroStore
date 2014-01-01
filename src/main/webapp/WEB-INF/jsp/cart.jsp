@@ -15,7 +15,7 @@
 					<thead>
 						<tr>
 							<th><span>Image</span></th>
-							<th class="desc"><span>Descraption</span></th>
+							<th class="desc"><span>Description</span></th>
 							<th><span>Quantity</span></th>
 							<th><span>Unit Price</span></th>
 							<th><span>Sub Price</span></th>
@@ -95,8 +95,8 @@
 						<tr>
 							<td class="alignRight"><h2>Total</h2></td>
 							<td class="alignLeft"><h2>
-									<fmt:formatNumber type="number" groupingUsed="false"
-										value="${sumprice*110/100}" />
+									<fmt:formatNumber type="number" maxFractionDigits="2"
+										groupingUsed="true" value="${sumprice*110/100}" />
 									$
 								</h2></td>
 						</tr>

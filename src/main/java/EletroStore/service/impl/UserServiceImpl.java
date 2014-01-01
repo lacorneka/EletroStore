@@ -53,9 +53,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		try {
 			org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder
 					.getContext().getAuthentication().getPrincipal();
-			String hql = "from User user where user.email='"
-					+ user.getUsername() + "'";
-			User u = (User) userDao.uniqueQuery(hql);
+			User u = (User) userDao.getUser(user.getUsername());
 			if (u.getEnable()) {
 				return u;
 			} else {
@@ -70,8 +68,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			String username) {
 		logger.debug("Spring security loading user details for user: "
 				+ username);
-		String hql = "from User user where user.email= '" + username + "'";
-		User user = (User) userDao.uniqueQuery(hql);
+		User user = (User) userDao.getUser(username);
 		if (user.getEnable()) {
 		Collection<Userroles> roles = user.getUserroleses();
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();

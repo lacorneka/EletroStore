@@ -45,29 +45,28 @@ public class WishlistController {
 			HttpServletResponse response) {
 
 		session = request.getSession();
-session.removeAttribute("wishlists");
-		if (userDetailsService.getCurrentUser() == null) {
-			logger.info("User not loged in then go to login page");
-			return "login";
-		}
-		
+		session.removeAttribute("wishlists");
 		User user = userDetailsService.getCurrentUser();
-//		if (session.getAttribute("wishlists") == null) {
-//		wishlists = wishListDao.getWishlListByUser(user);
-//		model.addAttribute("wishlists", wishlists);
-		List<Wishlist> wishlists;
-		if (session.getAttribute("wishlists") == null) {
-			wishlists = wishListDao.getWishlListByUser(user);
-			session.setAttribute("wishlists", wishlists);
-		} else {
-			wishlists = (List<Wishlist>) session
-					.getAttribute("wishlists");
+		if (user == null) {
+			logger.info("User not loged in then go to login page");
+			return "redirect:login.do";
 		}
 
+		// if (session.getAttribute("wishlists") == null) {
+		// wishlists = wishListDao.getWishlListByUser(user);
+		// model.addAttribute("wishlists", wishlists);
+		List<Wishlist> wishlists;
+//		if (session.getAttribute("wishlists") == null) {
+			wishlists = wishListDao.getWishlListByUser(user);
 //			session.setAttribute("wishlists", wishlists);
 //		} else {
 //			wishlists = (List<Wishlist>) session.getAttribute("wishlists");
 //		}
+
+//		session.setAttribute("wishlists", wishlists);
+		// } else {
+		// wishlists = (List<Wishlist>) session.getAttribute("wishlists");
+		// }
 
 		boolean flagWishlist = false;
 		if (request.getParameter("productid") != null) {
@@ -79,8 +78,7 @@ session.removeAttribute("wishlists");
 					flagWishlist = true;
 					break;
 				}
-				
-				
+
 			}
 			if (flagWishlist == false) {
 				Product product = productDao.findById(Integer
@@ -89,13 +87,13 @@ session.removeAttribute("wishlists");
 				Wishlist wishlist = new Wishlist(user, product, date);
 				wishlists.add(wishlist);
 				wishListDao.attachDirty(wishlist);
-				//session.setAttribute("wishlists", wishlists);
+				// session.setAttribute("wishlists", wishlists);
 				//
 			}
-			session.setAttribute("wishlists", wishlists);
+//			session.setAttribute("wishlists", wishlists);
 		}
-		
-		//request.setAttribute("wishlists", wishlists);
+		session.setAttribute("wishlists", wishlists);
+		// request.setAttribute("wishlists", wishlists);
 
 		return "wishlist";
 	}
@@ -111,7 +109,7 @@ session.removeAttribute("wishlists");
 			logger.info("User not loged in then go to login page");
 			return "login";
 		}
-		
+
 		User user = userDetailsService.getCurrentUser();
 		String productid;
 		productid = request.getParameter("productid");
@@ -119,7 +117,7 @@ session.removeAttribute("wishlists");
 		logger.info("Product Wishlist deleted");
 		wishlists = wishListDao.getWishlListByUser(user);
 		session.setAttribute("wishlists", wishlists);
-		
+
 		return "wishlist";
 	}
 

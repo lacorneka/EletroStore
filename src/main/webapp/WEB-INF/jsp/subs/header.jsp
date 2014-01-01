@@ -3,9 +3,18 @@
 <%@ include file="/WEB-INF/includes/taglibs.jsp"%>
 
 <c:set var="wishlists" scope="session" value="${sessionScope.wishlists}" />
+<c:set var="sumprice"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="0" /></c:set>
 <c:set var="listproductscart" scope="session"
 	value="${sessionScope.listproductscart}" />
-	
+<c:set var="cartsize" value="${listproductscart.size()}" />
+<c:set var="wishlistsize" value="${wishlists.size()}" />
+
+<c:if test="${empty listproductscart}">
+	<c:set var="cartsize" value="0" />
+</c:if>
+<c:if test="${empty wishlists}">
+	<c:set var="wishlistsize" value="0" />
+</c:if>
 <!--begin header-->
 <header>
 	<div class="topHeader">
@@ -13,67 +22,59 @@
 			<div class="pull-right">
 				<div class="btn-group">
 					<button class="btn dropdown-toggle" data-toggle="dropdown">
-						<i class="icon-shopping-cart"></i> 
-						<c:if test="${not empty listproductscart}">(${listproductscart.size()})</c:if>
-						 <span class="caret"></span>
+						<i class="icon-shopping-cart"></i> (${cartsize}) <span
+							class="caret"></span>
 					</button>
 					<div class="dropdown-menu cart-content pull-right">
-						<table class="table-cart">
-							<tbody>
-								<tr>
-									<td class="cart-product-info"><a href="#"><img
-											src="<c:url value='/resources/img/72x72.jpg'/>"
-											alt="product image"></a>
-										<div class="cart-product-desc">
-											<p>
-												<a class="invarseColor" href="#">Title1</a>
-											</p>
-											<ul class="unstyled">
-												<li>Available: Yes</li>
-												<li>Color: Black</li>
-											</ul>
-										</div></td>
-									<td class="cart-product-setting">
-										<p>
-											<strong>1x-$500.00</strong>
-										</p> <a href="#" class="btn btn-mini remove-pro"
-										data-tip="tooltip" data-title="Delete" data-original-title=""><i
-											class="icon-trash"></i></a>
-									</td>
-								</tr>
-								<tr>
-									<td class="cart-product-info"><a href="#"><img
-											src="<c:url value='/resources/img/72x72.jpg'/>"
-											alt="product image"></a>
-										<div class="cart-product-desc">
-											<p>
-												<a class="invarseColor" href="#">Title</a>
-											</p>
-											<ul class="unstyled">
-												<li>Available: Yes</li>
-												<li>Color: Black</li>
-											</ul>
-										</div></td>
-									<td class="cart-product-setting">
-										<p>
-											<strong>2x-$450.00</strong>
-										</p> <a href="#" class="btn btn-mini remove-pro"
-										data-tip="tooltip" data-title="Delete" data-original-title=""><i
-											class="icon-trash"></i></a>
-									</td>
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<td class="cart-product-info"><a href="cart.do"
-										class="btn btn-small">View cart</a> <a href="checkout.do"
-										class="btn btn-small btn-primary">Checkout</a></td>
-									<td>
-										<h3>$1,598.30</h3>
-									</td>
-								</tr>
-							</tfoot>
-						</table>
+						<c:choose>
+							<c:when test="${not empty listproductscart}">
+								<table class="table-cart">
+									<tbody>
+										<c:forEach var="product" items="${listproductscart}">
+											<c:set var="sumprice"
+												value="${sumprice + product.price*product.quantityforsell}" />
+											<tr>
+												<td class="cart-product-info"><a href="#"><img style="max-width: 78px; max-height: 78px;"
+														src="<c:url value='/resources/img/product/${product.image1}'/>"
+														alt="${product.productname}"></a>
+													<div class="cart-product-desc">
+														<p>
+														<c:set var="productname" value="${fn:substring(product.productname, 0, 20)}" />
+															<a class="invarseColor" href="#">${productname}...</a>
+														</p>
+														<!-- <ul class="unstyled">
+													<li>Available: Yes</li>
+													<li>Color: Black</li>
+												</ul> -->
+													</div></td>
+												<td width="20%" class="cart-product-setting">
+													<p>
+														<strong>${product.quantityforsell}x${product.price}</strong>
+													</p> <a href="deleteproduct.do" class="btn btn-mini remove-pro"
+													data-tip="tooltip" data-title="Delete"
+													data-original-title=""><i class="icon-trash"></i></a>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td class="cart-product-info"><a href="cart.do"
+												class="btn btn-small">View cart</a> <a href="checkout.do"
+												class="btn btn-small btn-primary">Checkout</a></td>
+											<td>
+												<h3>$<fmt:formatNumber value="${sumprice}" maxFractionDigits="2"/>
+												</h3>
+											</td>
+										</tr>
+									</tfoot>
+								</table>
+							</c:when>
+							<c:otherwise>
+								<h5 style="color: grey; text-align: center; margin: 3em;">Empty
+									Cart</h5>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -104,9 +105,9 @@
 					<li class="sep-vertical"></li>
 				</sec:authorize>
 
-				<li><a class="invarseColor" href="wishlist.do">Wishlist(${wishlists.size()})</a></li>
+				<li><a class="invarseColor" href="wishlist.do">Wishlist(${wishlistsize})</a></li>
 				<li class="sep-vertical"></li>
-				<li><a class="invarseColor" href="cart.do">Cart(${listproductscart.size()})</a></li>
+				<li><a class="invarseColor" href="cart.do">Cart(${cartsize})</a></li>
 				<li class="sep-vertical"></li>
 				<li><a class="invarseColor" href="checkout.do">Checkout</a></li>
 

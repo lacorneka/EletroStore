@@ -44,7 +44,7 @@ public class CartController {
 			boolean kq = false;
 			for (int i = 0; i < listproductscart.size(); i++) {
 				Product product = listproductscart.get(i);
-				if (product.getProductid() == Integer.parseInt(productid)) {
+				if (product.getProductid() == Integer.parseInt(productid) && product.getQuantity()>0) {
 					product.setQuantityforsell(product.getQuantityforsell() + 1);
 					product.setQuantity(product.getQuantity() - 1);
 					kq = true;
