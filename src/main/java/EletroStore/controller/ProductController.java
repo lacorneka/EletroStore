@@ -20,6 +20,7 @@ import EletroStore.dao.CommentDao;
 import EletroStore.dao.ConditionDao;
 import EletroStore.dao.ProductDao;
 import EletroStore.entity.Brand;
+import EletroStore.entity.Comment;
 import EletroStore.entity.Condition;
 import EletroStore.entity.Product;
 import EletroStore.entity.Productcatalog;

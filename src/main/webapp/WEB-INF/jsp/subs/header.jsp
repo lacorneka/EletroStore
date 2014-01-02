@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/includes/taglibs.jsp"%>
 
-<c:set var="wishlists" scope="session" value="${sessionScope.wishlists}" />
+<%-- <c:set var="wishlists" scope="session" value="${sessionScope.wishlists}" />
 <c:set var="sumprice"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="0" /></c:set>
 <c:set var="listproductscart" scope="session"
 	value="${sessionScope.listproductscart}" />
 <c:set var="cartsize" value="${listproductscart.size()}" />
-<c:set var="wishlistsize" value="${wishlists.size()}" />
+<c:set var="wishlistsize" value="${wishlists.size()}" /> --%>
 
 <c:if test="${empty listproductscart}">
 	<c:set var="cartsize" value="0" />
