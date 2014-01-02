@@ -3,11 +3,14 @@ package EletroStore.entity;
 // Generated Dec 31, 2013 1:56:48 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,15 +32,20 @@ public class Comment implements java.io.Serializable {
 	private Integer commentid;
 	private User user;
 	private Product product;
+	private Float rating;
 	private String content;
 	private Date datetime;
 
 	public Comment() {
 	}
 
-	public Comment(User user, Product product, String content, Date datetime) {
+
+	public Comment(User user, Product product, Float rating,
+			String content, Date datetime) {
+		super();
 		this.user = user;
 		this.product = product;
+		this.rating = rating;
 		this.content = content;
 		this.datetime = datetime;
 	}
@@ -81,6 +89,17 @@ public class Comment implements java.io.Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	@Column(name = "rating", precision = 12, scale = 0)
+	public Float getRating() {
+		return rating;
+	}
+
+
+	public void setRating(Float rating) {
+		this.rating = rating;
+	}
+
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "datetime", length = 19)

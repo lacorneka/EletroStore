@@ -55,7 +55,18 @@ public class ProductController {
 
 		List<Product> listproductaccessories = productsDao.getProductList(p
 				.getProductcatalog().getCatalogid().toString());
+		for (int i = 0; i < listproductaccessories.size(); i++) {
+			if (listproductaccessories.get(i).getProductid() == Integer
+					.parseInt(productid)) {
+				listproductaccessories.remove(i);
+				break;
+			}
+		}
 		request.setAttribute("listproductaccessories", listproductaccessories);
+
+		List<Comment> listcomment = (List<Comment>) commentDao
+				.getListCommentByProductid(productid);
+		request.setAttribute("listcomment", listcomment);
 
 		logger.info("Done product details");
 		return "product";
@@ -122,8 +133,7 @@ public class ProductController {
 				+ numberOfProduct);		
 		int pagecount = productsDao.numberOfPageCompute(numberOfProduct,
 				productonpage);
-		logger.info("Number of page: "
-				+ pagecount);		
+		logger.info("Number of page: " + pagecount);
 		
 		List<Product> listproduct = productsDao.getProductListCatalog(
 				productonpage, page, sortby, searchname, catalogid, conditionid, brandid, nstar, pricefilter);

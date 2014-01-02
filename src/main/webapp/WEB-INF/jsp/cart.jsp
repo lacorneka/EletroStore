@@ -23,50 +23,54 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="product" items="${listproductscart}">
-							<c:set var="sumprice"
-								value="${sumprice + product.price*product.quantityforsell}" />
-							<tr>
-								<td><a href="#"><img
-										src="<c:url value='/resources/img/product/${product.image1}'/>"
-										alt=""></a></td>
-								<td class="desc">
-									<h4>
-										<a href="product.do?productid=${product.productid}"
-											class="invarseColor"> ${product.productname} </a>
-									</h4>
-									<ul class="rating clearfix">
-										<li><i class="star-on"></i></li>
-										<li><i class="star-on"></i></li>
-										<li><i class="star-on"></i></li>
-										<li><i class="star-off"></i></li>
-										<li><i class="star-off"></i></li>
-									</ul>
-								</td>
-								<td class="quantity">
-									<div class="input-prepend input-append">
-										<input type="text" name="" value="${product.quantityforsell}">
-									</div>
-								</td>
-								<td class="sub-price">
-									<h2>${product.price}$</h2>
-								</td>
-								<td class="total-price">
-									<h2>
-										<fmt:formatNumber type="number" groupingUsed="false"
-											value="${product.quantityforsell*product.price}" />
-										$
-									</h2>
-								</td>
-								<td><a class="btn btn-small btn-success" data-title="Edit"
-									data-placement="top" data-tip="tooltip"> <i
-										class="icon-pencil"></i>
-								</a> <a class="btn btn-small btn-danger" data-title="Remove"
-									data-placement="top" data-tip="tooltip"> <i
-										class="icon-trash"></i>
-								</a></td>
-							</tr>
-						</c:forEach>
+						<form action="updateproductcart.do" method="get">
+							<c:forEach var="product" items="${listproductscart}">
+								<c:set var="sumprice"
+									value="${sumprice + product.price*product.quantityforsell}" />
+								<tr>
+									<td><a href="#"><img
+											src="<c:url value='/resources/img/product/${product.image1}'/>"
+											alt=""></a></td>
+									<td class="desc">
+										<h4>
+											<a href="product.do?productid=${product.productid}"
+												class="invarseColor"> ${product.productname} </a>
+										</h4>
+										<ul class="rating clearfix">
+											<li><i class="star-on"></i></li>
+											<li><i class="star-on"></i></li>
+											<li><i class="star-on"></i></li>
+											<li><i class="star-off"></i></li>
+											<li><i class="star-off"></i></li>
+										</ul>
+									</td>
+									<td class="quantity">
+										<div class="input-prepend input-append">
+											<input type="text" name="quantityforsell"
+												value="${product.quantityforsell}">
+										</div>
+									</td>
+									<td class="sub-price">
+										<h2>${product.price}$</h2>
+									</td>
+									<td class="total-price">
+										<h2>
+											<fmt:formatNumber type="number" groupingUsed="false"
+												value="${product.quantityforsell*product.price}" />
+											$
+										</h2>
+									</td>
+									<td><button class="btn btn-small btn-success" data-title="Edit"
+										data-placement="top" data-tip="tooltip" type="submit"> <i
+											class="icon-pencil"></i>
+									</button> <a class="btn btn-small btn-danger" data-title="Remove"
+										data-placement="top" data-tip="tooltip"
+										href="deleteproductcart.do?productid=${product.productid}">
+											<i class="icon-trash"></i>
+									</a></td>
+								</tr>
+							</c:forEach>
+						</form>
 					</tbody>
 				</table>
 			</div>
@@ -120,8 +124,8 @@
 		<table width="100%" border="1" cellspacing="0" cellpadding="5">
 			<tr bgcolor="#666666">
 				<td class="bgColorMain"><strong><font color="#FFFFFF">No
-							product in Cart! Press <a style="color: red" href="Products.do">here</a>
-							to continue shopping
+							product in Cart! Press <a style="color: red"
+							href="listproduct.do">here</a> to continue shopping
 					</font></strong></td>
 			</tr>
 		</table>

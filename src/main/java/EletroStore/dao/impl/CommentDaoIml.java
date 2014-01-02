@@ -4,6 +4,7 @@ package EletroStore.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.CommentDao;
 import EletroStore.entity.Comment;
+import EletroStore.entity.Product;
 
 @Repository("commentDao")
 public class CommentDaoIml implements CommentDao {
@@ -143,9 +145,15 @@ public class CommentDaoIml implements CommentDao {
 	}
 
 	@Transactional
-	public List<Comment> getListCommentByProductid(String productid) {
+	public List<?> getListCommentByProductid(String productid) {
 		Query query = getCurrentSession().createQuery(
 				"from Comment c where c.product.productid =" + productid);
-		return query.list();
+		List<?> commentList = query.list();
+		for (Object o:commentList) {
+			Comment instance = (Comment) o;
+			Hibernate.initialize(instance.getProduct());
+			Hibernate.initialize(instance.getUser());
+		}
+		return commentList;
 	}
 }

@@ -5,6 +5,7 @@ package EletroStore.dao;
 import java.util.List;
 
 import EletroStore.entity.Orders;
+import EletroStore.entity.User;
 
 /**
  * @author HNP
@@ -28,4 +29,6 @@ public interface OrdersDao {
 	public List<?> getAllOrders();
 
 	public List<?> findByExample(Orders instance);
+
+	public List<Orders> getListOrderByUser(User user, int filterorder);
 }

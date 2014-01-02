@@ -18,7 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import EletroStore.dao.*;
+import EletroStore.dao.CategoryDao;
+import EletroStore.dao.CommentDao;
+import EletroStore.dao.ProductDao;
 import EletroStore.entity.*;
 import EletroStore.service.UserService;
 
@@ -27,68 +29,63 @@ import EletroStore.service.UserService;
 public class CommentController {
 
 	private static Logger logger = LoggerFactory
-			.getLogger(SearchController.class);
+			.getLogger(CommentController.class);
 	@Autowired
 	private ProductDao productDao;
 
 	@Autowired
 	private CommentDao commentDao;
-	
+
+	@Autowired
+	private CategoryDao categoryDao;
+
 	@Autowired
 	UserService userDetailsService;
 
-	@RequestMapping(value = { "/CommentProduct.do" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/comment.do" }, method = RequestMethod.POST)
 	public String doCommentProduct(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 
+		logger.info("Add comment for product");
+
 		String productid = request.getParameter("productid");
-		String rating = "5";
+		String rating = "0";
 		if (request.getParameter("rating") != null)
 			rating = request.getParameter("rating");
-		String title = request.getParameter("title");
+		
 		String content = request.getParameter("content");
 		Product product = productDao.findById(Integer.parseInt(productid));
 
-		if (userDetailsService.getCurrentUser() == null) {
+		User user = userDetailsService.getCurrentUser();
+		if (user == null) {
 			logger.info("User not loged in then go to login page");
-			return "login";
+			return "redirect:login.do";
 		}
 
-		User user = userDetailsService.getCurrentUser();
-
 		Comment comment = new Comment();
-		// user, product, title, content,
-		// Integer.parseInt(rating));
 		comment.setUser(user);
 		comment.setProduct(product);
 		comment.setDatetime(new Date());
+		comment.setRating(Float.parseFloat(rating));
 		comment.setContent(content);
-
+		
 		commentDao.attachDirty(comment);
-
-		List<Comment> listcomment = commentDao
-				.getListCommentByProductid(productid);
+		List<Comment> listcomment = (List<Comment>) commentDao.getListCommentByProductid(productid);
 		
-//		int averagerating = 0;
-//		int count = 0, sum = 0;
-//		for (int i = 0; i < listcomment.size(); i++) {
-//			if (listcomment.get(i).get > 0) {
-//				sum += listcomment.get(i).getRating();
-//				count++;
-//			}
-//		}
-//		averagerating = sum / count;
-//		product.setRating(averagerating);
-//		productDAO.updateRating(averagerating, productid);
-//		List<Products> listproductaccessories = productDAO
-//				.getProductList(product.getProductcatalog().getCatalogid()
-//						.toString());
-//		request.setAttribute("listproductaccessories", listproductaccessories);
-//		request.setAttribute("listcomment", listcomment);
-//		request.setAttribute("product", product);
+		float averagerating = 0;
+		int count = 0, sum = 0;
+		for (int i = 0; i < listcomment.size(); i++) {
+			if (listcomment.get(i).getRating() > 0) {
+				sum += listcomment.get(i).getRating();
+				count++;
+			}
+		}
 
-		
-		return "product";
+		averagerating = sum / count;
+		product.setRating(averagerating);
+		productDao.update(product);
+
+		return "redirect:product.do?productid=" + productid;
 	}
 
 }
