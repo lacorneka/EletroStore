@@ -70,12 +70,10 @@
 								</a> <a href="wishlist.do?productid=${product.productid }"
 									class="btn" data-tip="tooltip" data-title="+To Wishlist"> <i
 									class="icon-heart"></i>
+								</a> <a href="compare.do?productid=${product.productid }"
+									class="btn" data-tip="tooltip" data-title="+To Compare"> <i
+									class="icon-refresh"></i>
 								</a>
-
-								<button type="button" class="btn" data-tip="tooltip"
-									data-title="+To Compare">
-									<i class="icon-refresh"></i>
-								</button>
 							</div>
 
 							<!--end form-->
@@ -112,77 +110,87 @@
 				<div class="tab-pane" id="return-info">${product.features}</div>
 
 				<div class="tab-pane" id="read-review">
+					<c:forEach var="comment" items="${requestScope.listcomment}">
+						<div class="single-review clearfix">
+							<div class="review-header">
+								<ul class="rating">
+									<li><i class="star-on"></i></li>
+									<li><i class="star-on"></i></li>
+									<li><i class="star-off"></i></li>
+									<li><i class="star-off"></i></li>
+									<li><i class="star-off"></i></li>
+								</ul>
+								<h4>${comment.user.firstname}</h4>
+								<small><fmt:formatDate pattern="dd-MM-yyyy"
+										value="${comment.datetime}" /></small>
+							</div>
+							<!--end review-header-->
 
-					<div class="single-review clearfix">
-						<div class="review-header">
-							<ul class="rating">
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-off"></i></li>
-								<li><i class="star-off"></i></li>
-								<li><i class="star-off"></i></li>
-							</ul>
-							<h4>John Doe</h4>
-							<small>26/11/2012</small>
+							<div class="review-body">
+								<p>${comment.content}</p>
+							</div>
+							<!--end review-body-->
 						</div>
-						<!--end review-header-->
-
-						<div class="review-body">
-							<p>Sed do eiusmod tempor incididunt ut labore et dolore magna
-								aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-						</div>
-						<!--end review-body-->
-					</div>
-					<!--end single-review-->
+						<!--end single-review-->
+					</c:forEach>
 
 				</div>
 
-
 				<div class="tab-pane" id="make-review">
-					<form method="post" action="comment.do" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="inputName">Your Name <span
-								class="text-error">*</span></label>
-							<div class="controls">
-								<input type="text" name="name" class="span8" id="inputName"
-									placeholder="John Doe...">
-							</div>
+					<sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
+						<div>
+							Please <a href="login.do">Login</a> to Reviews
 						</div>
-						<div class="control-group">
-							<label class="control-label" for="inputReview">Your
-								Review <span class="text-error">*</span>
-							</label>
-							<div class="controls">
-								<textarea name="content" class="span8" id="inputReview"
-									placeholder="Put your review here..."></textarea>
+					</sec:authorize>
+					<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
+						<form method="post" action="comment.do" class="form-horizontal">
+							<input type="hidden" name="productid" id="productid"
+								value="${product.productid}">
+							<div class="control-group">
+								<label class="control-label" for="inputName">Your Name <span
+									class="text-error">*</span></label>
+								<div class="controls">
+									<input type="text" name="name" class="span8" id="inputName"
+										value="<sec:authentication property="principal.username" />"
+										placeholder="John Doe...">
+								</div>
 							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">Your Rate <span
-								class="text-error">*</span></label>
-							<div class="controls">
-								<label class="radio inline">From Bad</label> <label
-									class="radio inline"> <input type="radio" name="rate"
-									value="option1">
-								</label> <label class="radio inline"> <input type="radio"
-									name="rate" value="option2">
-								</label> <label class="radio inline"> <input type="radio"
-									name="rate" value="option3">
-								</label> <label class="radio inline"> <input type="radio"
-									name="rate" value="option4">
-								</label> <label class="radio inline"> <input type="radio"
-									name="rate" value="option5">
-								</label> <label class="radio inline">To Good</label>
+							<div class="control-group">
+								<label class="control-label" for="inputReview">Your
+									Review <span class="text-error">*</span>
+								</label>
+								<div class="controls">
+									<textarea name="content" class="span8" id="content"
+										placeholder="Put your review here..."></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn btn-primary" name="submit">Add
-									Review</button>
+							<div class="control-group">
+								<label class="control-label">Your Rate <span
+									class="text-error">*</span></label>
+								<div class="controls">
+									<label class="radio inline">From Bad</label> <label
+										class="radio inline"> <input type="radio" name="rate"
+										value="1">
+									</label> <label class="radio inline"> <input type="radio"
+										name="rate" value="2">
+									</label> <label class="radio inline"> <input type="radio"
+										name="rate" value="3">
+									</label> <label class="radio inline"> <input type="radio"
+										name="rate" value="4">
+									</label> <label class="radio inline"> <input type="radio"
+										name="rate" value="5">
+									</label> <label class="radio inline">To Good</label>
+								</div>
 							</div>
-						</div>
-					</form>
-					<!--end form-->
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn btn-primary" name="submit">Add
+										Review</button>
+								</div>
+							</div>
+						</form>
+						<!--end form-->
+					</sec:authorize>
 				</div>
 			</div>
 			<!--end tab-content-->
@@ -217,7 +225,6 @@
 									<li><i class="star-on"></i></li>
 									<li><i class="star-off"></i></li>
 								</ul>
-								<div class="product-desc"></div>
 								<div class="thumbPrice">
 									<span>${product.price} $</span>
 								</div>

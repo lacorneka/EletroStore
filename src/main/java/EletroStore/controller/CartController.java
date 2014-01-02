@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,9 @@ import EletroStore.entity.Product;
 @Controller
 @Transactional
 public class CartController {
+	
+	private static Logger logger = LoggerFactory
+			.getLogger(CartController.class);
 
 	@Autowired
 	private ProductDao productDao;
@@ -69,5 +74,59 @@ public class CartController {
 		
 		return "cart";
 	}
+	
+	@RequestMapping(value = { "/deleteproductcart.do" }, method = RequestMethod.GET)
+	public String doDeleteProductCart(Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		logger.info("Begin delete product cart");
+	
+		ArrayList<Product> listproductscart;
+		session = request.getSession();
+		if (session.getAttribute("listproductscart") == null) {
+			listproductscart = new ArrayList<Product>();
+			session.setAttribute("listproductscart", listproductscart);
+		} else {
+			listproductscart = (ArrayList<Product>) session
+					.getAttribute("listproductscart");
+		}
+		
+		String productid = request.getParameter("productid");
+		for (int i = 0; i < listproductscart.size(); i++) {
+			if (listproductscart.get(i).getProductid() == Integer
+					.parseInt(productid)) {
+				listproductscart.remove(i);
+				logger.info("Product cart deleted");
+				break;
+			}
+		}
+		return "cart";
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = { "/updateproductcart.do" }, method = RequestMethod.GET)
+	public String doUpdateProductCart(Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		logger.info("Begin update product cart");
+		
+		String[] q = request.getParameterValues("quantityforsell");
+	
+		ArrayList<Product> listproductscart;
+		session = request.getSession();
+		if (session.getAttribute("listproductscart") == null) {
+			listproductscart = new ArrayList<Product>();
+			session.setAttribute("listproductscart", listproductscart);
+		} else {
+			listproductscart = (ArrayList<Product>) session
+					.getAttribute("listproductscart");
+		}
+		
+		for (int i = 0; i < listproductscart.size(); i++) {
+			int quantityforsell = Integer.parseInt(q[i]);
+			listproductscart.get(i).setQuantityforsell(quantityforsell);
+		}
+		
+		return "cart";
+	}
+	
 
 }

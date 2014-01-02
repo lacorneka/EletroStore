@@ -128,9 +128,12 @@ public class ProductDaoIml implements ProductDao {
 			Product instance = (Product) getCurrentSession().get(
 					"EletroStore.entity.Product", id);
 			Hibernate.initialize(instance);
+			Hibernate.initialize(instance.getComments());
+			Hibernate.initialize(instance.getOrderdetails());
 			Hibernate.initialize(instance.getBrand());
 			Hibernate.initialize(instance.getConditions());
 			Hibernate.initialize(instance.getProductcatalog());
+			Hibernate.initialize(instance.getUservoteproducts());
 			logger.debug("get successful, instance found");
 			return instance;
 		} catch (RuntimeException re) {
