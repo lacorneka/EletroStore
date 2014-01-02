@@ -29,4 +29,8 @@ public interface CategoryDao {
 	
 	public List<?> findByExample(Productcatalog instance);
 
+	public int pagecount(String productname, String productcatalog,
+			String[] brands, String[] conditions, String rating,
+			int productonpage, String minprice, String maxprice);
+
 }

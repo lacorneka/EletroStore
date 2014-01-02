@@ -236,4 +236,12 @@ public class ProductDaoIml implements ProductDao {
 		List<Product> listProduct = query.list();
 		return listProduct;
 	}
+
+	public List<Product> Search(String productname, String productcatalog,
+			String[] brands, String[] conditions, String rating,
+			String minprice, String maxprice, int page, int productonpage,
+			int sortby) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
