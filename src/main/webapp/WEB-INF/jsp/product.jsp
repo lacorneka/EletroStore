@@ -200,14 +200,15 @@
 						items="${requestScope.listproductaccessories }">
 						<li class="span3 clearfix">
 							<div class="thumbnail">
-								<a href="#"><img
+								<a href="product.do?productid=${product.productid }"><img
 									src="<c:url value='/resources/img/product/${product.image1}'/>"
 									alt=""></a>
 							</div>
 							<div class="thumbSetting">
 								<div class="thumbTitle">
 									<h3>
-										<a href="#" class="invarseColor">${product.productname}</a>
+										<a href="product.do?productid=${product.productid }"
+											class="invarseColor">${product.productname}</a>
 									</h3>
 								</div>
 								<ul class="rating clearfix">
@@ -217,7 +218,6 @@
 									<li><i class="star-on"></i></li>
 									<li><i class="star-off"></i></li>
 								</ul>
-								<div class="product-desc"></div>
 								<div class="thumbPrice">
 									<span>${product.price} $</span>
 								</div>

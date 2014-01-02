@@ -84,19 +84,10 @@
 				<div class="cart-receipt">
 					<table class="table table-receipt">
 						<tr>
-							<td class="alignRight">Sub Total</td>
-							<td class="alignLeft"><fmt:formatNumber type="number"
-									groupingUsed="false" value="${sumprice}" />$</td>
-						</tr>
-						<tr>
-							<td class="alignRight">VAT</td>
-							<td class="alignLeft">10%</td>
-						</tr>
-						<tr>
 							<td class="alignRight"><h2>Total</h2></td>
 							<td class="alignLeft"><h2>
 									<fmt:formatNumber type="number" groupingUsed="false"
-										value="${sumprice*110/100}" />
+										value="${sumprice}" />
 									$
 								</h2></td>
 						</tr>

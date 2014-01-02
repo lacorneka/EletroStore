@@ -56,46 +56,55 @@ public class ProductController {
 		List<Productcatalog> listCatalog = (List<Productcatalog>) categoryDao
 				.getAllCategory();
 		request.setAttribute("listcategory", listCatalog);
-		
+
 		List<Product> listProduct = (List<Product>) productsDao.getAllProduct();
 		request.setAttribute("listproduct", listProduct);
+
+		int productonpage = 2;
+		if (request.getParameter("productonpage") != null) {
+			productonpage = Integer.parseInt(request
+					.getParameter("productonpage"));
+		}
+
+		int page = 1;
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+
+		int sortby = -1;
+		if (request.getParameter("sortby") != null) {
+			sortby = Integer.parseInt(request.getParameter("sortby"));
+		}
+
+		int pagecount = listProduct.size() / productonpage;
+		if (listProduct.size() % productonpage != 0) {
+			pagecount++;
+		}
 
 		if (request.getParameter("catalogid") != null) {
 			int catalogid = Integer.parseInt(request.getParameter("catalogid"));
 			Productcatalog productcatalog = categoryDao.findById(catalogid);
 
-			int productonpage = 2;
-			if (request.getParameter("productonpage") != null) {
-				productonpage = Integer.parseInt(request
-						.getParameter("productonpage"));
-			}
-
-			int page = 1;
-			if (request.getParameter("page") != null) {
-				page = Integer.parseInt(request.getParameter("page"));
-			}
-
-			int sortby = -1;
-			if (request.getParameter("sortby") != null) {
-				sortby = Integer.parseInt(request.getParameter("sortby"));
-			}
-
-			int n = categoryDao.findByExample(productcatalog).size();
-			int pagecount = n / productonpage;
+			int n = productsDao.getProductList(String.valueOf(catalogid))
+					.size();
+			pagecount = n / productonpage;
 			if (n % productonpage != 0) {
 				pagecount++;
 			}
 
-			List<Product> listproduct = productsDao.getProductListCatalog(catalogid,
+			listProduct = productsDao.getProductListCatalog(catalogid,
 					productonpage, page, sortby);
 
 			request.setAttribute("productcatalog", productcatalog);
-			request.setAttribute("productonpage", productonpage);
-			request.setAttribute("page", page);
-			request.setAttribute("sortby", sortby);
-			request.setAttribute("pagecount", pagecount);
-			request.setAttribute("listproduct", listproduct);
-		} 
+		} else {
+			listProduct = productsDao.getProductListSort(productonpage, page, sortby);
+		}
+
+		request.setAttribute("productonpage", productonpage);
+		request.setAttribute("page", page);
+		request.setAttribute("sortby", sortby);
+		request.setAttribute("pagecount", pagecount);
+		request.setAttribute("listproduct", listProduct);
 
 		logger.info("Done load product");
 		return "listproduct";

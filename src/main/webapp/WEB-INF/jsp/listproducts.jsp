@@ -13,7 +13,8 @@
 				<ul class="unstyled">
 					<c:forEach var="category" items="${requestScope.listcategory}">
 						<li><a class="invarseColor"
-							href="listproduct.do?catalogid=${category.catalogid}" type="submit">${category.catalogname}</a></li>
+							href="listproduct.do?catalogid=${category.catalogid}"
+							type="submit">${category.catalogname}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -29,7 +30,7 @@
 
 				<div class="sortBy inline pull-left">
 					Sort By <select name="sortby">
-						<option value="Default">Name (A-Z)</option>
+						<option value="-1">Name (A-Z)</option>
 						<option value="0">Name (Z-A)</option>
 						<option value="1">Price (Low-Hight)</option>
 						<option value="2">Price (Height-Low)</option>
@@ -46,7 +47,10 @@
 					</select>
 				</div>
 				<!--end sortBy-->
-
+				<c:if test="${requestScope.productcatalog.catalogid != null}">
+					<input type="hidden" name="catalogid"
+						value="${requestScope.productcatalog.catalogid}" />
+				</c:if>
 				<div class="compareItem inline pull-left">
 					<button class="btn" type="submit">Show Products</button>
 				</div>
@@ -108,12 +112,23 @@
 				</ul>
 			</div>
 
+			<c:set var="pagecount" value="${requestScope.pagecount}" />
 
 			<div class="pagination pagination-right">
-				<span class="pull-left">Showing 1 of 2 pages:</span>
 				<ul>
-					<li class="active"><a class="invarseColor" href="#">1</a></li>
-					<li><a class="invarseColor" href="#">2</a></li>
+					<c:forEach var="i" begin="1" end="${pagecount}">
+						<li <c:if test="${page == i}"> class="active" </c:if>><a
+							class="invarseColor"
+							<c:choose>
+							 <c:when test="${requestScope.productcatalog.catalogid != null}">
+							 href="listproduct.do?catalogid=${requestScope.productcatalog.catalogid}&page=${i}&productonpage=${productonpage}&sortby=${sortby}"
+							 </c:when>
+							  <c:otherwise>
+							  href="listproduct.do?page=${i}&productonpage=${productonpage}&sortby=${sortby}"
+      							</c:otherwise>
+							
+							</c:choose>>${i}</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 			<!--end pagination-->

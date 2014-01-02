@@ -141,4 +141,11 @@ public class CategoryDaoIml implements CategoryDao{
 			throw re;
 		}
 	}
+
+	public int pagecount(String productname, String productcatalog,
+			String[] brands, String[] conditions, String rating,
+			int productonpage, String minprice, String maxprice) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

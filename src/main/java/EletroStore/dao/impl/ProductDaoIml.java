@@ -197,4 +197,39 @@ public class ProductDaoIml implements ProductDao {
 
 		return query.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Product> getProductListSort(int productonpage, int page,
+			int sortby) {
+		Session session = sessionFactory.getCurrentSession();
+		int n = (page - 1) * productonpage;
+		int m = productonpage;
+		String hql;
+		hql = "from Product p ";
+		if (sortby == -1)
+			hql += " order by p.productname asc";
+		if (sortby == 0)
+			hql += " order by p.productname desc";
+		if (sortby == 1)
+			hql += " order by p.price asc";
+		if (sortby == 2)
+			hql += " order by p.price desc";
+
+		Query query = session.createQuery(hql);
+		if (productonpage != -1) {
+			query.setFirstResult(n);
+			query.setMaxResults(m);
+		}
+
+		return query.list();
+	}
+
+	public List<Product> Search(String productname, String productcatalog,
+			String[] brands, String[] conditions, String rating,
+			String minprice, String maxprice, int page, int productonpage,
+			int sortby) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

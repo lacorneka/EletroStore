@@ -35,4 +35,12 @@ public interface ProductDao {
 	public List<Product> getProductListCatalog(int catalogid, int productonpage,
 			int page, int sortby);
 
+	public List<Product> getProductListSort(int productonpage, int page,
+			int sortby);
+
+	public List<Product> Search(String productname, String productcatalog,
+			String[] brands, String[] conditions, String rating,
+			String minprice, String maxprice, int page, int productonpage,
+			int sortby);
+
 }

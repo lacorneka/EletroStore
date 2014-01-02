@@ -45,7 +45,7 @@ public class WishlistController {
 			HttpServletResponse response) {
 
 		session = request.getSession();
-session.removeAttribute("wishlists");
+		
 		if (userDetailsService.getCurrentUser() == null) {
 			logger.info("User not loged in then go to login page");
 			return "login";
@@ -63,11 +63,6 @@ session.removeAttribute("wishlists");
 			wishlists = (List<Wishlist>) session
 					.getAttribute("wishlists");
 		}
-
-//			session.setAttribute("wishlists", wishlists);
-//		} else {
-//			wishlists = (List<Wishlist>) session.getAttribute("wishlists");
-//		}
 
 		boolean flagWishlist = false;
 		if (request.getParameter("productid") != null) {
