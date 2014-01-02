@@ -6,6 +6,8 @@ package EletroStore.dao;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.entity.Product;
 
@@ -34,20 +36,16 @@ public interface ProductDao {
 
 	public List<Product> getProductList(String productcatalogid);
 
-	public List<Product> getProductListCatalog(String catalogid, int productonpage,
-			int page, int sortby);
+	public int numberOfPageCompute(int numberOfProduct, int productOnPage);
 
-    public int numberOfPageCompute(int numberOfProduct, int productOnPage);
-    
-	public Query getProductList(String catalogid, int sortby);
+	public Query getProductList(int sortby, String searchname,
+			String catalogid, String conditionid, String brandid, String nstar, String pricefilter);
 
-	public int numberOfProduct(String catalogid, int sortby);
-	public List<Product> getProductListSort(int productonpage, int page,
-			int sortby);
+	public List<Product> getProductListCatalog(int productonpage, int page,
+			int sortby, String searchname, String catalogid,
+			String conditionid, String brandid, String nstar, String pricefilter);
 
-	public List<Product> Search(String productname, String productcatalog,
-			String[] brands, String[] conditions, String rating,
-			String minprice, String maxprice, int page, int productonpage,
-			int sortby);
+	public int numberOfProduct(int sortby, String searchname, String catalogid,
+			String conditionid, String brandid, String nstar, String pricefilter);
 
 }

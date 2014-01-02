@@ -14,8 +14,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import EletroStore.entity.*;
-import EletroStore.dao.*;
+import EletroStore.dao.BrandDao;
+import EletroStore.dao.CategoryDao;
+import EletroStore.dao.CommentDao;
+import EletroStore.dao.ConditionDao;
+import EletroStore.dao.ProductDao;
+import EletroStore.entity.Brand;
+import EletroStore.entity.Condition;
+import EletroStore.entity.Product;
+import EletroStore.entity.Productcatalog;
 
 @Controller
 @Transactional
@@ -31,6 +38,12 @@ public class ProductController {
 
 	@Autowired
 	private CategoryDao categoryDao;
+
+	@Autowired
+	private ConditionDao conditionDao;
+
+	@Autowired
+	private BrandDao brandDao;
 
 	@RequestMapping(value = { "/product" }, method = RequestMethod.GET)
 	public String doProduct(Model model, HttpServletRequest request,
@@ -59,10 +72,31 @@ public class ProductController {
 		List<Productcatalog> listCatalog = (List<Productcatalog>) categoryDao
 				.getAllCategory();
 		request.setAttribute("listcategory", listCatalog);
+		
+		List<Condition> listCondition = (List<Condition>) conditionDao.getAllCondition();
+		request.setAttribute("listcondition", listCondition);		
+		
+		List<Brand> listBrand = (List<Brand>) brandDao.getAllBrand();
+		request.setAttribute("listbrand", listBrand);		
+		
+		String searchname = request.getParameter("searchname");
+		logger.info("Get search name: " + searchname);
+		
+		String nstar = request.getParameter("nstar");
+		logger.info("Get number of star rating: " + nstar);
 
+		String pricefilter = request.getParameter("pricefilter");
+		logger.info("Price filter: " + pricefilter);
+		
 		String catalogid = request.getParameter("catalogid");
 		logger.info("Get catalog id: " + catalogid);
-
+		
+		String conditionid = request.getParameter("conditionid");
+		logger.info("Get condition id: " + conditionid);
+		
+		String brandid = request.getParameter("brandid");
+		logger.info("Get brand id: " + brandid);
+		
 		int productonpage = 2;
 		if (request.getParameter("productonpage") != null) {
 			logger.info("Get product id: "
@@ -83,7 +117,7 @@ public class ProductController {
 			sortby = Integer.parseInt(request.getParameter("sortby"));
 		}
 
-		int numberOfProduct = productsDao.numberOfProduct(catalogid, sortby);
+		int numberOfProduct = productsDao.numberOfProduct(sortby, searchname, catalogid, conditionid, brandid, nstar, pricefilter);
 		logger.info("Number of product list by sort and filter: "
 				+ numberOfProduct);		
 		int pagecount = productsDao.numberOfPageCompute(numberOfProduct,
@@ -92,7 +126,7 @@ public class ProductController {
 				+ pagecount);		
 		
 		List<Product> listproduct = productsDao.getProductListCatalog(
-				catalogid, productonpage, page, sortby);
+				productonpage, page, sortby, searchname, catalogid, conditionid, brandid, nstar, pricefilter);
 		logger.info("List product was sorted and filtered ");		
 		
 		request.setAttribute("productonpage", productonpage);

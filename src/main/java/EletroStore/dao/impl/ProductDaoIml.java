@@ -184,12 +184,28 @@ public class ProductDaoIml implements ProductDao {
 	}
 
 	@Transactional
-	public Query getProductList(String catalogid, int sortby) {
+	public Query getProductList(int sortby, String searchname,
+			String catalogid, String conditionid, String brandid, String nstar, String pricefilter) {
 		String hql;
 		hql = "from Product p";
+		searchname = (searchname == null) ? "" : searchname;
+		hql += " where p.productname like'%" + searchname + "%'";
 		if (catalogid != null && !catalogid.isEmpty()) {
-			hql += " where p.productcatalog.catalogid = " + catalogid;
+			hql += " and p.productcatalog.catalogid = " + catalogid;
 		}
+		if (conditionid != null && !conditionid.isEmpty()) {
+			hql += " and p.conditions.conditionid = " + conditionid;
+		}
+		if (brandid != null && !brandid.isEmpty()) {
+			hql += " and p.brand.brandid = " + brandid;
+		}
+		if (nstar != null && !nstar.isEmpty()) {
+			hql += " and p.rating >= " + nstar;
+		}
+		if (pricefilter != null && !pricefilter.isEmpty()) {
+			hql += " and " + pricefilter;
+		}
+
 		if (sortby == 0)
 			hql += " order by p.productname asc";
 		if (sortby == 1)
@@ -209,21 +225,23 @@ public class ProductDaoIml implements ProductDao {
 
 		return query;
 	}
-	
+
 	@Transactional
-	public int numberOfProduct(String catalogid, int sortby) {
-		Query query = getProductList(catalogid, sortby);
+	public int numberOfProduct(int sortby, String searchname, String catalogid,
+			String conditionid, String brandid, String nstar, String pricefilter) {
+		Query query = getProductList(sortby,searchname, catalogid, conditionid, brandid, nstar, pricefilter);
 		int n = query.list().size();
 		return n;
 	}
 
 	@Transactional
-	public List<Product> getProductListCatalog(String catalogid,
-			int productonpage, int page, int sortby) {
+	public List<Product> getProductListCatalog(int productonpage, int page,
+			int sortby, String searchname, String catalogid,
+			String conditionid, String brandid, String nstar, String pricefilter) {
 		int n = (page - 1) * productonpage;
 		int m = productonpage;
 
-		Query query = getProductList(catalogid, sortby);
+		Query query = getProductList(sortby,searchname, catalogid, conditionid, brandid, nstar, pricefilter);
 
 		if (productonpage != -1) {
 			query.setFirstResult(n);
@@ -232,13 +250,5 @@ public class ProductDaoIml implements ProductDao {
 		@SuppressWarnings("unchecked")
 		List<Product> listProduct = query.list();
 		return listProduct;
-	}
-
-	public List<Product> Search(String productname, String productcatalog,
-			String[] brands, String[] conditions, String rating,
-			String minprice, String maxprice, int page, int productonpage,
-			int sortby) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

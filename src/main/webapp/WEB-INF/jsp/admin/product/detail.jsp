@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/includes/taglibs.jsp"%>
 <h2>Model ${p.model}</h2>
-<p>Product detail</p>
+<p>Product detail</p><br/>
 <br />
 <div class="widget box">
 	<div class="widget-header">
@@ -11,9 +11,9 @@
 			<div class="btn-group">
 				<span class="btn btn-xs widget-collapse"><i
 					class="icon-angle-down"></i></span>
-			</div>
-		</div>
-	</div>
+			</div><br/>
+		</div><br/>
+	</div><br/>
 
 	<div class="widget-content" style="display: block;">
 		<img style="max-height: 300px; max-width: 300px;"
@@ -24,153 +24,155 @@
 			<label class="control-label col-md-2">Name: </label>
 
 			<div class="col-md-10">
-				<p>${p.productname}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.productname}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
+
 		<div class="form-group">
 			<label class="control-label col-md-2">Model: </label>
 
 			<div class="col-md-10">
-				<p>${p.model}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.model}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
+
 		<div class="form-group">
 			<label class="control-label col-md-2">Brand: </label>
 
 			<div class="col-md-10">
-				<p>${p.brand.brandname}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.brand.brandname}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Category: </label>
 
 			<div class="col-md-10">
-				<p>${p.productcatalog.catalogname}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.productcatalog.catalogname}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Condition: </label>
 
 			<div class="col-md-10">
-				<p>${p.conditions.conditionname}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.conditions.conditionname}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Price: </label>
 
 			<div class="col-md-10">
-				<p>${p.price}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.price}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Deal price: </label>
 
 			<div class="col-md-10">
-				<p>${p.dealprice}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.dealprice}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Tax: </label>
 
 			<div class="col-md-10">
-				<p>${p.tax}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.tax}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Quantity: </label>
 
 			<div class="col-md-10">
-				<p>${p.quantity}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.quantity}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Max quantity per Order:
 			</label>
 
 			<div class="col-md-10">
-				<p>${p.quantityforsell}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.quantityforsell}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Warranty: </label>
 
 			<div class="col-md-10">
-				<p>${p.warranty}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.warranty}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Rating: </label>
 
 			<div class="col-md-10">
-				<p>${p.rating}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.rating}</p><br/>
+			</div><br/>
+		</div><br/>
+
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Description: </label>
 
 			<div class="col-md-10">
-				<p>${p.description}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.description}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Specifications: </label>
 
 			<div class="col-md-10">
-				<p>${p.specifications}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.specifications}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Features: </label>
 
 			<div class="col-md-10">
-				<p>${p.features}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.features}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Image: </label>
 
 			<div class="col-md-10">
-				<p>${p.image2}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.image2}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">Views: </label>
 
 			<div class="col-md-10">
-				<p>${p.productviews}</p>
-				<br />
-			</div>
-		</div>
+				<p>${p.productviews}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br />
 		<div class="form-group">
 			<label class="control-label col-md-2">No.Buyers: </label>
 
 			<div class="col-md-10">
-				<p>${p.totalbuyer}</p>
-				<br />
-			</div>
-		</div>
-		<br /> <a href="deleteproduct.do?deleteID=${p.productid}">Delete</a>
+				<p>${p.totalbuyer}</p><br/>
+			</div><br/>
+		</div><br/>
+		<br /> <br /> <a href="deleteproduct.do?deleteID=${p.productid}">Delete</a>
 
-	</div>
+	</div><br/>
 
-</div>
+</div><br/>
 <div class="form-group">
 	<a href="${pageContext.request.contextPath}/admin/product.do">Back
 		to list</a>
-</div>
+</div><br/>

@@ -1,5 +1,6 @@
 package EletroStore.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,9 +83,7 @@ public class SearchController {
 		int pagecount = categoryDao.pagecount(productname,
 				productcatalog, brands, conditions, rating, productonpage,
 				minprice, maxprice);
-		List<Product> listproduct = productDao.Search(productname,
-				productcatalog, brands, conditions, rating, minprice, maxprice,
-				page, productonpage, sortby);
+		List<Product> listproduct = new ArrayList<Product>();
 		request.setAttribute("productname", productname);
 		request.setAttribute("productcatalog", productcatalog);
 		request.setAttribute("rating", rating);
