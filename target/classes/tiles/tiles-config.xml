@@ -58,6 +58,10 @@
         <put-attribute name="title" value="Result Search" />
         <put-attribute name="content" value="/WEB-INF/jsp/search.jsp"/>
     </definition>
+    <definition name="orderdetail" extends="base">
+        <put-attribute name="title" value="Detail Order" />
+        <put-attribute name="content" value="/WEB-INF/jsp/orderdetail.jsp"/>
+    </definition>
     
     <definition name="403" extends="base">
         <put-attribute name="title" value="Wooooooops!"/>

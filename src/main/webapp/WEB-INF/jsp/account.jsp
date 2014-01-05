@@ -18,6 +18,12 @@
 			<form id="customer" class="form-horizontal" action="changeaccount.do"
 				method="POST">
 
+				<c:if test="${not empty sessionScope.accounterror}">
+					<div class="error text-error">
+						Error: ${sessionScope.accounterror}
+					</div>
+				</c:if>
+
 				<div class="legend">&nbsp;&nbsp;&nbsp;&nbsp;Account
 					Informations</div>
 				<div class="control-group">
@@ -25,7 +31,8 @@
 						class="text-error">*</span>
 					</label>
 					<div class="controls">
-						<input id="email" name="email" type="text" value="${user.email}" />
+						<input id="email" name="email" type="text" disabled
+							value="${user.email}" />
 					</div>
 				</div>
 				<!--end control-group-->
@@ -119,10 +126,17 @@
 					<form name="listorder" action="account.do" method="get">
 						<div class="sortBy inline pull-left">
 							Filter By <select name="filterorder" onchange="submit()">
-								<option value="-1">All</option>
-								<option value="0">This week</option>
-								<option value="1">This month</option>
-								<option value="2">This year</option>
+								<option value="-1"
+									<c:if test="${-1 eq param.filterorder}"><c:out value="selected" /></c:if>>All</option>
+								<option value="0"
+									<c:if test="${0 eq param.filterorder}"><c:out value="selected" /></c:if>>This
+									week</option>
+								<option value="1"
+									<c:if test="${1 eq param.filterorder}"><c:out value="selected" /></c:if>>This
+									month</option>
+								<option value="2"
+									<c:if test="${2 eq param.filterorder}"><c:out value="selected" /></c:if>>This
+									year</option>
 							</select>
 						</div>
 						<table class="table">
@@ -140,20 +154,22 @@
 								<c:forEach var="order" items="${listorders}">
 									<tr>
 										<td>${order.orderid}</td>
-										<td>${order.user.email}</td>
-										<td>${order.orderstatus}</td>
+										<td>${user.email}</td>
+										<td>${order.orderstatus.orderstatusname}</td>
 										<td><h2>$${order.totalmoney}</h2></td>
 										<td><fmt:formatDate pattern="dd-MM-yyyy"
 												value="${order.orderdate}" /></td>
 										<td>
-											<button class="btn btn-small btn-success" data-title="Detail"
+											<a href="orderdetail.do?orderid=${order.orderid}" class="btn btn-small btn-success" data-title="Detail"
 												data-placement="top" data-tip="tooltip">
 												<i class="icon-pencil"></i>
-											</button>
-											<button class="btn btn-small" data-title="Remove"
+											</a>
+											<c:if test="${order.orderstatus.orderstatusid eq 1}">
+											<a href="deleteorder.do?orderid=${order.orderid}"class="btn btn-small" data-title="Remove"
 												data-placement="top" data-tip="tooltip">
 												<i class="icon-trash"></i>
-											</button>
+											</a>
+											</c:if>
 										</td>
 									</tr>
 								</c:forEach>

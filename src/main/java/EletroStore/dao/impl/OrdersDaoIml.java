@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -179,6 +180,11 @@ public class OrdersDaoIml implements OrdersDao {
 
 		Query query = session.createQuery(hql);
 		List<Orders> listOrders = query.list();
+		for (Orders o : listOrders) {
+			Hibernate.initialize(o.getOrderdetails());
+			Hibernate.initialize(o.getUser());
+			Hibernate.initialize(o.getOrderstatus());
+		}
 		return listOrders;
 	}
 }

@@ -15,6 +15,16 @@
 		<aside class="span3">
 			<div class="categories">
 				<div class="titleHeader clearfix">
+					<h3>Filter</h3>
+				</div>
+				<!--end titleHeader-->
+				<ul class="unstyled">
+					<li><a class="invarseColor" href="listproduct.do"
+						type="submit">Reset All</a></li>
+				</ul>
+			</div>
+			<div class="categories">
+				<div class="titleHeader clearfix">
 					<h3>Categories</h3>
 				</div>
 				<!--end titleHeader-->
@@ -33,12 +43,15 @@
 			</div>
 			<!--end categories-->
 
+			<%-- 			<input type="hidden" id="searchname" name="searchname"
+				value="${param.searchname}" />
+ --%>
 			<div class="product-quality">
 				<div class="titleHeader clearfix">
 					<h3>Search By Product Name</h3>
 				</div>
 				<input type="text" name="searchname" id="searchname"
-					placeholder="Search" />
+					value="${param.searchname}" placeholder="Search" />
 				<div class="pull-right">
 					<input type="submit" value="Go" />
 				</div>
@@ -142,7 +155,6 @@
 				</ul>
 			</div>
 			<!--end product-brands-->
-
 		</aside>
 		<!--end aside-->
 

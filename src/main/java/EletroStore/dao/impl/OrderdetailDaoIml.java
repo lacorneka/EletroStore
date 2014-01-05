@@ -4,6 +4,7 @@ package EletroStore.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.OrderdetailDao;
+import EletroStore.entity.Comment;
 import EletroStore.entity.Orderdetail;
 
 
@@ -125,6 +127,23 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 			throw re;
 		}
 	}
+	
+	@Transactional
+	public List<Orderdetail> findByOrderId(java.lang.Integer id) {
+		logger.debug("getting Orderdetail instance with id: " + id);
+		try {  
+			String hql = "from Orderdetail o where o.orders.orderid =" + id;		
+			List<Orderdetail> OrderdetailList = getCurrentSession().createQuery(hql).list();
+			for (Orderdetail o:OrderdetailList) {
+				Hibernate.initialize(o.getProduct());
+			}
+			return OrderdetailList;
+		} catch (RuntimeException re) {
+			logger.error("get failed", re);
+			throw re;
+		}
+	}
+
 
 	@Transactional
 	public List<?> findByExample(Orderdetail instance) {
@@ -141,4 +160,5 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 			throw re;
 		}
 	}
+	
 }

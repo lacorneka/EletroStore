@@ -63,8 +63,9 @@ public class AdminController {
 			.getLogger(AdminController.class);
 
 	@RequestMapping(value = "welcome")
-	public String viewDashboard(Model model, HttpSession session) {
-		session.setAttribute("adminCurrentPage", "dashboard");
+	public String viewDashboard(Model model, HttpServletRequest request) {
+		logger.info("Show dashboard");
+		request.getSession().setAttribute("adminCurrentPage", "welcome");
 		return "admin-welcome";
 	}
 

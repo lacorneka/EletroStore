@@ -28,4 +28,6 @@ public interface OrderdetailDao {
 	public List<?> getAllOrderdetail();
 
 	public List<?> findByExample(Orderdetail instance);
+	
+	public List<Orderdetail> findByOrderId(java.lang.Integer id);
 }

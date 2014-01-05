@@ -2,12 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/includes/taglibs.jsp"%>
 
-<%-- <c:set var="wishlists" scope="session" value="${sessionScope.wishlists}" />
-<c:set var="sumprice"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="0" /></c:set>
+<c:set var="wishlists" scope="session" value="${sessionScope.wishlists}" />
 <c:set var="listproductscart" scope="session"
 	value="${sessionScope.listproductscart}" />
 <c:set var="cartsize" value="${listproductscart.size()}" />
-<c:set var="wishlistsize" value="${wishlists.size()}" /> --%>
+<c:set var="wishlistsize" value="${wishlists.size()}" />
 
 <c:if test="${empty listproductscart}">
 	<c:set var="cartsize" value="0" />
@@ -15,6 +14,9 @@
 <c:if test="${empty wishlists}">
 	<c:set var="wishlistsize" value="0" />
 </c:if>
+
+<c:set var="sumprice"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="0" /></c:set>
+
 <!--begin header-->
 <header>
 	<div class="topHeader">
@@ -80,10 +82,10 @@
 			</div>
 			<!--end pull-right-->
 			<div class="pull-right">
-				<form method="get" action="http://egythemes.com/shoppest/page"
+				<form method="get" action="listproduct.do"
 					class="siteSearch">
 					<div class="input-append">
-						<input type="text" class="span2" id="appendedInputButton"
+						<input type="text" class="span2" name="searchname"
 							placeholder="Start Typing...">
 						<button class="btn" type="submit" name="">
 							<i class="icon-search"></i>
@@ -108,8 +110,6 @@
 				<li><a class="invarseColor" href="wishlist.do">Wishlist(${wishlistsize})</a></li>
 				<li class="sep-vertical"></li>
 				<li><a class="invarseColor" href="cart.do">Cart(${cartsize})</a></li>
-				<li class="sep-vertical"></li>
-				<li><a class="invarseColor" href="checkout.do">Checkout</a></li>
 
 				<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
 					<li class="sep-vertical"></li>

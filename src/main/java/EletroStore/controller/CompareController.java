@@ -30,6 +30,27 @@ public class CompareController {
 
 	HttpSession session;
 
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = { "/removecompare" }, method = RequestMethod.GET)
+	public String removeCompare(Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		logger.info("Remove a product compare");
+		String productid = request.getParameter("productid");
+		session = request.getSession();
+		ArrayList<Product> listproductscompare;
+		listproductscompare = (ArrayList<Product>) session
+				.getAttribute("listproductscompare");
+
+		for (int i = 0; i< listproductscompare.size(); i++) {
+			if(listproductscompare.get(i).getProductid() == Integer.parseInt(productid)){
+				listproductscompare.remove(i);
+				break;
+			}
+		}
+		session.setAttribute("listproductscompare", listproductscompare);
+		return "redirect:compare.do";
+	}
+
 	@RequestMapping(value = { "/compare.do" }, method = RequestMethod.GET)
 	public String docompare(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -66,7 +87,6 @@ public class CompareController {
 					}
 				}
 			}
-
 
 		} catch (Exception e) {
 			// TODO: handle exception

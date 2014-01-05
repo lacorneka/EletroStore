@@ -98,18 +98,18 @@
 						<c:forEach var="i" begin="0" end="${ n-1}">
 
 							<td>
-								<button class="btn btn-small btn-primary" data-tip="tooltip"
+								<a href="cart.do?productid=${products[i].productid}" class="btn btn-small btn-primary" data-tip="tooltip"
 									data-title="+To Cart" data-placement="top">
 									<i class="icon-shopping-cart"></i>
-								</button>
-								<button class="btn btn-small" data-tip="tooltip"
+								</a>
+								<a href="wishlist.do?productid=${products[i].productid}" class="btn btn-small" data-tip="tooltip"
 									data-title="+To Wishlist" data-placement="top">
 									<i class="icon-heart"></i>
-								</button>
-								<button class="btn btn-small" data-tip="tooltip"
+								</a>
+								<a href="removecompare.do?productid=${products[i].productid}" class="btn btn-small" data-tip="tooltip"
 									data-title="Remove" data-placement="top">
 									<i class="icon-trash"></i>
-								</button>
+								</a>
 							</td>
 						</c:forEach>
 					</tr>

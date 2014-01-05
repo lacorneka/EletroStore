@@ -120,7 +120,7 @@
 			<div id="sidebar-content">
 				<!--=== Navigation ===-->
 				<ul id="nav">
-					<li <c:if test="${sessionScope.adminCurrentPage == 'dashboard'}"><c:out value=" class=current"></c:out></c:if>>
+					<li <c:if test="${sessionScope.adminCurrentPage eq 'welcome'}"><c:out value=" class=current"></c:out></c:if>>
 						<a href="welcome.do"> <i
 							class="icon-dashboard"></i> Dashboard
 					</a>
@@ -134,7 +134,7 @@
 							class="icon-table"></i> Category Management
 					</a>
 					</li>
-					<li>
+					<li <c:if test="${sessionScope.adminCurrentPage == 'product'}"><c:out value=" class=current"></c:out></c:if>>
 						<a href="product.do"> <i
 							class="icon-table"></i> Product Management
 					</a>

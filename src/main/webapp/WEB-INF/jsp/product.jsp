@@ -150,7 +150,7 @@
 								<label class="control-label" for="inputName">Your Name <span
 									class="text-error">*</span></label>
 								<div class="controls">
-									<input type="text" name="name" class="span8" id="inputName"
+									<input disabled type="text" name="name" class="span8" id="inputName"
 										value="<sec:authentication property="principal.username" />"
 										placeholder="John Doe...">
 								</div>
@@ -169,16 +169,16 @@
 									class="text-error">*</span></label>
 								<div class="controls">
 									<label class="radio inline">From Bad</label> <label
-										class="radio inline"> <input type="radio" name="rate"
+										class="radio inline"> <input type="radio" name="rating"
 										value="1">
 									</label> <label class="radio inline"> <input type="radio"
-										name="rate" value="2">
+										name="rating" value="2">
 									</label> <label class="radio inline"> <input type="radio"
-										name="rate" value="3">
+										name="rating" value="3">
 									</label> <label class="radio inline"> <input type="radio"
-										name="rate" value="4">
+										name="rating" value="4">
 									</label> <label class="radio inline"> <input type="radio"
-										name="rate" value="5">
+										name="rating" value="5">
 									</label> <label class="radio inline">To Good</label>
 								</div>
 							</div>

@@ -75,9 +75,9 @@ public class CommentController {
 		float averagerating = 0;
 		int count = 0, sum = 0;
 		for (int i = 0; i < listcomment.size(); i++) {
+			count++;
 			if (listcomment.get(i).getRating() > 0) {
 				sum += listcomment.get(i).getRating();
-				count++;
 			}
 		}
 

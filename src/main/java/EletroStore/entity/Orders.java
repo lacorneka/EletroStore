@@ -5,11 +5,15 @@ package EletroStore.entity;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -98,7 +102,7 @@ public class Orders implements java.io.Serializable {
 		this.orderdate = orderdate;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "orders")
 	public Set<Orderdetail> getOrderdetails() {
 		return this.orderdetails;
 	}

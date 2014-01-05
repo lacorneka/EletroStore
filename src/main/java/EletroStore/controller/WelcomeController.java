@@ -62,11 +62,12 @@ public class WelcomeController {
 	 * Handles requests to the /admin/welcome.do page
 	 **/
 	@RequestMapping(method = RequestMethod.GET, value = { "admin/welcome" })
-	public String showAdminWelcomePage(Model model) {
+	public String showAdminWelcomePage(Model model, HttpServletRequest request) {
 		logger.debug("Page Request: /admin/welcome.do");
 		User user = userDetailsService.getCurrentUser();
 		model.addAttribute("name",
 				user.getFirstname() + " " + user.getLastname());
+		request.getSession().setAttribute("adminCurrentPage", "welcome");
 		return "admin-welcome";
 	}
 }

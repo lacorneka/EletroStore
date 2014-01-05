@@ -47,7 +47,7 @@
 					<li class="discover"></li>
 				</ul>
 				<p>
-					© Copyrights 2012 for <a href="welcome.do">sp.com</a>
+					© Copyrights 2012 for <a href="welcome.do">shoppest.com</a>
 				</p>
 			</div>
 		</div>
