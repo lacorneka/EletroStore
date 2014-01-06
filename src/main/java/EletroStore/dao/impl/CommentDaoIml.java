@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.CommentDao;
 import EletroStore.entity.Comment;
-import EletroStore.entity.Product;
 
 @Repository("commentDao")
 public class CommentDaoIml implements CommentDao {

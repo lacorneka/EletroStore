@@ -50,7 +50,7 @@ public class RegisterController {
 			try{
 				logger.debug("Validition met, add to database");
 				userDao.attachDirty(user);
-				return "welcome";
+				return "redirect:login.do";
 			} catch(Exception e) {
 				logger.debug("Adding to database failed");
 				result.rejectValue("email", "error.customer",

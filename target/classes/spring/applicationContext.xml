@@ -14,11 +14,4 @@
 
     <!-- Activates scanning of @Repository and @Service -->
     <context:component-scan base-package="EletroStore" />
-    <!-- bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" /-->
-
-    <!-- The bootstrap database password encoder bean. It is needed to encode passwords in database. -->
-    <!-- bean class="com.example.template.security.DatabasePasswordSecurerBean" lazy-init="false" init-method="secureDatabase"
-        depends-on="dataSource">
-        <property name="dataSource" ref="dataSource" />
-    </bean-->
 </beans>

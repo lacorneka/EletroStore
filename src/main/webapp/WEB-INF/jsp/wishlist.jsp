@@ -48,7 +48,7 @@
 								data-placement="top" data-tip="tooltip"> <i
 									class="icon-shopping-cart"></i>
 							</a> <a class="btn btn-small" data-title="Remove"
-								href="deleteProductWishlist.do?productid=${pr.productid}"
+								href="deleteproductwishlist.do?productid=${pr.productid}"
 								data-placement="top" data-tip="tooltip"> <i
 									class="icon-trash"></i>
 							</a></td>

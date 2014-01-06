@@ -100,7 +100,7 @@
 						</span> <i class="icon-caret-down small"></i>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="account.do"><i class="icon-user"></i> My
+						<li><a href="${pageContext.request.contextPath}/account.do"><i class="icon-user"></i> My
 								Profile</a></li>
 						<li class="divider"></li>
 						<li><a

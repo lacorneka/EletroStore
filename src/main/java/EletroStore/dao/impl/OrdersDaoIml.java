@@ -68,6 +68,12 @@ public class OrdersDaoIml implements OrdersDao {
 			List<?> orderslist = getCurrentSession().createQuery("from Orders")
 					.list();
 			logger.debug("Get success!");
+			for (Object o : orderslist) {
+				Orders instance = (Orders)o;
+				Hibernate.initialize(instance.getOrderdetails());
+				Hibernate.initialize(instance.getUser());
+				Hibernate.initialize(instance.getOrderstatus());
+			}
 			return orderslist;
 		} catch (RuntimeException re) {
 			logger.error("attach failed", re);
@@ -179,6 +185,7 @@ public class OrdersDaoIml implements OrdersDao {
 		}
 
 		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
 		List<Orders> listOrders = query.list();
 		for (Orders o : listOrders) {
 			Hibernate.initialize(o.getOrderdetails());

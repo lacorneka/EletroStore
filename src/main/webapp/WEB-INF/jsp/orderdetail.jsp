@@ -1,5 +1,4 @@
 <%@ include file="/WEB-INF/includes/taglibs.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -69,7 +68,7 @@
 					<td class="alignRight"><h2>Total</h2></td>
 					<td class="alignLeft"><h2>
 							<fmt:formatNumber type="number" maxFractionDigits="2"
-								groupingUsed="true" value="${requestScope.totalorder}" />
+								groupingUsed="true" value="${listorderdetails[0].orders.totalmoney}" />
 							$
 						</h2></td>
 				</tr>

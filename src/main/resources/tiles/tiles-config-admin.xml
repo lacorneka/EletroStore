@@ -79,16 +79,32 @@
 			value="/WEB-INF/jsp/admin/product/create.jsp" />
 	</definition>
 	<definition name="product-index" extends="admin-base">
-		<put-attribute name="title" value="Dashboard Admin | Show all products" />
-		<put-attribute name="content" value="/WEB-INF/jsp/admin/product/index.jsp" />
+		<put-attribute name="title"
+			value="Dashboard Admin | Show all products" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/product/index.jsp" />
 	</definition>
 	<definition name="product-edit" extends="admin-base">
 		<put-attribute name="title" value="Dashboard Admin | Edit product" />
-		<put-attribute name="content" value="/WEB-INF/jsp/admin/product/edit.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/product/edit.jsp" />
 	</definition>
-		<definition name="product-detail" extends="admin-base">
+	<definition name="product-detail" extends="admin-base">
 		<put-attribute name="title" value="Dashboard Admin | Product detail" />
 		<put-attribute name="content"
 			value="/WEB-INF/jsp/admin/product/detail.jsp" />
+	</definition>
+
+
+	<definition name="order-index" extends="admin-base">
+		<put-attribute name="title"
+			value="Dashboard Admin | Show all orders" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/order/index.jsp" />
+	</definition>
+	<definition name="order-detail" extends="admin-base">
+		<put-attribute name="title" value="Dashboard Admin | Order detail" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/order/detail.jsp" />
 	</definition>
 </tiles-definitions>  

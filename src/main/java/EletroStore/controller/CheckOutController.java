@@ -7,19 +7,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.sql.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import EletroStore.dao.*;
-import EletroStore.entity.*;
+import EletroStore.dao.OrderdetailDao;
+import EletroStore.dao.OrdersDao;
+import EletroStore.dao.OrderstatusDao;
+import EletroStore.dao.ProductDao;
+import EletroStore.dao.UserDao;
+import EletroStore.entity.Orderdetail;
+import EletroStore.entity.Orders;
+import EletroStore.entity.Product;
+import EletroStore.entity.User;
 import EletroStore.service.UserService;
 
 @Controller
@@ -41,10 +47,14 @@ public class CheckOutController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
+
+	@Autowired
+	private ProductDao productDao;
 	
 	@Autowired
 	private OrderdetailDao orderDetailDao;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/checkout.do" }, method = RequestMethod.GET)
 	public String doCheckOut(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -68,6 +78,10 @@ public class CheckOutController {
 					* listproductscart.get(i).getQuantityforsell() + price
 					* listproductscart.get(i).getQuantityforsell()
 					* listproductscart.get(i).getTax() / 100;
+			Integer buyers = pr.getTotalbuyer();
+			buyers = (buyers==null)?0:buyers;
+			pr.setTotalbuyer(buyers+pr.getQuantityforsell());
+			productDao.update(pr);
 		}
 
 		request.setAttribute("user", user);
@@ -88,6 +102,7 @@ public class CheckOutController {
 		
 		User user = userDetailsService.getCurrentUser();
 		
+		@SuppressWarnings("unchecked")
 		ArrayList<Product> listproductscart = (ArrayList<Product>) session
 				.getAttribute("listproductscart");
 		float sumprice = 0;

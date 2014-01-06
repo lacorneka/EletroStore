@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import EletroStore.beanform.AdvertisementBean;
@@ -28,11 +29,18 @@ import EletroStore.dao.AdvertisementDao;
 import EletroStore.dao.BrandDao;
 import EletroStore.dao.CategoryDao;
 import EletroStore.dao.ConditionDao;
+import EletroStore.dao.OrderdetailDao;
+import EletroStore.dao.OrdersDao;
+import EletroStore.dao.OrderstatusDao;
 import EletroStore.dao.ProductDao;
 import EletroStore.dao.UserDao;
+import EletroStore.dao.UserrolesDao;
 import EletroStore.entity.Advertisement;
 import EletroStore.entity.Brand;
 import EletroStore.entity.Condition;
+import EletroStore.entity.Orderdetail;
+import EletroStore.entity.Orders;
+import EletroStore.entity.Orderstatus;
 import EletroStore.entity.Product;
 import EletroStore.entity.Productcatalog;
 import EletroStore.entity.User;
@@ -55,14 +63,27 @@ public class AdminController {
 	@Autowired
 	UserDao userDao;
 	@Autowired
+	UserrolesDao userrolesDao;
+	@Autowired
 	ProductDao productDao;
 	@Autowired
 	ConditionDao conditionDao;
+	@Autowired
+	OrdersDao ordersDao;
+	@Autowired
+	OrderstatusDao orderstatusDao;
+	@Autowired
+	OrderdetailDao orderdetailDao;
 
 	private static Logger logger = LoggerFactory
 			.getLogger(AdminController.class);
 
-	@RequestMapping(value = "welcome")
+	@RequestMapping(value = { "" })
+	public String redirectDashboard(HttpServletRequest request) {
+		return "redirect:/admin/welcome.do";
+	}
+
+	@RequestMapping(value = { "welcome" })
 	public String viewDashboard(Model model, HttpServletRequest request) {
 		logger.info("Show dashboard");
 		request.getSession().setAttribute("adminCurrentPage", "welcome");
@@ -489,8 +510,7 @@ public class AdminController {
 		if (role != null) {
 			user = userDao.findById(memberid);
 			if (!user.getUserroleses().contains(role)) {
-				user.getUserroleses().add(new Userroles(user, role));
-				userDao.update(user);
+				userrolesDao.attachDirty(new Userroles(user, role));
 			}
 		}
 
@@ -737,6 +757,77 @@ public class AdminController {
 		Product p = productDao.findById(id);
 		model.addAttribute("p", p);
 		return "product-detail";
+	}
+
+	// ORDER ADMIN PAGES
+	@RequestMapping(value = "order")
+	public String viewOrdersList(Model model, HttpSession session) {
+		logger.info("Show table of Orders");
+		session.setAttribute("adminCurrentPage", "orders");
+		List<?> orders = ordersDao.getAllOrders();
+		List<?> orderstatus = orderstatusDao.getAllOrderstatus();
+		model.addAttribute("listorders", orders);
+		model.addAttribute("listorderstatus", orderstatus);
+		return "order-index";
+	}
+
+	@RequestMapping(value = "deleteorders")
+	public String deleteOrders(HttpServletRequest request) {
+		logger.info("Delete Orders by ID");
+		String idvar = request.getParameter("deleteID");
+		if (idvar != null) {
+			try {
+				int id = Integer.parseInt(idvar);
+				ordersDao.delete(ordersDao.findById(id));
+			} catch (Exception e) {
+				logger.info("Exception: " + e.getCause());
+			}
+		}
+		return "redirect:orders.do";
+	}
+
+	@RequestMapping(value = "editorder")
+	public String editOrdersHandler(Model model, HttpServletRequest request) {
+		logger.info("Edit Orderstatus");
+		String orderid = request.getParameter("orderid");
+		String orderstatusid = request.getParameter("orderstatusid");
+
+		if (orderid != null && orderstatusid != null) {
+			try {
+				Orders o = ordersDao.findById(Integer.parseInt(orderid));
+				Orderstatus os = orderstatusDao.findById(Integer
+						.parseInt(orderstatusid));
+				o.setOrderstatus(os);
+				ordersDao.update(o);
+			} catch (Exception e) {
+				logger.info("Exception: " + e.getCause());
+			}
+		}
+		return "redirect:order.do";
+	}
+
+	@RequestMapping(value = "deleteorder")
+	public String deleteOrder(HttpServletRequest request) {
+		String orderid = request.getParameter("orderid");
+		logger.debug("Delete Order " + orderid);
+		try {
+			Orders o = ordersDao.findById(Integer.parseInt(orderid));
+			ordersDao.delete(o);
+		} catch (Exception e) {
+			logger.debug("ORDER: " + e.getMessage());
+		}
+		return "redirect:order.do";
+	}
+
+	@RequestMapping(value = "orderdetail")
+	public String showOrderDetail(
+			@RequestParam(value = "orderid", required = true) Integer orderid,
+			HttpServletRequest request) {
+		logger.info("Edit Orders");
+		List<Orderdetail> listorderdetails = orderdetailDao
+				.findByOrderId(orderid);
+		request.setAttribute("listorderdetails", listorderdetails);
+		return "order-detail";
 	}
 
 }

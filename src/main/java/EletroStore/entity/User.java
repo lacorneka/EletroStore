@@ -4,11 +4,15 @@ package EletroStore.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -141,7 +145,7 @@ public class User implements java.io.Serializable {
 		this.enable = enable;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	public Set<Userroles> getUserroleses() {
 		return this.userroleses;
 	}
@@ -150,7 +154,7 @@ public class User implements java.io.Serializable {
 		this.userroleses = userroleses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	public Set<Comment> getComments() {
 		return this.comments;
 	}
@@ -159,7 +163,7 @@ public class User implements java.io.Serializable {
 		this.comments = comments;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	public Set<Orders> getOrderses() {
 		return this.orderses;
 	}
@@ -168,7 +172,7 @@ public class User implements java.io.Serializable {
 		this.orderses = orderses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	public Set<Wishlist> getWishlists() {
 		return this.wishlists;
 	}
@@ -177,7 +181,7 @@ public class User implements java.io.Serializable {
 		this.wishlists = wishlists;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	public Set<Uservoteproduct> getUservoteproducts() {
 		return this.uservoteproducts;
 	}
