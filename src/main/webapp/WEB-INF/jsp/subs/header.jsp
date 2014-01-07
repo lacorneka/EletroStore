@@ -77,7 +77,7 @@
 			</div>
 			<!--end pull-right-->
 			<div class="pull-right">
-				<form method="get" action="listproduct.do" class="siteSearch">
+				<form method="get" action="search.do" class="siteSearch">
 					<div class="input-append">
 						<input type="text" class="span2" name="searchname"
 							placeholder="Start Typing...">

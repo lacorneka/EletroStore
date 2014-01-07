@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import EletroStore.dao.*;
 import EletroStore.entity.*;
@@ -25,7 +26,7 @@ public class SearchController {
 	private static Logger logger = LoggerFactory
 			.getLogger(SearchController.class);
 	@Autowired
-	private ProductDao productDao;
+	private ProductDao productsDao;
 
 	@Autowired
 	private CommentDao commentDao;
@@ -33,71 +34,87 @@ public class SearchController {
 	@Autowired
 	private CategoryDao categoryDao;
 
+	@Autowired
+	private ConditionDao conditionDao;
+
+	@Autowired
+	private BrandDao brandDao;
+
 	@RequestMapping(value = { "/search.do" }, method = RequestMethod.GET)
-	public String doSearch(Model model, HttpServletRequest request,
+	public String doSearch(HttpServletRequest request,
 			HttpServletResponse response) {
 		logger.info("Load Search page");
-		
-		String productname = "";
-		if (request.getParameter("productname") != null) {
-			productname = request.getParameter("productname");
-		}
-		String productcatalog = "-1";
-		if (request.getParameter("productcatalog") != null) {
-			productcatalog = request.getParameter("productcatalog");
-		}
 
-		String[] brands = request.getParameterValues("brand");
+		List<?> listCondition = conditionDao.getAllCondition();
+		request.setAttribute("listcondition", listCondition);
 
-		String[] conditions = request.getParameterValues("condition");
-		String rating = "-1";
-		if (request.getParameter("rating") != null) {
-			rating = request.getParameter("rating");
-		}
-		String minprice = "";
-		if (request.getParameter("minprice") != null) {
-			minprice = request.getParameter("minprice");
-		}
+		List<?> listBrand = brandDao.getAllBrand();
+		request.setAttribute("listbrand", listBrand);
 
-		String maxprice = "";
-		if (request.getParameter("maxprice") != null) {
-			maxprice = request.getParameter("maxprice");
-		}
+		try {
+			String searchname = request.getParameter("searchname");
+			String nstar = request.getParameter("nstar");
+			String pricefrom = request.getParameter("pricefrom");
+			String priceto = request.getParameter("priceto");
+			String catalogid = request.getParameter("catalogid");
+			String conditionid = request.getParameter("conditionid");
+			String brandid = request.getParameter("brandid");
+			Boolean indescription = request.getParameter("indescription") != null;
 
-		int productonpage = 2;
-		if (request.getParameter("productonpage") != null) {
-			productonpage = Integer.valueOf(request
-					.getParameter("productonpage"));
-		}
+			logger.info("Get search name: " + searchname);
+			logger.info("Get number of star rating: " + nstar);
+			logger.info("Price from " + pricefrom + " to " + priceto);
+			logger.info("Get catalog id: " + catalogid);
+			logger.info("Get condition id: " + conditionid);
+			logger.info("Get brand id: " + brandid);
 
-		int page = 1;
-		if (request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-		}
+			int productonpage = 2;
+			if (request.getParameter("productonpage") != null) {
+				logger.info("Get product id: "
+						+ request.getParameter("productonpage"));
+				productonpage = Integer.parseInt(request
+						.getParameter("productonpage"));
+			}
 
-		int sortby = -1;
-		if (request.getParameter("sortby") != null) {
-			sortby = Integer.parseInt(request.getParameter("sortby"));
-		}
+			int page = 1;
+			if (request.getParameter("page") != null) {
+				logger.info("Get curent page: " + request.getParameter("page"));
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			String pricefilter = "";
+			pricefilter += (pricefrom != null && !pricefrom.isEmpty()) ? " and p.price>=" + pricefrom : "";
+			pricefilter += (pricefrom != null && !priceto.isEmpty()) ? " and p.price<=" + priceto : "";
 
-		int pagecount = categoryDao.pagecount(productname,
-				productcatalog, brands, conditions, rating, productonpage,
-				minprice, maxprice);
-		List<Product> listproduct = new ArrayList<Product>();
-		request.setAttribute("productname", productname);
-		request.setAttribute("productcatalog", productcatalog);
-		request.setAttribute("rating", rating);
-		request.setAttribute("page", page);
-		request.setAttribute("listbrand", brands);
-		request.setAttribute("listcondition", conditions);
-		request.setAttribute("minprice", minprice);
-		request.setAttribute("maxprice", maxprice);
-		request.setAttribute("productonpage", productonpage);
-		request.setAttribute("pagecount", pagecount);
-		request.setAttribute("listproduct", listproduct);
-		request.setAttribute("sortby", sortby);
-		//request.setAttribute("listsortby", listsortby);
-		logger.info("Done load search page");
+			int sortby = -1;
+			if (request.getParameter("sortby") != null) {
+				logger.info("Get Sort type: " + request.getParameter("sortby"));
+				sortby = Integer.parseInt(request.getParameter("sortby"));
+			}
+
+			int numberOfProduct = productsDao.numberOfProduct(sortby,
+					searchname, catalogid, conditionid, brandid, nstar,
+					pricefilter, indescription);
+			logger.info("Number of product list by sort and filter: "
+					+ numberOfProduct);
+			int pagecount = productsDao.numberOfPageCompute(numberOfProduct,
+					productonpage);
+			logger.info("Number of page: " + pagecount);
+
+			List<Product> listproduct = productsDao.getProductListCatalog(
+					productonpage, page, sortby, searchname, catalogid,
+					conditionid, brandid, nstar, pricefilter, indescription);
+			logger.info("List product was sorted and filtered ");
+
+			request.setAttribute("productonpage", productonpage);
+			request.setAttribute("page", page);
+			request.setAttribute("sortby", sortby);
+			request.setAttribute("pagecount", pagecount);
+			request.setAttribute("listproduct", listproduct);
+			logger.info("Done load search page");
+		} catch (Exception e) {
+			logger.error("Search fail: " + e.getCause());
+
+		}
 		return "search";
 
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.sql.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,7 +134,7 @@ public class ProductController {
 			sortby = Integer.parseInt(request.getParameter("sortby"));
 		}
 
-		int numberOfProduct = productsDao.numberOfProduct(sortby, searchname, catalogid, conditionid, brandid, nstar, pricefilter);
+		int numberOfProduct = productsDao.numberOfProduct(sortby, searchname, catalogid, conditionid, brandid, nstar, pricefilter, false);
 		logger.info("Number of product list by sort and filter: "
 				+ numberOfProduct);		
 		int pagecount = productsDao.numberOfPageCompute(numberOfProduct,
@@ -143,7 +142,7 @@ public class ProductController {
 		logger.info("Number of page: " + pagecount);
 		
 		List<Product> listproduct = productsDao.getProductListCatalog(
-				productonpage, page, sortby, searchname, catalogid, conditionid, brandid, nstar, pricefilter);
+				productonpage, page, sortby, searchname, catalogid, conditionid, brandid, nstar, pricefilter, false);
 		logger.info("List product was sorted and filtered ");		
 		
 		request.setAttribute("productonpage", productonpage);

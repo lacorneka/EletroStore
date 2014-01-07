@@ -188,51 +188,101 @@ public class ProductDaoIml implements ProductDao {
 
 	@Transactional
 	public Query getProductList(int sortby, String searchname,
-			String catalogid, String conditionid, String brandid, String nstar, String pricefilter) {
-		String hql;
-		hql = "from Product p";
+			String catalogid, String conditionid, String brandid, String nstar, String pricefilter, Boolean indescription) {
+		String script;
+		script = "from Product p";
 		searchname = (searchname == null) ? "" : searchname;
-		hql += " where p.productname like'%" + searchname + "%'";
+		script += " where p.productname like'%" + searchname + "%'";
 		if (catalogid != null && !catalogid.isEmpty()) {
-			hql += " and p.productcatalog.catalogid = " + catalogid;
+			script += " and p.productcatalog.catalogid = " + catalogid;
 		}
 		if (conditionid != null && !conditionid.isEmpty()) {
-			hql += " and p.conditions.conditionid = " + conditionid;
+			script += " and p.conditions.conditionid = " + conditionid;
 		}
 		if (brandid != null && !brandid.isEmpty()) {
-			hql += " and p.brand.brandid = " + brandid;
+			script += " and p.brand.brandid = " + brandid;
 		}
 		if (nstar != null && !nstar.isEmpty()) {
-			hql += " and p.rating >= " + nstar;
+			script += " and p.rating >= " + nstar;
 		}
 		if (pricefilter != null && !pricefilter.isEmpty()) {
-			hql += " and " + pricefilter;
+			script += " " + pricefilter;
 		}
 
 		if (sortby == 0)
-			hql += " order by p.productname asc";
+			script += " order by p.productname asc";
 		if (sortby == 1)
-			hql += " order by p.productname desc";
+			script += " order by p.productname desc";
 		if (sortby == 2)
-			hql += " order by p.price asc";
+			script += " order by p.price asc";
 		if (sortby == 3)
-			hql += " order by p.price desc";
+			script += " order by p.price desc";
 		if (sortby == 4)
-			hql += " order by p.rating asc";
+			script += " order by p.rating asc";
 		if (sortby == 5)
-			hql += " order by p.rating desc";
+			script += " order by p.rating desc";
 
 		Session session = sessionFactory.getCurrentSession();
 
-		Query query = session.createQuery(hql);
+		Query query = session.createQuery(script);
 
 		return query;
 	}
 
+/*	@Transactional
+	public Query getProductList(int sortby, String searchname,
+			String catalogid, String conditionid, String brandid, String nstar, String pricefilter, Boolean indescription) {
+		String script = "SELECT * FROM Product";
+		searchname = (searchname == null) ? "" : searchname;
+		String matchStr = "productname";
+		if(indescription){
+			matchStr = "productname,description,specifications,features";
+		}
+		
+		script += " WHERE 1 ";
+		if (searchname!=null && !searchname.isEmpty()) {
+			script+= "MATCH(" + matchStr + ") AGAINST ('"+searchname+"') ";
+		}
+		if (catalogid != null && !catalogid.isEmpty()) {
+			script += " and productcatalog = " + catalogid;
+		}
+		if (conditionid != null && !conditionid.isEmpty()) {
+			script += " and conditions = " + conditionid;
+		}
+		if (brandid != null && !brandid.isEmpty()) {
+			script += " and brand = " + brandid;
+		}
+		if (nstar != null && !nstar.isEmpty()) {
+			script += " and rating >= " + nstar;
+		}
+//		if (pricefilter != null && !pricefilter.isEmpty()) {
+//			script += " " + pricefilter;
+//		}
+
+		if (sortby == 0)
+			script += " order by productname asc";
+		if (sortby == 1)
+			script += " order by productname desc";
+		if (sortby == 2)
+			script += " order by price asc";
+		if (sortby == 3)
+			script += " order by price desc";
+		if (sortby == 4)
+			script += " order by rating asc";
+		if (sortby == 5)
+			script += " order by rating desc";
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Query query = session.createSQLQuery(script);
+
+		return query;
+	}*/
+
 	@Transactional
 	public int numberOfProduct(int sortby, String searchname, String catalogid,
-			String conditionid, String brandid, String nstar, String pricefilter) {
-		Query query = getProductList(sortby,searchname, catalogid, conditionid, brandid, nstar, pricefilter);
+			String conditionid, String brandid, String nstar, String pricefilter, Boolean indescription) {
+		Query query = getProductList(sortby,searchname, catalogid, conditionid, brandid, nstar, pricefilter,indescription);
 		int n = query.list().size();
 		return n;
 	}
@@ -240,11 +290,11 @@ public class ProductDaoIml implements ProductDao {
 	@Transactional
 	public List<Product> getProductListCatalog(int productonpage, int page,
 			int sortby, String searchname, String catalogid,
-			String conditionid, String brandid, String nstar, String pricefilter) {
+			String conditionid, String brandid, String nstar, String pricefilter, Boolean indescription) {
 		int n = (page - 1) * productonpage;
 		int m = productonpage;
 
-		Query query = getProductList(sortby,searchname, catalogid, conditionid, brandid, nstar, pricefilter);
+		Query query = getProductList(sortby,searchname, catalogid, conditionid, brandid, nstar, pricefilter,indescription);
 
 		if (productonpage != -1) {
 			query.setFirstResult(n);

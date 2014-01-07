@@ -46,7 +46,7 @@
 			<%-- 			<input type="hidden" id="searchname" name="searchname"
 				value="${param.searchname}" />
  --%>
-			<div class="product-quality">
+			<%-- 			<div class="product-quality">
 				<div class="titleHeader clearfix">
 					<h3>Search By Product Name</h3>
 				</div>
@@ -56,7 +56,7 @@
 					<input type="submit" value="Go" />
 				</div>
 				<!--end titleHeader-->
-			</div>
+			</div> --%>
 
 			<input type="hidden" id="conditionid" name="conditionid"
 				value="${param.conditionid}" />
@@ -90,23 +90,23 @@
 
 				<ul class="unstyled pro-filter-list">
 					<li><a class="invarseColor" href="#"
-						onclick="DoSubmit( ' p.price>=0', 'pricefilter')"> <i
+						onclick="DoSubmit( ' and p.price>=0', 'pricefilter')"> <i
 							class="icon-caret-right"></i> All Price
 					</a></li>
 					<li><a class="invarseColor" href="#"
-						onclick="DoSubmit( ' p.price<=100', 'pricefilter')"> <i
+						onclick="DoSubmit( ' and p.price<=100', 'pricefilter')"> <i
 							class="icon-caret-right"></i> Less than $100.00
 					</a></li>
 					<li><a class="invarseColor" href="#"
-						onclick="DoSubmit( ' p.price>=100 and p.price<=300', 'pricefilter')">
+						onclick="DoSubmit( ' and p.price>=100 and p.price<=300', 'pricefilter')">
 							<i class="icon-caret-right"></i> From $100.00 To $300.00
 					</a></li>
 					<li><a class="invarseColor" href="#"
-						onclick="DoSubmit( ' p.price>=300 and p.price<=500', 'pricefilter')">
+						onclick="DoSubmit( ' and p.price>=300 and p.price<=500', 'pricefilter')">
 							<i class="icon-caret-right"></i> From $300.00 To $500.00
 					</a></li>
 					<li><a class="invarseColor" href="#"
-						onclick="DoSubmit( ' p.price>=500', 'pricefilter')"> <i
+						onclick="DoSubmit( ' and p.price>=500', 'pricefilter')"> <i
 							class="icon-caret-right"></i> More Than $500.00
 					</a></li>
 				</ul>
@@ -126,7 +126,7 @@
 					<li><a class="invarseColor" href="#"
 						onclick="DoSubmit( '', 'nstar')" type="submit"><i
 							class="icon-caret-right"></i>All</a></li>
-					<c:forEach var="i" begin="1" end="5">
+					<c:forEach var="i" begin="1" end="4">
 						<li><a class="invarseColor" href="#"
 							onclick="DoSubmit( ${i}, 'nstar')"><i
 								class="icon-caret-right"></i>Over ${i} star(s)</a></li>
@@ -286,7 +286,7 @@
 				</ul>
 			</div>
 
-			<input id="page" name="page" type="hidden" value="1" />
+			<%-- 			<input id="page" name="page" type="hidden" value="1" />
 			<div class="pagination pagination-right">
 				<span class="pull-left">Showing 1 of
 					${requestScope.pagecount} pages:</span>
@@ -296,6 +296,46 @@
 							class="invarseColor" href="#" onclick="DoSubmit(${i},'page')">
 								${i} </a></li>
 					</c:forEach>
+				</ul>
+			</div>
+ --%>
+			<!--end pagination-->
+			<input id="page" name="page" type="hidden" value="1" />
+			<div class="pagination pagination-right">
+				<span class="pull-left">Showing 1 of
+					${requestScope.pagecount} pages:</span>
+				<ul>
+					<c:if test="${page>1}">
+						<li><a class="invarseColor" href="#"
+							onclick="DoSubmit(${page-1},'page')"> <i
+								class="icon-caret-left"></i>
+						</a></li>
+					</c:if>
+					<li <c:if test="${1 eq page}">class="active"</c:if>><a
+						class="invarseColor" href="#" onclick="DoSubmit(${1},'page')">
+							First </a></li>
+					<c:forEach var="i" begin="2" end="${requestScope.pagecount-1}">
+						<li <c:if test="${i eq page}">class="active"</c:if>><a
+							class="invarseColor" href="#" onclick="DoSubmit(${i},'page')">
+								${i} </a></li>
+					</c:forEach>
+
+					<%-- 					<li class="active"><a class="invarseColor" href="#">
+							${page} </a></li>--%>
+
+					<li 
+					<c:if test="${requestScope.pagecount eq page}">class="active"</c:if>
+					>
+					<a class="invarseColor" href="#"
+						onclick="DoSubmit(${requestScope.pagecount},'page')"> Last </a>
+					</li>
+					<c:if test="${page<requestScope.pagecount}">
+
+						<li><a class="invarseColor" href="#"
+							onclick="DoSubmit(${page+1},'page')"> <i
+								class="icon-caret-right"></i>
+						</a></li>
+					</c:if>
 				</ul>
 			</div>
 			<!--end pagination-->

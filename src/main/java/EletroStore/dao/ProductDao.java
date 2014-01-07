@@ -37,13 +37,13 @@ public interface ProductDao {
 	public int numberOfPageCompute(int numberOfProduct, int productOnPage);
 
 	public Query getProductList(int sortby, String searchname,
-			String catalogid, String conditionid, String brandid, String nstar, String pricefilter);
+			String catalogid, String conditionid, String brandid, String nstar, String pricefilter, Boolean indescription);
 
 	public List<Product> getProductListCatalog(int productonpage, int page,
 			int sortby, String searchname, String catalogid,
-			String conditionid, String brandid, String nstar, String pricefilter);
+			String conditionid, String brandid, String nstar, String pricefilter,Boolean indescription);
 
 	public int numberOfProduct(int sortby, String searchname, String catalogid,
-			String conditionid, String brandid, String nstar, String pricefilter);
+			String conditionid, String brandid, String nstar, String pricefilter, Boolean indescription);
 
 }
