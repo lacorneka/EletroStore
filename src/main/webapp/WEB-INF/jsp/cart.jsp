@@ -9,21 +9,21 @@
 <c:choose>
 	<c:when test="${listproductscart.size() > 0}">
 		<div class="row">
+			<form action="updateproductcart.do" method="get">
 
-			<div class="span12">
-				<table class="table">
-					<thead>
-						<tr>
-							<th><span>Image</span></th>
-							<th class="desc"><span>Description</span></th>
-							<th><span>Quantity</span></th>
-							<th><span>Unit Price</span></th>
-							<th><span>Sub Price</span></th>
-							<th><span>Action</span></th>
-						</tr>
-					</thead>
-					<tbody>
-						<form action="updateproductcart.do" method="get">
+				<div class="span12">
+					<table class="table">
+						<thead>
+							<tr>
+								<th><span>Image</span></th>
+								<th class="desc"><span>Description</span></th>
+								<th><span>Quantity</span></th>
+								<th><span>Unit Price</span></th>
+								<th><span>Sub Price</span></th>
+								<th><span>Action</span></th>
+							</tr>
+						</thead>
+						<tbody>
 							<c:forEach var="product" items="${listproductscart}">
 								<c:set var="sumprice"
 									value="${sumprice + product.price*product.quantityforsell}" />
@@ -60,21 +60,22 @@
 											$
 										</h2>
 									</td>
-									<td><button class="btn btn-small btn-success" data-title="Edit"
-										data-placement="top" data-tip="tooltip" type="submit"> <i
-											class="icon-pencil"></i>
-									</button> <a class="btn btn-small btn-danger" data-title="Remove"
+									<td><button class="btn btn-small btn-success"
+											data-title="Edit" data-placement="top" data-tip="tooltip"
+											type="submit">
+											<i class="icon-pencil"></i>
+										</button> <a class="btn btn-small btn-danger" data-title="Remove"
 										data-placement="top" data-tip="tooltip"
 										href="deleteproductcart.do?productid=${product.productid}">
 											<i class="icon-trash"></i>
 									</a></td>
 								</tr>
 							</c:forEach>
-						</form>
-					</tbody>
-				</table>
-			</div>
-			<!--end span12-->
+						</tbody>
+					</table>
+				</div>
+				<!--end span12-->
+			</form>
 
 
 			<div class="span7">
@@ -105,7 +106,7 @@
 								</h2></td>
 						</tr>
 						<tr>
-							<td class="alignRight"><a class="btn" href="welcome.do">Continue
+							<td class="alignRight"><a class="btn" href="listproduct.do">Continue
 									Shoping</a></td>
 							<td class="alignLeft"><a class="btn btn-primary"
 								href="checkout.do">Checkout</a></td>
@@ -114,8 +115,6 @@
 				</div>
 			</div>
 			<!--end span5-->
-
-
 		</div>
 		<!--end row-->
 	</c:when>

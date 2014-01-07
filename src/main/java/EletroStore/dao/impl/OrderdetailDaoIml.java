@@ -15,25 +15,24 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.dao.OrderdetailDao;
-import EletroStore.entity.Comment;
 import EletroStore.entity.Orderdetail;
-
 
 @Repository("orderdetailDao")
 public class OrderdetailDaoIml implements OrderdetailDao {
 
-	private static Logger logger = LoggerFactory.getLogger(OrderdetailDaoIml.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(OrderdetailDaoIml.class);
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	@Transactional
 	public void persist(Orderdetail transientInstance) {
 		logger.debug("persisting Orderdetail instance");
@@ -46,7 +45,7 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 		}
 	}
 
-	@Transactional(readOnly=false)
+	@Transactional(readOnly = false)
 	public void attachDirty(Orderdetail instance) {
 		logger.debug("attaching dirty Orderdetail instance");
 		try {
@@ -57,12 +56,13 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public List<?> getAllOrderdetail() {
 		logger.debug("Get all Orderdetail item");
 		try {
-			List<?> orderdetaillist = getCurrentSession().createQuery("from Orderdetail").list();
+			List<?> orderdetaillist = getCurrentSession().createQuery(
+					"from Orderdetail").list();
 			logger.debug("Get success!");
 			return orderdetaillist;
 		} catch (RuntimeException re) {
@@ -70,7 +70,6 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 			throw re;
 		}
 	}
-
 
 	@Transactional
 	public void delete(Orderdetail persistentInstance) {
@@ -83,7 +82,7 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public Orderdetail merge(Orderdetail detachedInstance) {
 		logger.debug("merging Orderdetail instance");
@@ -103,7 +102,7 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 		logger.debug("updating Orderdetail instance");
 		try {
 			getCurrentSession().update(detachedInstance);
-			logger.debug("update successful");			
+			logger.debug("update successful");
 		} catch (RuntimeException re) {
 			logger.error("update failed", re);
 			throw re;
@@ -113,7 +112,7 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 	@Transactional
 	public Orderdetail findById(java.lang.Integer id) {
 		logger.debug("getting Orderdetail instance with id: " + id);
-		try {            
+		try {
 			Orderdetail instance = (Orderdetail) getCurrentSession().get(
 					"EletroStore.entity.Orderdetail", id);
 			if (instance == null) {
@@ -127,15 +126,18 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 			throw re;
 		}
 	}
-	
+
 	@Transactional
 	public List<Orderdetail> findByOrderId(java.lang.Integer id) {
 		logger.debug("getting Orderdetail instance with id: " + id);
-		try {  
-			String hql = "from Orderdetail o where o.orders.orderid =" + id;		
-			List<Orderdetail> OrderdetailList = getCurrentSession().createQuery(hql).list();
-			for (Orderdetail o:OrderdetailList) {
+		try {
+			String hql = "from Orderdetail o where o.orders.orderid =" + id;
+			@SuppressWarnings("unchecked")
+			List<Orderdetail> OrderdetailList = getCurrentSession()
+					.createQuery(hql).list();
+			for (Orderdetail o : OrderdetailList) {
 				Hibernate.initialize(o.getProduct());
+				Hibernate.initialize(o.getOrders());
 			}
 			return OrderdetailList;
 		} catch (RuntimeException re) {
@@ -143,7 +145,6 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 			throw re;
 		}
 	}
-
 
 	@Transactional
 	public List<?> findByExample(Orderdetail instance) {
@@ -160,5 +161,5 @@ public class OrderdetailDaoIml implements OrderdetailDao {
 			throw re;
 		}
 	}
-	
+
 }

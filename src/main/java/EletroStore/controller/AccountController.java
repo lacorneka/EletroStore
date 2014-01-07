@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import EletroStore.dao.OrderdetailDao;
 import EletroStore.dao.OrdersDao;
@@ -48,12 +48,10 @@ public class AccountController {
 			HttpServletResponse response) {
 
 		User user = userDetailsService.getCurrentUser();
-		// request.getSession().removeAttribute("accounterror");
 		if (user == null) {
 			logger.info("User not loged in then go to login page");
 			return "redirect:login.do";
 		}
-
 		request.setAttribute("user", user);
 
 		int filterorder = -1;
@@ -72,25 +70,28 @@ public class AccountController {
 
 	@RequestMapping(value = { "/changeaccount.do" }, method = RequestMethod.POST)
 	public String changeAccount(Model model, HttpServletRequest request,
-			HttpServletResponse response) {
-		String email = request.getParameter("email");
+			HttpServletResponse response, RedirectAttributes redirect) {
+
 		String password = request.getParameter("password");
 		String newpassword = request.getParameter("newpassword");
 		String renewpassword = request.getParameter("renewpassword");
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
 		String phonenumber = request.getParameter("phonenumber");
-		HttpSession session = request.getSession();
+		String id = request.getParameter("memberid");
+
 		try {
-			User user = userDao.getUser(email);
+			int memberid = Integer.parseInt(id);
+			logger.debug("Change Account info: memberid= " + memberid);
+			User user = userDao.findById(memberid);
 			Md5PasswordEncoder md5 = new Md5PasswordEncoder();
 			String encodedPass = md5.encodePassword(password, null);
 			String encodedNewPass = md5.encodePassword(newpassword, null);
 			if (!user.getPassword().equals(encodedPass)) {
-				session.setAttribute("accounterror", "Wrong Password!");
+				redirect.addAttribute("accounterror", "Wrong Password!");
 
-			} else if (!newpassword.equals(renewpassword)) {
-				session.setAttribute("accounterror",
+			} else if (newpassword==null || newpassword.isEmpty() || !newpassword.equals(renewpassword)) {
+				redirect.addAttribute("accounterror",
 						"Retype-Password Not Match!");
 			} else {
 				user.setPassword(encodedNewPass);
@@ -98,11 +99,13 @@ public class AccountController {
 				user.setLastname(lastname);
 				user.setPhonenumber(phonenumber);
 				userDao.update(user);
-				session.setAttribute("accounterror", "Success!");
+				redirect.addAttribute("accounterror", "Success!");
 			}
 		} catch (Exception e) {
-			session.setAttribute("accounterror", e.getMessage());
+			redirect.addAttribute("accounterror", e.getCause());
+			logger.trace("Exception " + e.getCause());
 		}
+
 		return "redirect:account.do";
 	}
 
@@ -123,13 +126,11 @@ public class AccountController {
 	@RequestMapping(value = { "/orderdetail.do" }, method = RequestMethod.GET)
 	public String orderDetail(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
-		String orderid = request.getParameter("orderid");
-		Orders o = ordersDao.findById(Integer.parseInt(orderid));
+		String orderid = request.getParameter("orderid");;
 		List<Orderdetail> listorderdetails = orderdetailDao
 				.findByOrderId(Integer.parseInt(orderid));
 
 		request.setAttribute("listorderdetails", listorderdetails);
-		request.setAttribute("totalorder", o.getTotalmoney());
 
 		return "orderdetail";
 	}

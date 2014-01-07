@@ -40,14 +40,5 @@ public class AuthenticationController {
 			return "redirect:welcome.do";
 		}
 	}
-	
 
-	/**
-	 * Handles requests to the /403.do page
-	 **/
-	@RequestMapping(method = RequestMethod.GET, value = { "error/403" })
-	public String show403Page(Model model) {
-		logger.debug("Page Request: /error/403.do");
-		return "403";
-	}
 }

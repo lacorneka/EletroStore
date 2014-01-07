@@ -58,6 +58,13 @@ public class WelcomeController {
 		return "welcome";
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = { "error" })
+	public String errorPage(Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		logger.debug("Page Request: /welcome.do");
+		return "403";
+	}
+
 	/**
 	 * Handles requests to the /admin/welcome.do page
 	 **/

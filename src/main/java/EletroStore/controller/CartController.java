@@ -30,6 +30,7 @@ public class CartController {
 
 	HttpSession session;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/cart.do" }, method = RequestMethod.GET)
 	public String doCart(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -75,6 +76,7 @@ public class CartController {
 		return "cart";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/deleteproductcart.do" }, method = RequestMethod.GET)
 	public String doDeleteProductCart(Model model, HttpServletRequest request,
 			HttpServletResponse response) {

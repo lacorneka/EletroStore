@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.sql.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class ProductController {
 	@Autowired
 	private BrandDao brandDao;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/product" }, method = RequestMethod.GET)
 	public String doProduct(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -53,7 +55,9 @@ public class ProductController {
 		String productid = request.getParameter("productid");
 		Product p = productsDao.findById(Integer.parseInt(productid));
 		request.setAttribute("product", p);
-
+		int views = p.getProductviews();
+		p.setProductviews(views+1);
+		productsDao.update(p);
 		List<Product> listproductaccessories = productsDao.getProductList(p
 				.getProductcatalog().getCatalogid().toString());
 		for (int i = 0; i < listproductaccessories.size(); i++) {

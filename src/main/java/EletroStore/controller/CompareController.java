@@ -1,7 +1,6 @@
 package EletroStore.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +50,7 @@ public class CompareController {
 		return "redirect:compare.do";
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/compare.do" }, method = RequestMethod.GET)
 	public String docompare(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -66,8 +66,7 @@ public class CompareController {
 				listproductscompare = new ArrayList<Product>();
 				session.setAttribute("listproductscompare", listproductscompare);
 			} else {
-				listproductscompare = (ArrayList<Product>) session
-						.getAttribute("listproductscompare");
+				listproductscompare = (ArrayList<Product>) session.getAttribute("listproductscompare");
 			}
 
 			if (productid != null) {

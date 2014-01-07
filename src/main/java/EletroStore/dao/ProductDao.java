@@ -6,8 +6,6 @@ package EletroStore.dao;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.springframework.transaction.annotation.Transactional;
 
 import EletroStore.entity.Product;
 

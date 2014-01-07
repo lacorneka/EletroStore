@@ -45,28 +45,13 @@ public class WishlistController {
 			HttpServletResponse response) {
 
 		session = request.getSession();
-		session.removeAttribute("wishlists");
 		User user = userDetailsService.getCurrentUser();
 		if (user == null) {
 			logger.info("User not loged in then go to login page");
 			return "redirect:login.do";
 		}
-
-		// if (session.getAttribute("wishlists") == null) {
-		// wishlists = wishListDao.getWishlListByUser(user);
-		// model.addAttribute("wishlists", wishlists);
-		List<Wishlist> wishlists;
-//		if (session.getAttribute("wishlists") == null) {
-			wishlists = wishListDao.getWishlListByUser(user);
-//			session.setAttribute("wishlists", wishlists);
-//		} else {
-//			wishlists = (List<Wishlist>) session.getAttribute("wishlists");
-//		}
-
-//		session.setAttribute("wishlists", wishlists);
-		// } else {
-		// wishlists = (List<Wishlist>) session.getAttribute("wishlists");
-		// }
+		@SuppressWarnings("unchecked")
+		List<Wishlist> wishlists = (List<Wishlist>)session.getAttribute("wishlists");
 
 		boolean flagWishlist = false;
 		if (request.getParameter("productid") != null) {
@@ -80,6 +65,7 @@ public class WishlistController {
 				}
 
 			}
+			
 			if (flagWishlist == false) {
 				Product product = productDao.findById(Integer
 						.parseInt(productid));
@@ -87,18 +73,14 @@ public class WishlistController {
 				Wishlist wishlist = new Wishlist(user, product, date);
 				wishlists.add(wishlist);
 				wishListDao.attachDirty(wishlist);
-				// session.setAttribute("wishlists", wishlists);
-				//
 			}
-//			session.setAttribute("wishlists", wishlists);
 		}
 		session.setAttribute("wishlists", wishlists);
-		// request.setAttribute("wishlists", wishlists);
 
 		return "wishlist";
 	}
 
-	@RequestMapping(value = { "/DeleteProductWishlist.do" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/deleteproductwishlist" }, method = RequestMethod.GET)
 	public String doDeleteProductWishlist(Model model,
 			HttpServletRequest request, HttpServletResponse response) {
 		logger.info("Begin delete Product Wishlist");
