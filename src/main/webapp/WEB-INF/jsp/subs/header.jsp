@@ -15,7 +15,10 @@
 	<c:set var="wishlistsize" value="0" />
 </c:if>
 
-<c:set var="sumprice"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="0" /></c:set>
+<c:set var="sumprice">
+	<fmt:formatNumber type="number" minFractionDigits="2"
+		maxFractionDigits="2" value="0" />
+</c:set>
 
 <!--begin header-->
 <header>
@@ -36,12 +39,14 @@
 											<c:set var="sumprice"
 												value="${sumprice + product.price*product.quantityforsell}" />
 											<tr>
-												<td class="cart-product-info"><a href="#"><img style="max-width: 78px; max-height: 78px;"
+												<td class="cart-product-info"><a href="#"><img
+														style="max-width: 78px; max-height: 78px;"
 														src="<c:url value='/resources/img/product/${product.image1}'/>"
 														alt="${product.productname}"></a>
 													<div class="cart-product-desc">
 														<p>
-														<c:set var="productname" value="${fn:substring(product.productname, 0, 20)}" />
+															<c:set var="productname"
+																value="${fn:substring(product.productname, 0, 20)}" />
 															<a class="invarseColor" href="#">${productname}...</a>
 														</p>
 														<!-- <ul class="unstyled">
@@ -65,7 +70,9 @@
 												class="btn btn-small">View cart</a> <a href="checkout.do"
 												class="btn btn-small btn-primary">Checkout</a></td>
 											<td>
-												<h3>$<fmt:formatNumber value="${sumprice}" maxFractionDigits="2"/>
+												<h3>
+													$
+													<fmt:formatNumber value="${sumprice}" maxFractionDigits="2" />
 												</h3>
 											</td>
 										</tr>
@@ -82,8 +89,7 @@
 			</div>
 			<!--end pull-right-->
 			<div class="pull-right">
-				<form method="get" action="listproduct.do"
-					class="siteSearch">
+				<form method="get" action="listproduct.do" class="siteSearch">
 					<div class="input-append">
 						<input type="text" class="span2" name="searchname"
 							placeholder="Start Typing...">

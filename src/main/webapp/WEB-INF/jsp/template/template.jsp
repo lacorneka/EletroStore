@@ -17,14 +17,19 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- CSS
   ================================================== -->
-<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>" media="screen">
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/bootstrap.min.css'/>" media="screen">
 <!-- jquery ui css -->
-<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui-1.10.1.min.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/css/customize.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css'/>">
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/jquery-ui-1.10.1.min.css'/>">
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/customize.css'/>">
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/font-awesome.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
 <!-- fancybox -->
-<link rel="stylesheet" href="<c:url value='/resources/js/fancybox/jquery.fancybox.css'/>">
+<link rel="stylesheet"
+	href="<c:url value='/resources/js/fancybox/jquery.fancybox.css'/>">
 <!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
@@ -32,14 +37,36 @@
 	<![endif]-->
 <!-- Favicons
 	================================================== -->
-<link rel="shortcut icon" href="<c:url value='/resources/images/favicon.html'/>">
-<link rel="apple-touch-icon" href="<c:url value='/resources/images/apple-touch-icon.html'/>">
+<link rel="shortcut icon"
+	href="<c:url value='/resources/images/favicon.html'/>">
+<link rel="apple-touch-icon"
+	href="<c:url value='/resources/images/apple-touch-icon.html'/>">
 <link rel="apple-touch-icon" sizes="72x72"
 	href="<c:url value='/resources/images/apple-touch-icon-72x72.html'/>">
 <link rel="apple-touch-icon" sizes="114x114"
 	href="<c:url value='/resources/images/apple-touch-icon-114x114.html'/>">
+<meta property="fb:app_id" content="231352093694196">
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
 </head>
 <body>
+
+
+	<!-- AddThis Smart Layers BEGIN -->
+	<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+	<script type="text/javascript"
+		src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52c6a3601739107c"></script>
+	<script type="text/javascript">
+		addthis.layers({
+			'theme' : 'gray',
+			'share' : {
+				'position' : 'left',
+				'numPreferredServices' : 5
+			},
+			'whatsnext' : {},
+			'recommended' : {}
+		});
+	</script>
+	<!-- AddThis Smart Layers END -->
 
 	<div id="wrapper">
 		<tiles:insertAttribute name="header" />
@@ -65,7 +92,8 @@
 	<!-- jQuery.Cookie -->
 	<script src="<c:url value='/resources/js/jquery.cookie.js'/>"></script>
 	<!-- fancybox -->
-	<script src="<c:url value='/resources/js/fancybox/jquery.fancybox.js'/>"></script>
+	<script
+		src="<c:url value='/resources/js/fancybox/jquery.fancybox.js'/>"></script>
 	<!-- jquery.tweet -->
 	<script src="<c:url value='/resources/js/jquery.tweet.js'/>"></script>
 	<!-- custom function-->

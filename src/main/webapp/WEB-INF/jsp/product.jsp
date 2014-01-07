@@ -15,16 +15,19 @@
 						<h1>${product.productname }</h1>
 					</div>
 					<div class="product-img-thumb-floated">
-						<a class="fancybox" href="img/650x700.jpg"><img
+						<a class="fancybox"
+							href="<c:url value='/resources/img/product/${product.image1}'/>"><img
 							src="<c:url value='/resources/img/product/${product.image1}'/>"
-							alt="" style="width: 60px;"></a> <a class="fancybox" href=''><img
+							alt="" style="width: 60px;"></a> <a class="fancybox"
+							href="<c:url value='/resources/img/product/${product.image2}'/>"><img
 							src="<c:url value='/resources/img/product/${product.image2}'/>"
 							alt="" style="width: 60px;"></a>
 					</div>
 					<!--product-img-thumb-->
 
 					<div class="product-img-floated">
-						<a class="fancybox" href="#"><img
+						<a class="fancybox"
+							href="<c:url value='/resources/img/product/${product.image1}'/>"><img
 							src="<c:url value='/resources/img/product/${product.image1}'/>"
 							alt="" style="width: 370px;"></a>
 					</div>
@@ -36,18 +39,31 @@
 				<div class="span6">
 					<div class="product-set">
 						<div class="product-price">
-							<span>${product.price }$</span>
+							<c:choose>
+								<c:when test="${product.price > product.dealprice }">
+									<span><span
+										style="color: #c0c0c0; text-decoration: line-through;">$${product.price}</span>$${product.dealprice}</span>
+								</c:when>
+
+								<c:otherwise>
+									<span>$${product.price}</span>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<!--end product-price-->
 						<div class="product-rate clearfix">
+							<c:set var="rating" value="${product.rating}" />
+							<h4>Customer Rating: ${rating }</h4>
 							<ul class="rating">
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-on"></i></li>
-								<li><i class="star-off"></i></li>
-								<li><i class="star-off"></i></li>
+								<fmt:formatNumber maxFractionDigits="0" groupingUsed="false"
+									value="${rating}" var="intrating" />
+								<c:forEach var="son" begin="1" end="${intrating}">
+									<li><i class="star-on"></i></li>
+								</c:forEach>
+								<c:forEach var="sof" begin="1" end="${5-intrating}">
+									<li><i class="star-off"></i></li>
+								</c:forEach>
 							</ul>
-							<span> 18 Review(s)&nbsp;&nbsp; </span>
 						</div>
 						<!--end product-inputs-->
 						<div class="product-info">
@@ -75,9 +91,7 @@
 									class="icon-refresh"></i>
 								</a>
 							</div>
-
 							<!--end form-->
-
 						</div>
 						<!--end product-inputs-->
 					</div>
@@ -113,12 +127,16 @@
 					<c:forEach var="comment" items="${requestScope.listcomment}">
 						<div class="single-review clearfix">
 							<div class="review-header">
+								<c:set var="rating" value="${product.rating}" />
 								<ul class="rating">
-									<li><i class="star-on"></i></li>
-									<li><i class="star-on"></i></li>
-									<li><i class="star-off"></i></li>
-									<li><i class="star-off"></i></li>
-									<li><i class="star-off"></i></li>
+									<fmt:formatNumber maxFractionDigits="0" groupingUsed="false"
+										value="${rating}" var="intrating" />
+									<c:forEach var="son" begin="1" end="${intrating}">
+										<li><i class="star-on"></i></li>
+									</c:forEach>
+									<c:forEach var="sof" begin="1" end="${5-intrating}">
+										<li><i class="star-off"></i></li>
+									</c:forEach>
 								</ul>
 								<h4>${comment.user.firstname}</h4>
 								<small><fmt:formatDate pattern="dd-MM-yyyy"
@@ -150,7 +168,8 @@
 								<label class="control-label" for="inputName">Your Name <span
 									class="text-error">*</span></label>
 								<div class="controls">
-									<input disabled type="text" name="name" class="span8" id="inputName"
+									<input disabled type="text" name="name" class="span8"
+										id="inputName"
 										value="<sec:authentication property="principal.username" />"
 										placeholder="John Doe...">
 								</div>
@@ -169,8 +188,8 @@
 									class="text-error">*</span></label>
 								<div class="controls">
 									<label class="radio inline">From Bad</label> <label
-										class="radio inline"> <input type="radio" name="rating"
-										value="1">
+										class="radio inline"> <input type="radio"
+										name="rating" value="1">
 									</label> <label class="radio inline"> <input type="radio"
 										name="rating" value="2">
 									</label> <label class="radio inline"> <input type="radio"
@@ -219,15 +238,28 @@
 											class="invarseColor">${product.productname}</a>
 									</h3>
 								</div>
+								<c:set var="rating" value="${product.rating}" />
 								<ul class="rating clearfix">
-									<li><i class="star-on"></i></li>
-									<li><i class="star-on"></i></li>
-									<li><i class="star-on"></i></li>
-									<li><i class="star-on"></i></li>
-									<li><i class="star-off"></i></li>
+									<fmt:formatNumber maxFractionDigits="0" groupingUsed="false"
+										value="${rating}" var="intrating" />
+									<c:forEach var="son" begin="1" end="${intrating}">
+										<li><i class="star-on"></i></li>
+									</c:forEach>
+									<c:forEach var="sof" begin="1" end="${5-intrating}">
+										<li><i class="star-off"></i></li>
+									</c:forEach>
 								</ul>
 								<div class="thumbPrice">
-									<span>${product.price} $</span>
+									<c:choose>
+										<c:when test="${product.price > product.dealprice }">
+											<span><span
+												style="color: #c0c0c0; text-decoration: line-through;">$${product.price}</span>$${product.dealprice}</span>
+										</c:when>
+
+										<c:otherwise>
+											<span>$${product.price}</span>
+										</c:otherwise>
+									</c:choose>
 								</div>
 
 								<div class="thumbButtons">
@@ -242,6 +274,18 @@
 			</div>
 			<!--end row-->
 		</div>
+		<div class="related-product">
+			<div class="titleHeader clearfix">
+				<h3>Share Product</h3>
+			</div>
+			<div class="row">
+				<c:set var="req"
+					value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${requestScope['javax.servlet.forward.request_uri']}?${pageContext.request.queryString}" />
+				<div id="fb-root"></div>
+				<fb:comments href="${req}" num-posts="2" width="800px"></fb:comments>
+			</div>
+		</div>
+
 		<!--end related-product-->
 	</div>
 	<!--end span12-->

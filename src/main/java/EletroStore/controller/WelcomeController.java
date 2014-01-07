@@ -46,7 +46,7 @@ public class WelcomeController {
 
 		try {
 			List<?> lsproduct = (List<?>) productsDao
-					.getAllProduct().subList(0, 4);
+					.getAllProduct().subList(0, 8);
 			request.setAttribute("listproduct", lsproduct);
 		} catch (Exception e) {
 

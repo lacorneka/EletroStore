@@ -69,15 +69,28 @@
 												class="invarseColor">${product.productname}</a>
 										</h3>
 									</div>
+									<c:set var="rating" value="${product.rating}" />
 									<ul class="rating clearfix">
-										<li><i class="star-on"></i></li>
-										<li><i class="star-on"></i></li>
-										<li><i class="star-on"></i></li>
-										<li><i class="star-on"></i></li>
-										<li><i class="star-off"></i></li>
+										<fmt:formatNumber maxFractionDigits="0" groupingUsed="false"
+											value="${rating}" var="intrating" />
+										<c:forEach var="son" begin="1" end="${intrating}">
+											<li><i class="star-on"></i></li>
+										</c:forEach>
+										<c:forEach var="sof" begin="1" end="${5-intrating}">
+											<li><i class="star-off"></i></li>
+										</c:forEach>
 									</ul>
 									<div class="thumbPrice">
-										<span>${product.price}$</span>
+										<c:choose>
+											<c:when test="${product.price > product.dealprice }">
+												<span><span
+													style="color: #c0c0c0; text-decoration: line-through;">$${product.price}</span>$${product.dealprice}</span>
+											</c:when>
+
+											<c:otherwise>
+												<span>$${product.price}</span>
+											</c:otherwise>
+										</c:choose>
 									</div>
 
 									<div class="thumbButtons">
@@ -104,22 +117,17 @@
 		<div class="brands">
 			<div class="titleHeader clearfix">
 				<h3>Brands</h3>
-				<div class="pagers">
-					<div class="btn-toolbar">
-						<button class="btn btn-mini">View All</button>
-					</div>
-				</div>
+				<div class="pagers"></div>
 			</div>
 			<!--end titleHeader-->
 			<ul class="brandList clearfix">
-				<li><a href="#"><img
+				<li><a href="listproduct.do?brandid=8"><img
 						src="<c:url value='/resources/img/brand/sony.gif'/>" alt="logo1"></a></li>
-				<li><a href="#"><img
-						src="<c:url value='/resources/img/brand/panasonic.gif'/>"
-						alt="logo"></a></li>
-				<li><a href="#"><img
+				<li><a href="listproduct.do?brandid=7"><img
+						src="<c:url value='/resources/img/brand/samsung.gif'/>" alt="logo"></a></li>
+				<li><a href="listproduct.do?brandid=4"><img
 						src="<c:url value='/resources/img/brand/toshiba.gif'/>" alt="logo"></a></li>
-				<li><a href="#"><img
+				<li><a href="listproduct.do?brandid=5"><img
 						src="<c:url value='/resources/img/brand/lg.gif'/>" alt="logo"></a></li>
 			</ul>
 		</div>

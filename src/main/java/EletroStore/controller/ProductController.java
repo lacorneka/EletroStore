@@ -63,6 +63,8 @@ public class ProductController {
 				break;
 			}
 		}
+		if(listproductaccessories.size() > 4)
+			listproductaccessories.subList(0, 4);
 		request.setAttribute("listproductaccessories", listproductaccessories);
 
 		List<Comment> listcomment = (List<Comment>) commentDao
