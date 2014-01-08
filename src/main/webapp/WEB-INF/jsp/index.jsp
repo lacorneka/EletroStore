@@ -2,37 +2,39 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/includes/taglibs.jsp"%>
 
-<div class="row">
+<c:if test="${not empty requestScope.listad}">
+	<div class="row">
+		<div class="span8">
+			<div id="slideShow" class="carousel slide">
+				<!-- Carousel items -->
+				<div class="carousel-inner">
+					<div class="active item">
+						<img style="max-height: 350px; max-width: 930px"
+							src="<c:url value='/resources/img/banner/${requestScope.listad[0].adimage}'/>"
+							alt="${requestScope.listad[0].adname}">
+					</div>
 
-	<div class="span8">
-		<div id="slideShow" class="carousel slide">
-			<!-- Carousel items -->
-			<div class="carousel-inner">
-				<div class="active item">
-					<img src="<c:url value='/resources/img/banner/banner1.jpg'/>"
-						alt="slide1">
+					<c:forEach var="i" begin="1" end="${requestScope.listad.size()-1}">
+						<div class="item">
+							<img style="max-height: 350px; max-width: 930px"
+								src="<c:url value='/resources/img/banner/${requestScope.listad[i].adimage}'/>"
+								alt="${requestScope.listad[i].adname}">
+						</div>
+					</c:forEach>
 				</div>
-				<div class="item">
-					<img src="<c:url value='/resources/img/banner/banner2.jpg'/>"
-						alt="slide1">
-				</div>
-				<div class="item">
-					<img src="<c:url value='/resources/img/banner/banner3.jpg'/>"
-						alt="slide1">
-				</div>
+				<!--end carousel-inner-->
+
+				<!-- Carousel nav -->
+				<a class="carousel-control left" href="#slideShow" data-slide="prev">&lsaquo;</a>
+				<a class="carousel-control right" href="#slideShow"
+					data-slide="next">&rsaquo;</a>
 			</div>
-			<!--end carousel-inner-->
-
-			<!-- Carousel nav -->
-			<a class="carousel-control left" href="#slideShow" data-slide="prev">&lsaquo;</a>
-			<a class="carousel-control right" href="#slideShow" data-slide="next">&rsaquo;</a>
+			<!--end carousel-->
 		</div>
-		<!--end carousel-->
+		<!--end span8-->
 	</div>
-	<!--end span8-->
-</div>
-<!--end row-->
-
+	<!--end row-->
+</c:if>
 <div class="row">
 	<div class="span12">
 		<div id="latestItems">

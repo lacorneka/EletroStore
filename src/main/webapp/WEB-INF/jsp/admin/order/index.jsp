@@ -22,23 +22,6 @@
 				document.listorder.submit();
 			}
 		</script>
-		<form name="listorder" action="account.do" method="get">
-
-			Filter By <select name="filterorder" onchange="submit()">
-				<option value="-1"
-					<c:if test="${-1 eq param.filterorder}"><c:out value="selected" /></c:if>>All</option>
-				<option value="0"
-					<c:if test="${0 eq param.filterorder}"><c:out value="selected" /></c:if>>This
-					week</option>
-				<option value="1"
-					<c:if test="${1 eq param.filterorder}"><c:out value="selected" /></c:if>>This
-					month</option>
-				<option value="2"
-					<c:if test="${2 eq param.filterorder}"><c:out value="selected" /></c:if>>This
-					year</option>
-			</select>
-		</form>
-
 		<table
 			class="table table-hover table-striped table-bordered table-highlight-head">
 			<tr>

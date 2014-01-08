@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import EletroStore.dao.AdvertisementDao;
 import EletroStore.dao.ProductDao;
 import EletroStore.entity.*;
 import EletroStore.service.UserService;
@@ -35,6 +36,9 @@ public class WelcomeController {
 	@Autowired
 	ProductDao productsDao;
 
+	@Autowired
+	AdvertisementDao advertisementDao;
+
 	/**
 	 * Handles requests to the /welcome.do page
 	 **/
@@ -47,7 +51,9 @@ public class WelcomeController {
 		try {
 			List<?> lsproduct = (List<?>) productsDao
 					.getAllProduct().subList(0, 8);
+			List<?> listad = advertisementDao.getAllAdvertisement();
 			request.setAttribute("listproduct", lsproduct);
+			request.setAttribute("listad", listad);
 		} catch (Exception e) {
 
 		}

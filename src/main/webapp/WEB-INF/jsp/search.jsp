@@ -25,15 +25,13 @@
 				</div>
 
 				<div class="well well-small">
-
-
 					<input name="searchname" value="${param.searchname }" type="text"
 						class="span8" placeholder="Type Search Term..." /> &nbsp;&nbsp;
 					<button type="submit" class="btn btn-primary">
 						<i class="icon-search"></i>
 					</button>
-					&nbsp;&nbsp; <label class="checkbox" checked> <input
-						type="checkbox" value="1" name="indescription"> Search in
+					&nbsp;&nbsp; <label class="checkbox" > <input
+						type="checkbox" value="1" name="indescription" checked> Search in
 						product descriptions
 					</label> <br /> <br />
 					<!-- Search by category -->
@@ -70,11 +68,11 @@
 								<c:if test="${i eq param.nstar}">selected='selected'</c:if>
 								value="${i}">Over ${i} star(s)</option>
 						</c:forEach>
-					</select> &nbsp;&nbsp; <label class="pricefrom"> Price from </label>&nbsp;&nbsp;
+					</select> <br/><br/> <label for="pricefrom"> Price from </label>&nbsp;&nbsp;
 					<input name="pricefrom" value="${param.pricefrom }" type="number"
-						class="span4" placeholder="100" />&nbsp;&nbsp; <label
-						class="pricefrom"> To </label>&nbsp;&nbsp; <input name="priceto"
-						value="${param.priceto }" type="number" class="span4"
+						class="span2" placeholder="100" />&nbsp;&nbsp; <label
+						for="priceto"> To </label>&nbsp;&nbsp; <input name="priceto"
+						value="${param.priceto }" type="number" class="span2"
 						placeholder="500" />
 
 				</div>

@@ -192,7 +192,15 @@ public class ProductDaoIml implements ProductDao {
 		String script;
 		script = "from Product p";
 		searchname = (searchname == null) ? "" : searchname;
+		searchname = searchname.replace(' ', '%');
 		script += " where p.productname like'%" + searchname + "%'";
+		if(indescription){
+			script += " or p.description like'%" + searchname + "%'";
+			script += " or p.specifications like'%" + searchname + "%'";
+			script += " or p.features like'%" + searchname + "%'";
+			logger.trace("In desciption true ");
+		}
+		
 		if (catalogid != null && !catalogid.isEmpty()) {
 			script += " and p.productcatalog.catalogid = " + catalogid;
 		}
@@ -223,6 +231,7 @@ public class ProductDaoIml implements ProductDao {
 			script += " order by p.rating desc";
 
 		Session session = sessionFactory.getCurrentSession();
+		logger.trace("HQL: "+script);
 
 		Query query = session.createQuery(script);
 
@@ -273,12 +282,12 @@ public class ProductDaoIml implements ProductDao {
 			script += " order by rating desc";
 
 		Session session = sessionFactory.getCurrentSession();
-
+		logger.trace("SQL: "+script);
 		Query query = session.createSQLQuery(script);
 
 		return query;
-	}*/
-
+	}
+*/
 	@Transactional
 	public int numberOfProduct(int sortby, String searchname, String catalogid,
 			String conditionid, String brandid, String nstar, String pricefilter, Boolean indescription) {
