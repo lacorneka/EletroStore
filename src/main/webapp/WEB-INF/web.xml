@@ -54,13 +54,13 @@
 	</servlet-mapping>
 
 	<!-- Enable if you want custom http error pages -->
-<!-- 	<error-page>
+	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/WEB-INF/error/500.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>404</error-code>
 		<location>/error/404</location>
-	</error-page> -->
+	</error-page>
 
 </web-app>

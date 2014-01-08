@@ -79,7 +79,7 @@
 							class="text-error">*</span>
 						</label>
 						<div class="controls">
-							<input type="text" name="total" placeholder="0$" value="${requestScope.sumprice} $">
+							<input disabled type="text" name="total" placeholder="0$" value="${requestScope.sumprice} $">
 						</div>
 					</div>
 					<!--end control-group-->

@@ -89,24 +89,15 @@
 				<div class="cart-receipt">
 					<table class="table table-receipt">
 						<tr>
-							<td class="alignRight">Sub Total</td>
-							<td class="alignLeft"><fmt:formatNumber type="number"
-									groupingUsed="false" value="${sumprice}" />$</td>
-						</tr>
-						<tr>
-							<td class="alignRight">VAT</td>
-							<td class="alignLeft">10%</td>
-						</tr>
-						<tr>
 							<td class="alignRight"><h2>Total</h2></td>
 							<td class="alignLeft"><h2>
 									<fmt:formatNumber type="number" maxFractionDigits="2"
-										groupingUsed="true" value="${sumprice*110/100}" />
+										groupingUsed="true" value="${sumprice}" />
 									$
 								</h2></td>
 						</tr>
 						<tr>
-							<td class="alignRight"><a class="btn" href="listproduct.do">Continue
+							<td class="alignRight"><a class="btn" href="welcome.do">Continue
 									Shoping</a></td>
 							<td class="alignLeft"><a class="btn btn-primary"
 								href="checkout.do">Checkout</a></td>
